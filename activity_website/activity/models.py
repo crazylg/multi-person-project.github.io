@@ -13,6 +13,7 @@ class User(models.Model):
     phone = models.CharField(max_length = 20)
     interest = models.CharField(max_length = 200)
     headimg = models.FileField(upload_to = './upload/')
+    friends = models.ManyToManyField("self")
 
     def __unicode__(self):
         return self.nickname
