@@ -131,7 +131,7 @@ def register(request):
 def welcome(request):
     if 'user_id' in request.session:
         user = User.objects.get(id = request.session['user_id'])
-        return render_to_response("user_center.html", {
+        return render_to_response("welcome.html", {
             'nickname': user.nickname
         }, context_instance = RequestContext(request))
     else:
@@ -411,14 +411,14 @@ def upload_headimg(request):
 
 
 def my_activities_attend(request):
-    return 0
+    return render_to_response("my_attend.html")
 
 
 def my_activities_launch(request):
-    return 0
+    return render_to_response("my_launch.html")
 
 def friend_activities_attend(request):
-    return 0
+    return render_to_response("friend_attend.html")
 
 def friend_activities_launch(request):
-    return 0
+    return render_to_response("friend_launch.html")
