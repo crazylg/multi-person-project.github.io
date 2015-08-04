@@ -411,13 +411,21 @@ def upload_headimg(request):
 
 
 def my_activities_attend(request):
-    return render_to_response("my_attend.html")
+    user = User.objects.get(id = request.session["user_id"])
+    return render_to_response("my_attend.html", {
+        "my_attend_activities": [act for act in user.activity_member.all()],
+    })
 
 
 def my_activities_launch(request):
-    return render_to_response("my_launch.html")
+    user = User.objects.get(id = request.session["user_id"])
+    return render_to_response("my_launch.html", {
+        "my_launch_activities": [act for act in user.activity_organizer.all()],
+    })
 
 def friend_activities_attend(request):
+    acts = []
+
     return render_to_response("friend_attend.html")
 
 def friend_activities_launch(request):
