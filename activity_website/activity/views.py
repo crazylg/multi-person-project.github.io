@@ -424,9 +424,23 @@ def my_activities_launch(request):
     })
 
 def friend_activities_attend(request):
+    user = User.objects.get(id = request.session["user_id"])
     acts = []
-
-    return render_to_response("friend_attend.html")
+    for friend in user.friends.all():
+        for act in friend.activity_member.all():
+            if not act in acts:
+                acts.append(act)
+    return render_to_response("friend_attend.html", {
+        "friend_attend_activities": acts,
+    })
 
 def friend_activities_launch(request):
-    return render_to_response("friend_launch.html")
+    user = User.objects.get(id = request.session["user_id"])
+    acts = []
+    for friend in user.friends.all():
+        for act in friend.activity_organizer.all():
+            if not act in acts:
+                acts.append(act)
+    return render_to_response("friend_launch.html", {
+        "friend_launch_activities": acts,
+    })
