@@ -131,7 +131,7 @@ def register(request):
 def welcome(request):
     if 'user_id' in request.session:
         user = User.objects.get(id = request.session['user_id'])
-        return render_to_response("welcome.html", {
+        return render_to_response("user_center.html", {
             'nickname': user.nickname
         }, context_instance = RequestContext(request))
     else:
