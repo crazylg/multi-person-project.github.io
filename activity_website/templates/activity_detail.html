@@ -1,0 +1,119 @@
+﻿<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+	<title>约不约</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./staticfiles/js/jquery.js"></script>
+    <link href="./staticfiles/css/chat.css" rel="stylesheet">
+    <link href="./staticfiles/css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body style="font-family:'Microsoft YaHei'">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header navbar-static-top">
+            <a class="navbar-brand" href="#" style="font-size:2.5em">约不约</a>
+        </div>
+        <a class="navbar-brand navbar-right" href="#" style="font-size:1.5em">  </a>
+        <a class="navbar-brand navbar-right" href="#" style="font-size:1.5em">退出</a>
+        <a class="navbar-brand navbar-right" href="#" style="font-size:1.5em"><span class="glyphicon glyphicon-user"></span>个人中心</a>
+        <a class="navbar-brand navbar-right" href="#" style="font-size:1.5em">活动</a>
+    </nav>
+
+    <div class="container" style="width:100%;padding-left:5px;padding-right:5px;">
+	    <div class="row">
+	    	<div class="col-lg-2 col-sm-2" style="padding-left:3%;background-color:skyblue;">
+	    		<ul class="nav nav-list">
+	    			<li class="nav-header">个人中心</li>
+	    			<li><a href="#">个人资料</a></li>
+	    			<li><a href="./safe_center.html">安全中心</a></li>
+	    			<li><a href="#">我的活动</a></li>
+	    			<li class="nav-header">社交中心</li>
+	    			<li class="active"><a href="#">我的好友</a></li>
+	    			<li><a href="#">我的群组</a></li>
+	    			<li><a href="#">好友活动</a></li>
+	    			<li><a href="#">群组活动</a></li>
+	    			<li class="divider"></li>
+                    <li class="nav-header">活动中心</li>
+	    			<li><a href="#">发起活动</a></li>
+	    			<li><a href="#">搜索活动</a></li>
+	    			<li><a href="#">查看活动</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">帮助</a></li>
+	    		</ul>
+	    	</div>
+
+            <div class="col-lg-6 col-lg-offset-1 col-sm-7">
+                <div class="row">
+                    <table class="table table-hover" style="font-family:'Microsoft YaHei';font-size:1.7em">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>活动名称</td>
+                                <td>{{activity.name}}</td>
+                            </tr>
+                            <tr>
+                                <td>组织者</td>
+                                <td>{{activity.organizer}}</td>
+                            </tr>
+                            <tr>
+                                <td>发布时间</td>
+                                <td>{{activity.post_time}}</td>
+                            </tr>
+                            <tr>
+                                <td>活动开始</td>
+                                <td>{{activity.start_time}}</td>
+                            </tr>
+                            <tr>
+                                <td>活动结束</td>
+                                <td>{{activity.end_time}}</td>
+                            </tr>
+                            <tr>
+                                <td>活动地点</td>
+                                <td>{{activity.place}}</td>
+                            </tr>
+                            <tr>
+                                <td>年龄要求</td>
+                                <td>{{activity.min_age}} 到 {{avctivity.max_age}}</td>
+                            </tr>
+                            <tr>
+                                <td>性别要求</td>
+                                <td>{{activity.sex_requirement}}</td>
+                            </tr>
+                            <tr>
+                                <td>已报名人数/总人数</td>
+                                <td>{{activity.current_size}}/{{activity.max_size}}</td>
+                            </tr>
+                            <tr>
+                                <td>报名结束时间</td>
+                                <td>{{activity.applyend_time}}</td>
+                            </tr>
+                            <tr>
+                                <td>详细描述</td>
+                                <td>{{activity.explanation}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <form class="form-horizontal" role="form" method="post" action="">
+                        <div class="form-group">
+                            <textarea class="form-control" style="height:140px;overflow-y:auto" name="apply_message" placeholder="报名留言"></textarea>
+                            <button type="submit" class="btn btn-lg btn-danger pull-right" style="position:relative;top:4px">报名</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-3">
+		    	<p>留着以后用=。=  还没时间做</p>
+		    </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
