@@ -43,6 +43,12 @@ urlpatterns = [
     url(r'^change_userinfo/$', 'activity.views.change_userinfo', name = 'change_userinfo'),
     url(r'^change_userpwd/$', 'activity.views.change_userpwd', name = 'change_userpwd'),
     url(r'^upload_headimg/$', 'activity.views.upload_headimg', name = 'upload_headimg'),
+
+    url(r'^my_activities/attend/$', 'activity.views.my_activities_attend', name = 'my_activities_attend'),
+    url(r'^my_activities/launch/$', 'activity.views.my_activities_launch', name = 'my_activities_launch'),
+    url(r'^friend_activities/attend/$', 'activity.views.friend_activities_attend', name = 'friend_activities_attend'),
+    url(r'^friend_activities/launch/$', 'activity.views.friend_activities_launch', name = 'friend_activities_launch'),
+
 ]
 
 #urlpatterns = patterns('',

@@ -164,7 +164,6 @@ def my_request(request):
                     tmp_req.save()
         req.save()
 
-
         return render_to_response("my_request.html", {
             'requests': [req for req in Request.objects.filter(receiver = user)],
         })
@@ -409,6 +408,6 @@ def upload_headimg(request):
         uf = UserForm()
     return render_to_response('upload_headimg.html',{'uf': uf})
 
-def test(request):
-    if (request.method == 'POST'):
-        return HttpResponse(request.POST['button_type'])
+
+
+def my_attend(request):

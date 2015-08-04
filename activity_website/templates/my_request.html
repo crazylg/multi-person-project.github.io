@@ -17,7 +17,9 @@
                                 {% if request.status == 'unread' %}
                                 <button type="submit" class="btn btn-primary btn-md pull-right">我知道了<span class="glyphicon glyphicon-ok"></span></button>
                                 {% else %}
-                                <div class="btn btn-primary btn-md pull-right disabled">我知道了<span class="glyphicon glyphicon-ok"></span></div>
+                                <a href="#" class="list-group-item">
+                                    <h5 class="list-group-item-text">已读</h5>
+                                </a>
                                 {% endif %}
                             </form>
                         </div>
