@@ -1,46 +1,4 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-	<title>约不约</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./staticfiles/js/jquery.js"></script>
-    <link href="./staticfiles/css/chat.css" rel="stylesheet">
-    <link href="./staticfiles/css/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body style="font-family:'Microsoft YaHei'">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="navbar-header navbar-static-top">
-            <a class="navbar-brand" href="#" style="font-size:2.5em">约不约</a>
-        </div>
-        <a class="navbar-brand navbar-right" href="#" style="font-size:1.5em">  </a>
-        <a class="navbar-brand navbar-right" href="#" style="font-size:1.5em">退出</a>
-        <a class="navbar-brand navbar-right" href="#" style="font-size:1.5em"><span class="glyphicon glyphicon-user"></span>个人中心</a>
-        <a class="navbar-brand navbar-right" href="#" style="font-size:1.5em">活动</a>
-    </nav>
-
-    <div class="container" style="width:100%;padding-left:5px;padding-right:5px;">
-	<div class="row">
-		<div class="col-lg-2 col-sm-2" style="padding-left:3%;background-color:skyblue;">
-			<ul class="nav nav-list">
-				<li class="nav-header">个人中心</li>
-				<li><a href="#">个人资料</a></li>
-				<li><a href="./safe_center.html">安全中心</a></li>
-				<li><a href="#">我的活动</a></li>
-				<li class="nav-header">社交中心</li>
-				<li class="active"><a href="#">我的好友</a></li>
-				<li><a href="#">我的群组</a></li>
-				<li><a href="#">好友活动</a></li>
-				<li><a href="#">群组活动</a></li>
-				<li class="divider"></li>
-                <li class="nav-header">活动中心</li>
-				<li><a href="#">发起活动</a></li>
-				<li><a href="#">搜索活动</a></li>
-				<li><a href="#">查看活动</a></li>
-                <li class="divider"></li>
-                <li><a href="#">帮助</a></li>
-			</ul>
-		</div>
+﻿{% include "header.html" %}
 		<div class="col-lg-6 col-lg-offset-1 col-sm-7" style="">
             <div class="row" style="width:103%;border:2px solid skyblue;padding-left:2px;padding-top:2px">
                 <div class="col-lg-4 col-sm-3" style="height:600px;border:2px solid skyblue;overflow-y:auto">
@@ -79,9 +37,12 @@
             </div>
 		</div>
 		<div class="col-lg-2 col-sm-3">
-			<p>留着以后用=。=  还没时间做</p>
+			<div class="form-group has-feedback" style="width:100%">
+                <form method="post" action="">
+                    <input type="text" name="account" class="form-control search-query" placeholder="请输入账号" autofocus>
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    <button type="submit" class="btn btn-danger pull-right" style="top:10px;position:relative">发送好友请求  <span class="glyphicon glyphicon-plus"></span></button>
+                </form>
+            </div>
 		</div>
-	</div>
-</div>
-</body>
-</html>
+{% include "footer.html" %}

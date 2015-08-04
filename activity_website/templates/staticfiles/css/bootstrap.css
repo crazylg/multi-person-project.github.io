@@ -3119,7 +3119,7 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-default .badge {
   color: #fff;
-  background-color: #333;
+  background-color: #ff0000;
 }
 .btn-primary {
   color: #fff;
