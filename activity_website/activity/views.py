@@ -444,3 +444,7 @@ def friend_activities_launch(request):
     return render_to_response("friend_launch.html", {
         "friend_launch_activities": acts,
     })
+
+def my_friends(request):
+    user = User.objects.get(id = request.session["user_id"])
+    return render_to_response("my_friends.html")
