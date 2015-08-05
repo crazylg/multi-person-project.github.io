@@ -11,9 +11,9 @@
                     <ul class="nav nav-pills" style="width:100%">
                         {% for friend in friend_list %}
 						{% if friend.current_talker %}
-                        <li class="active"><a href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
+                        <li class="active" style="width:100%"><a href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
 						{% else %}
-                        <li><a href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
+                        <li style="width:100%"><a href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
 						{% endif %}
                         <form role="form" id={{friend.id}} method="post" action="">
 						<input type="hidden" name="form_type" value="change_talker"/>
