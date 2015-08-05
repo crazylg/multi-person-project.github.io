@@ -101,7 +101,6 @@ def register(request):
         if (errors):
             #return HttpResponse(errors)
             return render_to_response("register.html", {
-                'user': getUserObj(user.id),
                 'errors': errors,
                 'account': request.POST.get('account', ''),
                 'password': request.POST.get('password', ''),
@@ -128,7 +127,6 @@ def register(request):
         return HttpResponseRedirect('/welcome/')
     else:
         return render_to_response("register.html", {
-            'user': getUserObj(user.id),
         }, context_instance = RequestContext(request))
 
 def welcome(request):
@@ -167,6 +165,19 @@ def my_request(request):
                         type = "notice",
                         title = "提醒",
                         content = "你参加活动'" + act.name + "'的申请已经通过",
+                        poster = req.receiver,
+                        receiver = req.poster,
+                        status = "unread",
+                        goal = " ",
+                        time = datetime.datetime.now(),
+                    )
+                    tmp_req.save()
+                if (req.type == 'friend_application'):
+                    user.friends.add(req.poster)
+                    tmp_req = Request(
+                        type = "notice",
+                        title = "提醒",
+                        content = "你向 " + user.nickname + " 提交的好友请求已通过",
                         poster = req.receiver,
                         receiver = req.poster,
                         status = "unread",
@@ -474,7 +485,6 @@ def upload_headimg(request):
         uf = UserForm()
     return render_to_response('upload_headimg.html',{
         'uf': uf,
-        'user': getUserObj(user.id),
     })
 
 def my_activities_attend(request):
@@ -576,9 +586,14 @@ def my_friends(request):
             'user': getUserObj(user.id),
             "errors": errors,
             "responses": responses,
+            "friend_list": user.friends.all(),
         })
 
     else:
         return render_to_response("my_friends.html", {
             'user': getUserObj(user.id),
+            "friend_list": user.friends.all(),
         })
+
+def my_groups(request):
+    return 0
