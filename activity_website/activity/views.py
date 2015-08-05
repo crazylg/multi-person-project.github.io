@@ -514,7 +514,7 @@ def my_activities_attend(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
-    return render_to_response("my_attend.html", {
+    return render_to_response("my_activities_attend.html", {
         'user': getUserObj(user.id),
         "my_attend_activities": [act for act in user.activity_member.all()],
     })
@@ -527,7 +527,7 @@ def my_activities_launch(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
-    return render_to_response("my_launch.html", {
+    return render_to_response("my_activities_launch.html", {
         'user': getUserObj(user.id),
         "my_launch_activities": [act for act in user.activity_organizer.all()],
     })
@@ -545,7 +545,7 @@ def friend_activities_attend(request):
         for act in friend.activity_member.all():
             if not act in acts:
                 acts.append(act)
-    return render_to_response("friend_attend.html", {
+    return render_to_response("friend_activities_attend.html", {
         'user': getUserObj(user.id),
         "friend_attend_activities": acts,
     })
@@ -563,7 +563,7 @@ def friend_activities_launch(request):
         for act in friend.activity_organizer.all():
             if not act in acts:
                 acts.append(act)
-    return render_to_response("friend_launch.html", {
+    return render_to_response("friend_activities_launch.html", {
         'user': getUserObj(user.id),
         "friend_launch_activities": acts,
     })
