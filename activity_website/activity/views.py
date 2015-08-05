@@ -232,6 +232,8 @@ def my_request(request):
                     act = Activity.objects.get(id = req.goal)
                     #if (act.add_member(req.poster) == 'success'):
                     act.members.add(req.poster)
+                    act.current_size += 1
+                    act.save()
                     tmp_req = Request(
                         type = "notice",
                         title = "提醒",
@@ -274,8 +276,22 @@ def my_request(request):
 
 
 def applyActivity(user_id, activity_id):
-    user = User.objects.get(id = user_id)
-    acti = Activity.objects.get(id = activity_id)
+    try:
+        user = User.objects.get(id = user_id)
+    except User.DoesNotExist:
+        return "用户不存在，请您先登录"
+    try:
+        acti = Activity.objects.get(id = activity_id)
+    except Activity.DoesNotExist:
+        return "该活动不存在"
+
+    if (acti.sex_requirement != 'unlimit') and (acti.sex_requirement != user.sex):
+        return "您的性别不符合该活动要求"
+    if (acti.min_age > user.age) or (acti.max_age < user.age):
+        return "您的年龄不符合该活动要求"
+    if (acti.current_size >= acti.max_size):
+        return "该活动人数已满"
+
     req = Request(
         type = "activity_application",
         title = user.nickname + "的活动参加申请",
@@ -298,7 +314,7 @@ def add_activity(request):
         return HttpResponseRedirect("/login/")
 
     if (request.method == 'POST'):
-        #return HttpResponse(request.POST['startDate'] + '    ' + request.POST['startTime'])
+        #return HttpResponse(request.POST['sex_requirement'])
         errors = {}
         if (not 'name' in request.POST) or (not request.POST['name']):
             errors['name'] = '请输入活动名称'
@@ -564,6 +580,55 @@ def add_group(request):
         'errors': errors,
     })
 
+def my_groups_create(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    return render_to_response("my_groups_create.html", {
+        'user': getUserObj(user.id),
+        "my_create_groups": user.group_owner.all(),
+    })
+
+def my_groups_attend(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    return render_to_response("my_groups_attend.html", {
+        'user': getUserObj(user.id),
+        "my_attend_groups": user.group_member.all(),
+    })
+
+def all_groups(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    grps = []
+    for grp in Group.objects.all():
+        grps.append({
+            "id": grp.id,
+            "name": grp.name,
+            "explanation": grp.explanation,
+            "owner": grp.owner.nickname,
+            "attend": True if (user in grp.members.all())or(user == grp.owner) else False,
+        })
+
+    return render_to_response("all_groups.html", {
+        "user": getUserObj(user.id),
+        "groups" : grps,
+    })
+
 def group_info(request, group_id):
     if (not 'user_id' in request.session):
         return HttpResponseRedirect("/login/")
@@ -700,41 +765,3 @@ def my_friends(request):
             "friend_list": user.friends.all(),
         })
 
-def my_groups_create(request):
-    if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
-    try:
-        user = User.objects.get(id = request.session['user_id'])
-    except User.DoesNotExist:
-        return HttpResponseRedirect("/login/")
-
-    return render_to_response("my_groups_create.html", {
-        'user': getUserObj(user.id),
-        "my_create_groups": user.group_owner.all(),
-    })
-
-def my_groups_attend(request):
-    if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
-    try:
-        user = User.objects.get(id = request.session['user_id'])
-    except User.DoesNotExist:
-        return HttpResponseRedirect("/login/")
-
-    return render_to_response("my_groups_attend.html", {
-        'user': getUserObj(user.id),
-        "my_attend_groups": user.group_member.all(),
-    })
-
-def all_groups(request):
-    if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
-    try:
-        user = User.objects.get(id = request.session['user_id'])
-    except User.DoesNotExist:
-        return HttpResponseRedirect("/login/")
-
-    return render_to_response("all_groups.html", {
-        "user": getUserObj(user.id),
-        "groups" : Group.objects.all(),
-    })
