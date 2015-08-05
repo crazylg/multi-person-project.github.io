@@ -9,9 +9,13 @@
                 <span class="glyphicon glyphicon-map-marker" aria-hidden:true></span>{{activity.place}}</h4>
             <p class="list-group-item-text">{{activity.explanation}}</p>
         </div>
-        {% if activity.attend %}
+        {% if activity.status == "already_in" %}
              <button type="submit" class="btn btn-md pull-right disabled" style="position:relative;top:4px">已参加</button>
-        {% else %}
+        {% endif %}
+        {% if activity.status == "expired" %}
+             <button type="submit" class="btn btn-md pull-right disabled" style="position:relative;top:4px">已过期</button>
+        {% endif %}
+        {% if activity.status == "available" %}
         <form role="form" method="post" action="">
             <input type="hidden" name="activity_id" value={{activity.id}} />
             <input type="hidden" name="form_type" value="apply_activity" />
