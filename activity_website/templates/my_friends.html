@@ -8,7 +8,7 @@
                             <input type="text" class="form-control search-query" placeholder="搜索" autofocus>
                         </form>
                     </div>
-                    <ul class="nav nav-list">
+                    <ul class="nav nav-pills">
                         {% for friend in friend_list %}
                         <form role="form" id={{friend.id}} method="post" action="">
 						<input type="hidden" name="form_type" value="change_talker"/>
