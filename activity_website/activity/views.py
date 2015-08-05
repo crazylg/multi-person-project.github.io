@@ -465,7 +465,6 @@ def my_activities_attend(request):
         "my_attend_activities": [act for act in user.activity_member.all()],
     })
 
-
 def my_activities_launch(request):
     if (not 'user_id' in request.session):
         return HttpResponseRedirect("/login/")
