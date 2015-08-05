@@ -400,9 +400,27 @@ def add_group(request):
     if (request.method == 'POST'):
         if (not 'name' in request.POST) or (not request.POST['name']):
             errors['name'] = '请输入群组名称'
-            
+        elif (len(request.POST['name']) > 20):
+            errors['name'] = '群组名称应不大于20'
+        if (not 'explanation' in request.POST) or (not request.POST['explanation']):
+            errors['explanation'] = '请输入群组说明'
+        elif (len(request.POST['explanation']) > 400):
+            errors['explanation'] = '群组说明应不大于400字'
+        if (not errors):
+            group = Group(
+                name = request.POST['name'],
+                owner = user,
+                explanation = request.POST['explanation'],
+                found_time = datetime.datetime.now(),
+                current_size = 0,
+                max_size = 100,
+            )
+            group.save()
+
     return render_to_response('add_group.html',{
         'user': getUserObj(user.id),
+        'responses': responses,
+        'errors': errors,
     })
 
 def group_info(request, group_id):
@@ -602,4 +620,13 @@ def my_friends(request):
         })
 
 def my_groups(request):
-    return 0
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    return render_to_response("my_groups.html", {
+        "mygroups": user.group_owner.all(),
+    })
