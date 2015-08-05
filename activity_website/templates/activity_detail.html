@@ -1,72 +1,95 @@
-﻿{% include "header.html" %}                    
-            <div class="col-lg-6 col-lg-offset-1 col-sm-7">
-                <div class="row">
-                    <table class="table table-hover" style="font-family:'Microsoft YaHei';font-size:1.7em">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>活动名称</td>
-                                <td>{{activity.name}}</td>
-                            </tr>
-                            <tr>
-                                <td>组织者</td>
-                                <td>{{activity.organizer}}</td>
-                            </tr>
-                            <tr>
-                                <td>发布时间</td>
-                                <td>{{activity.post_time}}</td>
-                            </tr>
-                            <tr>
-                                <td>活动开始</td>
-                                <td>{{activity.start_time}}</td>
-                            </tr>
-                            <tr>
-                                <td>活动结束</td>
-                                <td>{{activity.end_time}}</td>
-                            </tr>
-                            <tr>
-                                <td>活动地点</td>
-                                <td>{{activity.place}}</td>
-                            </tr>
-                            <tr>
-                                <td>年龄要求</td>
-                                <td>{{activity.min_age}} 到 {{avctivity.max_age}}</td>
-                            </tr>
-                            <tr>
-                                <td>性别要求</td>
-                                <td>{{activity.sex_requirement}}</td>
-                            </tr>
-                            <tr>
-                                <td>已报名人数/总人数</td>
-                                <td>{{activity.current_size}}/{{activity.max_size}}</td>
-                            </tr>
-                            <tr>
-                                <td>报名结束时间</td>
-                                <td>{{activity.applyend_time}}</td>
-                            </tr>
-                            <tr>
-                                <td>详细描述</td>
-                                <td>{{activity.explanation}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <form class="form-horizontal" role="form" method="post" action="">
-                        <div class="form-group">
-                            <textarea class="form-control" style="height:140px;overflow-y:auto" name="apply_message" placeholder="报名留言"></textarea>
-                            <button type="submit" class="btn btn-lg btn-danger pull-right" style="position:relative;top:4px">报名</button>
-                        </div>
-                    </form>
-
+{% include "header.html" %}         
+            <div class="col-lg-7 col-sm-8">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#">活动介绍</a></li>
+                    <li><a href="/activity/attendence/">参加人员</a></li>        
+                </ul>
+                <div style="top:10px">
+                <blockquote>
+                    <p></p>
+                    <h2>{{activity.name}}</h2>
+                    <p><h3>{{activity.status}}</h3></p>
+                    <h4>目前报名人数： {{activity.current_size}}   /  {{activity.maxsize}}</h4>
+                    <p></p>
+                </blockquote>
                 </div>
+                    <div class="col-lg-11">
+                        <div class="col-lg-3">
+                        <h4>活动时间：</h4>
+                        </div>
+                        <div class="col-lg-7 col-lg-offset-1 list-group">
+                            <h4>{{activtiy.start_time}}  ~  {{activity.end_time}}</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-11">
+                        <div class="col-lg-3">
+                        <h4>活动地点：</h4>
+                        </div>
+                        <div class="col-lg-7 col-lg-offset-1 list-group">
+                            <p><h4>{{activtiy.place}}</h4></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-11">
+                        <div class="col-lg-3">
+                        <h4>活动发起人：</h4>
+                        </div>
+                        <div class="col-lg-7 col-lg-offset-1 list-group">
+                            <p><h4>{{activtiy.organizer}}</h4></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-11">
+                        <div class="col-lg-3">
+                        <h4>活动分类：</h4>
+                        </div>
+                        <div class="col-lg-7 col-lg-offset-1 list-group">
+                            <p><h4>{{activtiy.type}}</h4></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-11">
+                        <div class="col-lg-3">
+                        <h4>活动简介：</h4>
+                        </div>
+                        <div class="col-lg-7 col-lg-offset-1 list-group">
+                            <p><h4>{{activtiy.explanation}}</h4></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-11">
+                        <div class="col-lg-3">
+                        <h4>参与年龄限制：</h4>
+                        </div>
+                        <div class="col-lg-7 col-lg-offset-1 list-group">
+                            <p><h4>{{activtiy.min_age}}  ~  {{acitvity.max_age}} 岁</h4></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-11">
+                        <div class="col-lg-3">
+                        <h4>参与性别限制：</h4>
+                        </div>
+                        <div class="col-lg-7 col-lg-offset-1 list-group">
+                            <p><h4>{{activtiy.sex_requirement}}</h4></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-11">
+                        <div class="col-lg-3">
+                        <p><h4>报名截止时间：</h4></p>
+                        </div>
+                        <div class="col-lg-7 col-lg-offset-1 list-group">
+                            <h4><p>{{activtiy.applyend_time}}</p></h4>
+                        </div>
+                    </div>
             </div>
-            <div class="col-lg-2 col-sm-3">
-		    	<p>留着以后用=。=  还没时间做</p>
-		    </div>
-
+            <div class="col-lg-2">
+                {% if organizer %}
+                <form role="form" method="post" action>
+                    <h3>邀请好友</h3>
+                    <div style="width:100%;height:500px;padding-right:20px;box-shadow:0px 0px 8px skyblue;overflow-y:auto">
+                    {% for friend in friends %}
+                    <div class="checkbox">
+                        <label><input type="checkbox" name={{friend.id}} value="">{{friend.nickname}}</label>
+                    </div>
+                    {% endfor %}
+                    </div>
+                <button type="submit" class="btn btn-primary btn-block" style="position:relative;top:20px">发送邀请</button>
+                {% endif %}
+            </div>
 {% include "footer.html" %}
