@@ -623,6 +623,7 @@ def my_groups_create(request):
         return HttpResponseRedirect("/login/")
 
     return render_to_response("my_groups_create.html", {
+        'user': getUserObj(user.id),
         "my_create_groups": user.group_owner.all(),
     })
 
@@ -635,5 +636,6 @@ def my_groups_attend(request):
         return HttpResponseRedirect("/login/")
 
     return render_to_response("my_groups_attend.html", {
+        'user': getUserObj(user.id),
         "my_attend_groups": user.group_member.all(),
     })

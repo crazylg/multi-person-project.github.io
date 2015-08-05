@@ -36,8 +36,8 @@ urlpatterns = [
     url(r'^apply_activity/$', 'activity.views.apply_activity', name = 'apply_activity'),
 
     url(r'^my_friends/$', 'activity.views.my_friends', name = 'my_friends'),
-    url(r'^my_groups/attend$', 'activity.views.my_groups_attend', name = 'my_groups_attend'),
-    url(r'^my_groups/create$', 'activity.views.my_groups_create', name = 'my_groups_create'),
+    url(r'^my_groups/attend/$', 'activity.views.my_groups_attend', name = 'my_groups_attend'),
+    url(r'^my_groups/create/$', 'activity.views.my_groups_create', name = 'my_groups_create'),
 
     url(r'^add_group/$', 'activity.views.add_group', name = 'add_group'),
     url(r'^group/(\d+)/info$', 'activity.views.group_info', name = 'group_info'),

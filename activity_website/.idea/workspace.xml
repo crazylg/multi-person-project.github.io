@@ -24,14 +24,14 @@
     <favorites_list name="activity_website" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.59234387">
+    <splitter split-orientation="horizontal" split-proportion="0.43720618">
       <split-first>
         <leaf>
-          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/activity/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="637" column="19" selection-start-line="637" selection-start-column="19" selection-end-line="637" selection-end-column="19" />
+                <state vertical-scroll-proportion="0.31156462">
+                  <caret line="490" column="23" selection-start-line="490" selection-start-column="23" selection-end-line="490" selection-end-column="23" />
                   <folding>
                     <element signature="e#0#100#0" expanded="true" />
                     <element signature="e#265#317#0" expanded="false" />
@@ -61,26 +61,18 @@
                     <element signature="e#20728#21271#0" expanded="false" />
                     <element signature="e#21316#21862#0" expanded="false" />
                     <element signature="e#21893#23520#0" expanded="false" />
+                    <element signature="e#23557#23947#0" expanded="false" />
+                    <element signature="e#23984#24375#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="header.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/templates/header.html">
+          <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/activity_website/urls.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.4375">
-                  <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="my_groups_attend.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/templates/my_groups_attend.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
                   <folding />
                 </state>
               </provider>
@@ -93,8 +85,8 @@
           <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/activity/models.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.6585034">
-                  <caret line="47" column="18" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
+                <state vertical-scroll-proportion="1.1374149">
+                  <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
                   <folding />
                 </state>
               </provider>
@@ -144,9 +136,9 @@
         <option value="$PROJECT_DIR$/templates/all_activities.html" />
         <option value="$PROJECT_DIR$/templates/my_attend_groups.html" />
         <option value="$PROJECT_DIR$/templates/my_create_groups.html" />
+        <option value="$PROJECT_DIR$/templates/header.html" />
         <option value="$PROJECT_DIR$/activity_website/urls.py" />
         <option value="$PROJECT_DIR$/activity/views.py" />
-        <option value="$PROJECT_DIR$/templates/header.html" />
       </list>
     </option>
   </component>
@@ -578,7 +570,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -616,6 +608,8 @@
             <element signature="e#20728#21271#0" expanded="false" />
             <element signature="e#21316#21862#0" expanded="false" />
             <element signature="e#21893#23520#0" expanded="false" />
+            <element signature="e#23557#23947#0" expanded="false" />
+            <element signature="e#23984#24375#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -677,6 +671,8 @@
             <element signature="e#20728#21271#0" expanded="false" />
             <element signature="e#21316#21862#0" expanded="false" />
             <element signature="e#21893#23520#0" expanded="false" />
+            <element signature="e#23557#23947#0" expanded="false" />
+            <element signature="e#23984#24375#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -730,6 +726,8 @@
             <element signature="e#20728#21271#0" expanded="false" />
             <element signature="e#21316#21862#0" expanded="false" />
             <element signature="e#21893#23520#0" expanded="false" />
+            <element signature="e#23557#23947#0" expanded="false" />
+            <element signature="e#23984#24375#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -767,6 +765,8 @@
             <element signature="e#20728#21271#0" expanded="false" />
             <element signature="e#21316#21862#0" expanded="false" />
             <element signature="e#21893#23520#0" expanded="false" />
+            <element signature="e#23557#23947#0" expanded="false" />
+            <element signature="e#23984#24375#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -818,6 +818,8 @@
             <element signature="e#20728#21271#0" expanded="false" />
             <element signature="e#21316#21862#0" expanded="false" />
             <element signature="e#21893#23520#0" expanded="false" />
+            <element signature="e#23557#23947#0" expanded="false" />
+            <element signature="e#23984#24375#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -862,6 +864,8 @@
             <element signature="e#20728#21271#0" expanded="false" />
             <element signature="e#21316#21862#0" expanded="false" />
             <element signature="e#21893#23520#0" expanded="false" />
+            <element signature="e#23557#23947#0" expanded="false" />
+            <element signature="e#23984#24375#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -921,6 +925,8 @@
             <element signature="e#20728#21271#0" expanded="false" />
             <element signature="e#21316#21862#0" expanded="false" />
             <element signature="e#21893#23520#0" expanded="false" />
+            <element signature="e#23557#23947#0" expanded="false" />
+            <element signature="e#23984#24375#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -988,6 +994,8 @@
             <element signature="e#20728#21271#0" expanded="false" />
             <element signature="e#21316#21862#0" expanded="false" />
             <element signature="e#21893#23520#0" expanded="false" />
+            <element signature="e#23557#23947#0" expanded="false" />
+            <element signature="e#23984#24375#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1145,22 +1153,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/activity_website/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/activity/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6585034">
-          <caret line="47" column="18" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/my_groups_attend.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1169,10 +1161,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/activity/views.py">
+    <entry file="file://$PROJECT_DIR$/templates/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4375">
+          <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/activity_website/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="637" column="19" selection-start-line="637" selection-start-column="19" selection-end-line="637" selection-end-column="19" />
+          <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/activity/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1374149">
+          <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/activity/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31156462">
+          <caret line="490" column="23" selection-start-line="490" selection-start-column="23" selection-end-line="490" selection-end-column="23" />
           <folding>
             <element signature="e#0#100#0" expanded="true" />
             <element signature="e#265#317#0" expanded="false" />
@@ -1202,15 +1218,9 @@
             <element signature="e#20728#21271#0" expanded="false" />
             <element signature="e#21316#21862#0" expanded="false" />
             <element signature="e#21893#23520#0" expanded="false" />
+            <element signature="e#23557#23947#0" expanded="false" />
+            <element signature="e#23984#24375#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4375">
-          <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
