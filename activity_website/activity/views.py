@@ -613,6 +613,7 @@ def add_group(request):
         'user': getUserObj(user.id),
         'responses': responses,
         'errors': errors,
+        'friends': user.friends.all(),
     })
 
 def my_groups_create(request):
