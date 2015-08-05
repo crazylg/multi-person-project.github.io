@@ -10,7 +10,8 @@
                     </div>
                     <ul class="nav nav-list">
                         {% for friend in friend_list %}
-                        <form role="form" id={{friend.id}} name="form_type" value="change_talker" method="post" action="">
+                        <form role="form" id={{friend.id}} method="post" action="">
+						<input type="hidden" name="form_type" value="change_talker"/>
 						{% if friend.current_talker %}
                         <li><a class="active" href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
 						{% else %}
@@ -31,12 +32,14 @@
 								<div class="message_get"><p>{{message.content}}</br>{{message.time}}<p></div>
 						<script type="text/javascript>
 							$("#chatbox").scrollTop = $('#chatbox').scrollHeight;
+							{% endif %}
 						</script>
 						{% endfor %}
                     </div>
 
                     <div id="sendbox" class="row" style="width:103%;height:190px;border:2px solid skyblue;padding-left:2px;padding-top:2px;display:block;position:relative;left:5px;top:5px">
-                        <form name="form_type" value="send_message" method="post" action="">
+                        <form method="post" action="">
+							<input type="hidden" name="form_type" value="send_message"/>
                             <textarea class="form-control" style="height:140px;overflow-y:auto" name="send_message"></textarea>
                             <button type="submit" class="btn btn-md btn-primary pull-right" style="position:relative;top:4px">发送</button>
                         </form>
@@ -48,7 +51,8 @@
 		</div>
 		<div class="col-lg-2 col-sm-3">
 			<div class="form-group has-feedback" style="width:100%">
-                <form name="form_type" value="add_friend" method="post" action="">
+                <form method="post" action="">
+					<input type="hidden" name="form_type" value="add_friend" />
                     <input type="text" name="account" class="form-control search-query" placeholder="请输入账号" autofocus>
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     <button type="submit" class="btn btn-danger pull-right" style="top:10px;position:relative">发送好友请求  <span class="glyphicon glyphicon-plus"></span></button>
