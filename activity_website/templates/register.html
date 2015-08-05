@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+	<title>约不约</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/staticfiles/js/jquery.js"></script>
+    <link href="/staticfiles/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/staticfiles/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/staticfiles/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
+    <link href="/staticfiles/css/left_nav.css" rel="stylesheet" />
+    <script type="text/javascript" src="/staticfiles/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/staticfiles/js/accept-or-reject.js" charset="UTF-8"></script>
+</head>
+<body style="font-family:'Microsoft YaHei'">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header navbar-static-top">
+            <a class="navbar-brand" href="#" style="font-size:2.5em">约不约</a>
+        </div>
+        <a class="navbar-brand navbar-right" href="#" style="font-size:1.5em">  </a>
+        <a class="navbar-brand navbar-right" href="/logout/" style="font-size:1.5em">退出</a>
+        <a class="navbar-brand navbar-right" href="/welcome/" style="font-size:1.5em"><span class="glyphicon glyphicon-user"></span>个人中心</a>
+        <a class="navbar-brand navbar-right" href="/my_request/" style="font-size:1.2em"><span class="fa fa-envelope"><span class="badge empty" style="background-color:red">{% if user.request_num %}{% if user.request_num > 0 %} {{user.request_num}} {% endif %} {% endif %} </span></span></a>
+        <a class="navbar-brand navbar-right" href="/activities/" style="font-size:1.5em">活动</a>
+    </nav>
+
+    <div class="container" style="width:30%;border:2px solid skyblue;padding:15px 10px 8px 10px;">
+        <form class="form-horizontal" role="form" method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+               <label for="email" class="col-sm-2 control-label">帐号</label>
+               <div class="col-sm-10">
+                  <input type="text" class="form-control" name="account" 
+                     placeholder="请输入帐号" {% if account %} value="{{ account }}" {% endif %}>
+                   {% if errors.account %}
+                        {{errors.account}}
+                   {% endif %}
+               </div>
+            </div>
+
+            <div class="form-group">
+               <label for="password" class="col-sm-2 control-label">密码</label>
+               <div class="col-sm-10">
+                  <input type="password" class="form-control" name="password1" 
+                     placeholder="请输入密码" {% if password1 %} value="{{ password1 }}" {% endif %}>
+                   {% if errors.password1 %}
+                        {{errors.password1}}
+                   {% endif %}
+               </div>
+            </div>
+
+            <div class="form-group">
+               <label for="password" class="col-sm-2 control-label">重复密码</label>
+               <div class="col-sm-10">
+                  <input type="password" class="form-control" name="password2" 
+                     placeholder="请再次输入密码" {% if password2 %} value="{{ password2 }}" {% endif %}>
+                   {% if errors.password2 %}
+                        {{errors.password2}}
+                   {% endif %}
+               </div>
+            </div>
+
+            <div class="form-group">
+                <label for="nickname" class="col-sm-2 control-label">昵称</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="nickname" {% if nickname %} value="{{ nickname }}" {% endif %}>
+                   {% if errors.nickname %}
+                        {{errors.nickname}}
+                   {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="sex" class="col-sm-2 control-label">性别</label>
+                <div class="col-sm-10">
+                    <label class="checkbox-inline">
+                       <input type="radio" name="sex" id="male"
+                           value="male" checked> 男
+                    </label>
+                    <label class="checkbox-inline">
+                       <input type="radio" name="sex" id="female"
+                           value="female"> 女
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="age" class="col-sm-2 control-label">年龄</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="age" {% if age %} value="{{ age }}" {% endif %}>
+                   {% if errors.age %}
+                        {{errors.age}}
+                   {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="tel" class="col-sm-2 control-label">手机</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="phone" {% if phone %} value="{{ phone }}" {% endif %}>
+                   {% if errors.phone %}
+                        {{errors.phone}}
+                   {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="tel" class="col-sm-2 control-label">邮箱</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="email" {% if email %} value="{{ email }}" {% endif %}>
+                   {% if errors.email %}
+                        {{errors.email}}
+                   {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="tel" class="col-sm-2 control-label">兴趣</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="interest" {% if interest %} value="{{ interest }}" {% endif %}>
+                   {% if errors.interest %}
+                        {{errors.interest}}
+                   {% endif %}
+                </div>
+
+                <!--<label for="tel" class="col-sm-2 control-label">    </label>
+                <div class="col-sm-10">
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="singing" 
+                           value="singing"> K歌
+                    </label>
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="movie"
+                           value="movie"> 电影
+                    </label>
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="bikeriding"
+                           value="bikeriding"> 骑车
+                    </label>
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="bikeriding"
+                           value="bikeriding"> 骑车
+                    </label>
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="swimming"
+                           value="swimming"> 游泳
+                    </label>
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="eating"
+                           value="eating"> 吃吃吃
+                    </label>
+                </div>
+                <label for="tel" class="col-sm-2 control-label">    </label>
+                <div class="col-sm-10">
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="singing" 
+                           value="singing"> K歌
+                    </label>
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="movie"
+                           value="movie"> 电影
+                    </label>
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="bikeriding"
+                           value="bikeriding"> 骑车
+                    </label>
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="bikeriding"
+                           value="bikeriding"> 骑车
+                    </label>
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="swimming"
+                           value="swimming"> 游泳
+                    </label>
+                    <label class="checkbox-inline">
+                       <input type="checkbox" name="eating"
+                           value="eating"> 吃吃吃
+                    </label>
+                </div>-->
+
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="确定">
+                </div>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>
