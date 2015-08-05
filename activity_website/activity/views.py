@@ -274,20 +274,23 @@ def my_request(request):
 
 
 def applyActivity(user_id, activity_id):
-    user = User.objects.get(id = user_id)
-    acti = Activity.objects.get(id = activity_id)
-    req = Request(
-        type = "activity_application",
-        title = user.nickname + "的活动参加申请",
-        content = "账号" + user.account + "想参加活动 '" + acti.name + "'",
-        poster = user,
-        receiver = acti.organizer,
-        status = "unread",
-        time = datetime.datetime.now(),
-        goal = acti.id,
-    )
-    req.save()
-    return "success"
+    try:
+        user = User.objects.get(id = user_id)
+        acti = Activity.objects.get(id = activity_id)
+        req = Request(
+            type = "activity_application",
+            title = user.nickname + "的活动参加申请",
+            content = "账号" + user.account + "想参加活动 '" + acti.name + "'",
+            poster = user,
+            receiver = acti.organizer,
+            status = "unread",
+            time = datetime.datetime.now(),
+            goal = acti.id,
+        )
+        req.save()
+        return "success"
+    except:
+        return "请求发送失败"
 
 def add_activity(request):
     if (not 'user_id' in request.session):
