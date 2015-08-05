@@ -1,4 +1,52 @@
-﻿{% include "header.html" %}
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+	<title>约不约</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./staticfiles/js/jquery.js"></script>
+    <link href="./staticfiles/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="./staticfiles/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./staticfiles/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" />
+    <link href="./staticfiles/css/left_nav.css" rel="stylesheet" />
+    <link href="./staticfiles/css/chat.css" rel="stylesheet" />
+    <script type="text/javascript" src="./staticfiles/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="./staticfiles/js/accept-or-reject.js" charset="UTF-8"></script>
+</head>
+<body style="font-family:'Microsoft YaHei'">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header navbar-static-top">
+            <a class="navbar-brand" href="/welcome/" style="font-size:2.5em">约不约</a>
+        </div>
+        <a class="navbar-brand navbar-right" href="#" style="font-size:1.5em">  </a>
+        <a class="navbar-brand navbar-right" href="/logout/" style="font-size:1.5em"><span class="fa fa-sign-out"></span></a>
+        <a class="navbar-brand navbar-right" href="/welcome/" style="font-size:1.5em"><span class="fa fa-user"></span>{{ user.nickname }}</a>
+        <a class="navbar-brand navbar-right" href="/my_request/" style="font-size:1.2em"><span class="fa fa-envelope"><span class="badge empty" style="background-color:red">{% if user.request_num %}{% if user.request_num > 0 %} {{user.request_num}} {% endif %} {% endif %}</span></span></a>
+    </nav>
+
+    <!-- 工具栏 -->
+    <div class="container" style="width:100%;padding-left:5px;padding-right:5px;">
+	    <div class="row">
+	    	<div class="col-lg-2 col-sm-2" style="padding-left:20px">
+	    		<ul class="nav nav-tabs">
+	    			<li class="nav-header">个人中心</li>
+	    			<li><a href="/change_userinfo/"><span class="fa fa-pencil"></span>修改资料</a></li>
+	    			<li><a href="/change_userpwd/"><span class="fa fa-lock"></span>修改密码</a></li>
+	    			<li class="nav-header">社交中心</li>
+	    			<li><a href="/my_friends/"><span class="fa fa-user"></span>我的好友</a></li>
+	    			<li><a href="/my_groups/create/"><span class="fa fa-group"></span>我的群组</a></li>
+                    <li><a href="/add_group/"><span class="fa fa-user-plus"></span>创建群组</a></li>
+	    			<li class="divider"></li>
+                    <li class="nav-header">活动中心</li>
+	    			<li><a href="/add_activity/"><span class="fa fa-plus"></span>发起活动</a></li>
+	    			<li><a href="/my_activities/attend/"><span class="fa fa-comment"></span>我的活动</a></li>
+	    			<li><a href="/friend_activities/attend/"><span class="fa fa-comment-o"></span>好友活动</a></li>
+	    			<li><a href="/group_activities/"><span class="fa fa-comments-o"></span>群组活动</a></li>
+	    			<li><a href="/all_activities/"><span class="fa fa-globe"></span>所有活动</a></li>
+                    <li class="divider"></li>
+	    		</ul>
+	    	</div>
 		<div class="col-lg-6 col-lg-offset-1 col-sm-7" style="">
             <div class="row" style="width:103%;border:2px solid skyblue;padding-left:2px;padding-top:2px">
                 <div class="col-lg-4 col-sm-3" style="height:600px;border:2px solid skyblue;overflow-y:auto">
@@ -10,13 +58,13 @@
                     </div>
                     <ul class="nav nav-pills">
                         {% for friend in friend_list %}
-                        <form role="form" id={{friend.id}} method="post" action="">
-						<input type="hidden" name="form_type" value="change_talker"/>
 						{% if friend.current_talker %}
                         <li class="active"><a href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
 						{% else %}
                         <li><a href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
 						{% endif %}
+                        <form role="form" id={{friend.id}} method="post" action="">
+						<input type="hidden" name="form_type" value="change_talker"/>
 						<input type="hidden" name="click_friend_id" value={{friend.id}}/>
                         </form>
                         {% endfor %}
@@ -72,4 +120,7 @@
 	};
 </script>
 		
-{% include "footer.html" %}
+	    </div>
+    </div>
+</body>
+</html>
