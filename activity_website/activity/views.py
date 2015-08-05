@@ -18,15 +18,14 @@ def isEmail(s):
 def isPhone(s):
     return (re.match(r'^((13[0-9])|(15[^4,\D])|(18[0,5-9]))\d{8}$', s))
 
-def getUser(request):
-#    if ('user_id' in request.session):
-#        user = User.objects.get(id == request.session['user_id'])
-#        return user
-#        return {
-#            'nickname': user.nickname,
-#            'request_num': Request.objects.filter(receiver = user, statuts = 'unread').count(),
-#        }
-#    else:
+def getUserObj(id):
+    try:
+        user = User.objects.get(id = id)
+        return {
+            "nickname": user.nickname,
+            "request_num": user.request_receiver.filter(status = "unread").count(),
+        }
+    except User.DoesNotExist:
         return {}
 
 def getPOST(request, t, max_len):
@@ -46,15 +45,18 @@ def login(request):
             else:
                 errors['password'] = 'Your password is wrong!'
                 return render_to_response("login_form.html", {
+                    'user': getUserObj(user.id),
                     'errors': errors
                 }, context_instance = RequestContext(request))
         except User.DoesNotExist:
             errors['account'] = '该账号不存在'
             return render_to_response("login_form.html", {
+                'user': getUserObj(user.id),
                 'errors': errors
             }, context_instance = RequestContext(request))
     else:
         return render_to_response("login_form.html", {
+            'user': getUserObj(user.id),
         }, context_instance = RequestContext(request))
 
 def logout(request):
@@ -100,6 +102,7 @@ def register(request):
         if (errors):
             #return HttpResponse(errors)
             return render_to_response("register.html", {
+                'user': getUserObj(user.id),
                 'errors': errors,
                 'account': request.POST.get('account', ''),
                 'password': request.POST.get('password', ''),
@@ -126,6 +129,7 @@ def register(request):
         return HttpResponseRedirect('/welcome/')
     else:
         return render_to_response("register.html", {
+            'user': getUserObj(user.id),
         }, context_instance = RequestContext(request))
 
 def welcome(request):
@@ -136,8 +140,9 @@ def welcome(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
+    #return HttpResponse(getUserObj(user.id)["nickname"])
     return render_to_response("welcome.html", {
-        'nickname': user.nickname
+        'user': getUserObj(user.id),
     }, context_instance = RequestContext(request))
 
 def my_request(request):
@@ -172,12 +177,18 @@ def my_request(request):
                     tmp_req.save()
         req.save()
 
+        reqs = [req for req in Request.objects.filter(receiver = user)]
+        reqs.reverse()
         return render_to_response("my_request.html", {
-            'requests': [req for req in Request.objects.filter(receiver = user)],
+            'user': getUserObj(user.id),
+            'requests': reqs,
         })
     else:
+        reqs = [req for req in Request.objects.filter(receiver = user)]
+        reqs.reverse()
         return render_to_response("my_request.html", {
-            'requests': [req for req in Request.objects.filter(receiver = user)],
+            'user': getUserObj(user.id),
+            'requests': reqs,
         })
 
 def apply_activity(request):
@@ -220,10 +231,12 @@ def all_activities(request):
         search_word = getPOST(request, 'search_word', 20)
         if (search_word):
             return render_to_response("all_activities.html", {
+                'user': getUserObj(user.id),
                 "activities": [act for act in Activity.objects.filter(name__contains = search_word)]
             })
     else:
         return render_to_response("all_activities.html", {
+            'user': getUserObj(user.id),
             "activities": [act for act in Activity.objects.all()],
         }, context_instance = RequestContext(request))
 
@@ -269,6 +282,7 @@ def add_activity(request):
 
         if (errors):
             return render_to_response("add_activity.html", {
+                'user': getUserObj(user.id),
                 'errors': errors
             }, context_instance = RequestContext(request))
         else:
@@ -293,6 +307,7 @@ def add_activity(request):
             return HttpResponseRedirect('/welcome/')
     else:
         return render_to_response("add_activity.html", {
+            'user': getUserObj(user.id),
         }, context_instance = RequestContext(request))
 
 def change_userinfo(request):
@@ -314,6 +329,7 @@ def change_userinfo(request):
         return HttpResponseRedirect('/welcome/')
     else:
         return render_to_response("change_userinfo_form.html", {
+            'user': getUserObj(user.id),
             'account': user.account,
             'password': user.password,
             'nickname': user.nickname,
@@ -351,12 +367,14 @@ def change_userpwd(request):
                 errors.append('Your old password is wrong.')
         if (errors):
             return render_to_response("change_userpwd_form.html", {
+                'user': getUserObj(user.id),
                 'errors': errors
             }, context_instance = RequestContext(request))
         else:
             return HttpResponseRedirect('/welcome/')
     else:
         return render_to_response("change_userpwd_form.html", {
+            'user': getUserObj(user.id),
         }, context_instance = RequestContext(request))
 
 def add_group(request):
@@ -368,6 +386,7 @@ def add_group(request):
         return HttpResponseRedirect("/login/")
 
     return render_to_response('add_group.html',{
+        'user': getUserObj(user.id),
     })
 
 def group_info(request, group_id):
@@ -387,6 +406,7 @@ def group_info(request, group_id):
     except Group.DoesNotExist:
         raise Http404()
     return render_to_response('group_info.html',{
+        'user': getUserObj(user.id),
         'group_time': group.found_time,
         'group_number': group.size,
         'group_content': group.explanation,
@@ -409,6 +429,7 @@ def group_members(request, group_id):
     except Group.DoesNotExist:
         raise Http404()
     return render_to_response('group_members.html',{
+        'user': getUserObj(user.id),
         'group_usernamelist': [user.nickname for user in group.members],
     })
 
@@ -429,6 +450,7 @@ def group_activities(request, group_id):
     except Group.DoesNotExist:
         raise Http404()
     return render_to_response('group_activities.html',{
+        'user': getUserObj(user.id),
         'group_activity_list': [{
             'act_name': act.name,
             'act_content': act.explanation,
@@ -451,7 +473,10 @@ def upload_headimg(request):
             return HttpResponse('upload ok!')
     else:
         uf = UserForm()
-    return render_to_response('upload_headimg.html',{'uf': uf})
+    return render_to_response('upload_headimg.html',{
+        'uf': uf,
+        'user': getUserObj(user.id),
+    })
 
 def my_activities_attend(request):
     if (not 'user_id' in request.session):
@@ -462,6 +487,7 @@ def my_activities_attend(request):
         return HttpResponseRedirect("/login/")
 
     return render_to_response("my_attend.html", {
+        'user': getUserObj(user.id),
         "my_attend_activities": [act for act in user.activity_member.all()],
     })
 
@@ -474,6 +500,7 @@ def my_activities_launch(request):
         return HttpResponseRedirect("/login/")
 
     return render_to_response("my_launch.html", {
+        'user': getUserObj(user.id),
         "my_launch_activities": [act for act in user.activity_organizer.all()],
     })
 
@@ -491,6 +518,7 @@ def friend_activities_attend(request):
             if not act in acts:
                 acts.append(act)
     return render_to_response("friend_attend.html", {
+        'user': getUserObj(user.id),
         "friend_attend_activities": acts,
     })
 
@@ -508,6 +536,7 @@ def friend_activities_launch(request):
             if not act in acts:
                 acts.append(act)
     return render_to_response("friend_launch.html", {
+        'user': getUserObj(user.id),
         "friend_launch_activities": acts,
     })
 
@@ -519,4 +548,38 @@ def my_friends(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
-    return render_to_response("my_friends.html")
+    if (request.method == "POST"):
+        errors = {}
+        responses = {}
+        if (not 'account' in request.POST) or (not request.POST['account']):
+            errors['search_friend'] = "请输入搜索账号"
+        elif (len(request.POST['account']) > 30):
+            errors['search_friend'] = "账号不存在"
+        if (not errors):
+            try:
+                tar = User.objects.get(account = request.POST['account'])
+                req = Request(
+                    type = "friend_application",
+                    title = "来自 " + user.nickname + " 的好友请求",
+                    content = "账号 " + user.account + " 想加你为好友",
+                    poster = user,
+                    receiver = tar,
+                    status = "unread",
+                    goal = tar.id,
+                    time = datetime.datetime.now(),
+                )
+                req.save()
+                responses['search_friend'] = "请求已发送"
+            except User.DoesNotExist:
+                errors['search_friend'] = "账号不存在"
+
+        return render_to_response("my_friends.html", {
+            'user': getUserObj(user.id),
+            "errors": errors,
+            "responses": responses,
+        })
+
+    else:
+        return render_to_response("my_friends.html", {
+            'user': getUserObj(user.id),
+        })

@@ -20,7 +20,7 @@
         <a class="navbar-brand navbar-right" href="#" style="font-size:1.5em">  </a>
         <a class="navbar-brand navbar-right" href="/logout/" style="font-size:1.5em">退出</a>
         <a class="navbar-brand navbar-right" href="/welcome/" style="font-size:1.5em"><span class="fa fa-user"></span>{{ user.nickname }}</a>
-        <a class="navbar-brand navbar-right" href="/my_request/" style="font-size:1.2em"><span class="fa fa-envelope"><span class="badge empty" style="background-color:red">{% if message.num > 0 %} {{message.num}} {% endif %} </span></span></a>
+        <a class="navbar-brand navbar-right" href="/my_request/" style="font-size:1.2em"><span class="fa fa-envelope"><span class="badge empty" style="background-color:red">{% if user.request_num > 0 %} {{user.request_num}} {% endif %} </span></span></a>
     </nav>
 
     <!-- 工具栏 -->

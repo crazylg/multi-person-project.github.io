@@ -42,6 +42,12 @@
                     <input type="text" name="account" class="form-control search-query" placeholder="请输入账号" autofocus>
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     <button type="submit" class="btn btn-danger pull-right" style="top:10px;position:relative">发送好友请求  <span class="glyphicon glyphicon-plus"></span></button>
+                    {% if errors.search_friend %}
+                        {{ errors.search_friend }}
+                    {% endif %}
+                    {% if responses.search_friend %}
+                        {{ responses.search_friend }}
+                    {% endif %}
                 </form>
             </div>
 		</div>
