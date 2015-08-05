@@ -13,7 +13,7 @@
                         <form role="form" id={{friend.id}} method="post" action="">
 						<input type="hidden" name="form_type" value="change_talker"/>
 						{% if friend.current_talker %}
-                        <li><a class="active" href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
+                        <li class="active"><a href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
 						{% else %}
                         <li><a href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
 						{% endif %}
