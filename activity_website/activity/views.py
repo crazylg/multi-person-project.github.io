@@ -395,6 +395,12 @@ def add_group(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
+    errors = {}
+    responses = {}
+    if (request.method == 'POST'):
+        if (not 'name' in request.POST) or (not request.POST['name']):
+            errors['name'] = '请输入群组名称'
+            
     return render_to_response('add_group.html',{
         'user': getUserObj(user.id),
     })
