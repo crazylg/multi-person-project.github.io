@@ -49,8 +49,6 @@ urlpatterns = [
     url(r'^friend_activities/attend/$', 'activity.views.friend_activities_attend', name = 'friend_activities_attend'),
     url(r'^friend_activities/launch/$', 'activity.views.friend_activities_launch', name = 'friend_activities_launch'),
 
-    url(r'^my_friends/$', 'activity.views.my_friends', name = 'my_friends'),
-
 ]
 
 #urlpatterns = patterns('',
