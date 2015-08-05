@@ -239,16 +239,11 @@ def all_activities(request):
         #if (not user):
         #    return HttpResponseRedirect('/login/')
         search_word = getPOST(request, 'search_word', 20)
-        if (search_word):
-            return render_to_response("all_activities.html", {
-                'user': getUserObj(user.id),
-                "activities": [act for act in Activity.objects.filter(name__contains = search_word)]
-            })
-    else:
-        return render_to_response("all_activities.html", {
-            'user': getUserObj(user.id),
-            "activities": [act for act in Activity.objects.all()],
-        }, context_instance = RequestContext(request))
+
+    return render_to_response("all_activities.html", {
+        'user': getUserObj(user.id),
+        "activities": [act for act in Activity.objects.all()],
+    }, context_instance = RequestContext(request))
 
 def add_activity(request):
     if (not 'user_id' in request.session):
@@ -619,7 +614,19 @@ def my_friends(request):
             "friend_list": user.friends.all(),
         })
 
-def my_groups(request):
+def my_groups_create(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    return render_to_response("my_groups.html", {
+        "mygroups": user.group_owner.all(),
+    })
+
+def my_groups_attend(request):
     if (not 'user_id' in request.session):
         return HttpResponseRedirect("/login/")
     try:

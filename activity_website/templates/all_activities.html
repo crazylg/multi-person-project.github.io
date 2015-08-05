@@ -24,7 +24,7 @@
                                     <span class="glyphicon glyphicon-map-marker" aria-hidden:true></span>{{activity.place}}</h4>
                                 <p class="list-group-item-text">{{activity.explanation}}</p>
                             </div>
-                            {% if activity_attend %}
+                            {% if activity.attend %}
                                  <button type="submit" class="btn btn-md pull-right disabled" style="position:relative;top:4px">已参加</button>
                             {% else %}
                             <form role="form" method="post" action="/apply_activity/">
