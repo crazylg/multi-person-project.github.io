@@ -1,12 +1,12 @@
 {% include "header.html" %}
                 <div class="col-lg-7 col-lg-offset-1 col-sm-8">
-                	<h2>{{name}}</h2>
+                	<h2>{{group.name}}</h2>
                 	<ul class="nav nav-pills">
                     <li><a href="/group/activities/">活动</a></li>
                     <li class="active"><a href="#">成员</a></li>        
                     <li><a href="/group/info/">介绍</a></li>
                     </ul>
-                    {% for groupmember in groupmembers}
+                    {% for groupmember in groupmembers %}
 					<div class="col-lg-10">
                         <div class="col-lg-1">
                         </div>

@@ -1,6 +1,6 @@
 {% include "header.html" %}
                 <div class="col-lg-7 col-lg-offset-1 col-sm-8">
-                	<h2>{{name}}</h2>
+                	<h2>{{group.name}}</h2>
                 	<ul class="nav nav-pills">
                     <li class="active"><a href="#">活动</a></li>
                     <li><a href="/group/members/">成员</a></li>        
@@ -26,7 +26,7 @@
                             </a>
                             <div class="list-group-item">
                                 <h4 class="list-group-item-heading">
-                                    <span class="glyphicon glyphicon-map-marker" aria-hidden:true></span>{{groupactivity.place}}</h4>
+                                    <span class="glyphicon glyphicon-map-marker"></span>{{groupactivity.place}}</h4>
                                 <p class="list-group-item-text">{{groupactivity.explanation}}</p>
                             </div>
                             {% if groupactivity.attend %}
