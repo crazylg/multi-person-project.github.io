@@ -639,3 +639,16 @@ def my_groups_attend(request):
         'user': getUserObj(user.id),
         "my_attend_groups": user.group_member.all(),
     })
+
+def all_groups(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    return render_to_response("all_groups.html", {
+        "user": getUserObj(user.id),
+        "groups" : Group.objects.all(),
+    })
