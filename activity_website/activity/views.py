@@ -34,6 +34,8 @@ def getPOST(request, t, max_len):
     else:
         return False
 
+
+
 def login(request):
     if (request.method == 'POST'):
         errors = {}
@@ -142,6 +144,75 @@ def welcome(request):
         'user': getUserObj(user.id),
     }, context_instance = RequestContext(request))
 
+def change_userinfo(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    if (request.method == "POST"):
+        user.nickname = request.POST.get('nickname')
+        user.age = int(request.POST.get('age'))
+        #user.email = request.POST.get('email')
+        user.phone = request.POST.get('phone')
+        user.sex = request.POST.get('sex')
+        user.interest = request.POST.get('interest')
+        user.save()
+        return HttpResponseRedirect('/welcome/')
+    else:
+        return render_to_response("change_userinfo_form.html", {
+            'user': getUserObj(user.id),
+            'account': user.account,
+            'password': user.password,
+            'nickname': user.nickname,
+            'sex': user.sex, #male/female
+            'age': user.age,
+            'email': user.email,
+            'phone': user.phone,
+            'interest': user.interest,
+        }, context_instance = RequestContext(request))
+
+def change_userpwd(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    if (request.method == 'POST'):
+        errors = []
+        old_password = ''
+        new_password = ''
+        if ('old_password' in request.POST) and (request.POST['old_password']):
+            old_password = request.POST['old_password']
+        else:
+            errors.append('Please enter your old password.')
+        if ('new_password1' in request.POST) and ('new_password2' in request.POST) and (request.POST['new_password1']) and (request.POST['new_password1'] == request.POST['new_password2']):
+            new_password = request.POST['new_password1']
+        else:
+            errors.append('Please enter your new password correctly.')
+        if (not errors):
+            if (old_password == user.password):
+                User.objects.filter(id = user.id).update(password = new_password)
+            else:
+                errors.append('Your old password is wrong.')
+        if (errors):
+            return render_to_response("change_userpwd_form.html", {
+                'user': getUserObj(user.id),
+                'errors': errors
+            }, context_instance = RequestContext(request))
+        else:
+            return HttpResponseRedirect('/welcome/')
+    else:
+        return render_to_response("change_userpwd_form.html", {
+            'user': getUserObj(user.id),
+        }, context_instance = RequestContext(request))
+
+
+
 def my_request(request):
     if (not 'user_id' in request.session):
         return HttpResponseRedirect("/login/")
@@ -201,49 +272,22 @@ def my_request(request):
             'requests': reqs,
         })
 
-def apply_activity(request):
-    if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
-    try:
-        user = User.objects.get(id = request.session['user_id'])
-    except User.DoesNotExist:
-        return HttpResponseRedirect("/login/")
 
-    act = Activity.objects.get(id = request.POST["id"])
-
+def applyActivity(user_id, activity_id):
+    user = User.objects.get(id = user_id)
+    acti = Activity.objects.get(id = activity_id)
     req = Request(
         type = "activity_application",
         title = user.nickname + "的活动参加申请",
-        content = "账号" + user.account + "想参加活动 '" + act.name + "'",
+        content = "账号" + user.account + "想参加活动 '" + acti.name + "'",
         poster = user,
-        receiver = act.organizer,
+        receiver = acti.organizer,
         status = "unread",
         time = datetime.datetime.now(),
-        goal = act.id,
+        goal = acti.id,
     )
     req.save()
-
-    return HttpResponseRedirect('/welcome/')
-
-def all_activities(request):
-    if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
-    try:
-        user = User.objects.get(id = request.session['user_id'])
-    except User.DoesNotExist:
-        return HttpResponseRedirect("/login/")
-
-    if (request.method == 'POST'):
-        #user = request.user
-        #return HttpResponse(user.nickname)
-        #if (not user):
-        #    return HttpResponseRedirect('/login/')
-        search_word = getPOST(request, 'search_word', 20)
-
-    return render_to_response("all_activities.html", {
-        'user': getUserObj(user.id),
-        "activities": [act for act in Activity.objects.all()],
-    }, context_instance = RequestContext(request))
+    return "success"
 
 def add_activity(request):
     if (not 'user_id' in request.session):
@@ -315,7 +359,7 @@ def add_activity(request):
             'user': getUserObj(user.id),
         }, context_instance = RequestContext(request))
 
-def change_userinfo(request):
+def all_activities(request):
     if (not 'user_id' in request.session):
         return HttpResponseRedirect("/login/")
     try:
@@ -323,64 +367,166 @@ def change_userinfo(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
-    if (request.method == "POST"):
-        user.nickname = request.POST.get('nickname')
-        user.age = int(request.POST.get('age'))
-        #user.email = request.POST.get('email')
-        user.phone = request.POST.get('phone')
-        user.sex = request.POST.get('sex')
-        user.interest = request.POST.get('interest')
-        user.save()
-        return HttpResponseRedirect('/welcome/')
-    else:
-        return render_to_response("change_userinfo_form.html", {
-            'user': getUserObj(user.id),
-            'account': user.account,
-            'password': user.password,
-            'nickname': user.nickname,
-            'sex': user.sex, #male/female
-            'age': user.age,
-            'email': user.email,
-            'phone': user.phone,
-            'interest': user.interest,
-        }, context_instance = RequestContext(request))
-
-def change_userpwd(request):
-    if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
-    try:
-        user = User.objects.get(id = request.session['user_id'])
-    except User.DoesNotExist:
-        return HttpResponseRedirect("/login/")
-
+    alerts = []
     if (request.method == 'POST'):
-        errors = []
-        old_password = ''
-        new_password = ''
-        if ('old_password' in request.POST) and (request.POST['old_password']):
-            old_password = request.POST['old_password']
-        else:
-            errors.append('Please enter your old password.')
-        if ('new_password1' in request.POST) and ('new_password2' in request.POST) and (request.POST['new_password1']) and (request.POST['new_password1'] == request.POST['new_password2']):
-            new_password = request.POST['new_password1']
-        else:
-            errors.append('Please enter your new password correctly.')
-        if (not errors):
-            if (old_password == user.password):
-                User.objects.filter(id = user.id).update(password = new_password)
+        if (request.POST['form_type'] == 'apply_activity'):
+            response = applyActivity(user.id, request.POST['activity_id'])
+            if (response != 'success'):
+                alerts.append(response)
             else:
-                errors.append('Your old password is wrong.')
-        if (errors):
-            return render_to_response("change_userpwd_form.html", {
-                'user': getUserObj(user.id),
-                'errors': errors
-            }, context_instance = RequestContext(request))
-        else:
-            return HttpResponseRedirect('/welcome/')
-    else:
-        return render_to_response("change_userpwd_form.html", {
-            'user': getUserObj(user.id),
-        }, context_instance = RequestContext(request))
+                alerts.append("请求已发送")
+
+    acts = []
+    for act in Activity.objects.all():
+        acts.append({
+            "id": act.id,
+            "name": act.name,
+            "place": act.place,
+            "start_time": act.start_time,
+            "explanation": act.explanation,
+            "attend": True if (act in user.activity_member.all())or(act.organizer == user) else False
+        })
+
+    return render_to_response("all_activities.html", {
+        'user': getUserObj(user.id),
+        "activities": acts,
+        "alerts": alerts,
+    }, context_instance = RequestContext(request))
+
+def my_activities_attend(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    alerts = []
+    if (request.method == 'POST'):
+        if (request.POST['form_type'] == 'apply_activity'):
+            response = applyActivity(user.id, request.POST['activity_id'])
+            if (response != 'success'):
+                alerts.append(response)
+
+    acts = []
+    for act in user.activity_member.all():
+        acts.append({
+            "id": act.id,
+            "name": act.name,
+            "place": act.place,
+            "start_time": act.start_time,
+            "explanation": act.explanation,
+            "attend": True if (act in user.activity_member.all())or(act.organizer == user) else False
+        })
+
+    return render_to_response("my_activities_attend.html", {
+        'user': getUserObj(user.id),
+        "my_attend_activities": acts,
+        "alerts": alerts,
+    })
+
+def my_activities_launch(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    alerts = []
+    if (request.method == 'POST'):
+        if (request.POST['form_type'] == 'apply_activity'):
+            response = applyActivity(user.id, request.POST['activity_id'])
+            if (response != 'success'):
+                alerts.append(response)
+
+    acts = []
+    for act in user.activity_organizer.all():
+        acts.append({
+            "id": act.id,
+            "name": act.name,
+            "place": act.place,
+            "start_time": act.start_time,
+            "explanation": act.explanation,
+            "attend": True if (act in user.activity_member.all())or(act.organizer == user) else False
+        })
+
+    return render_to_response("my_activities_launch.html", {
+        'user': getUserObj(user.id),
+        "my_launch_activities": [act for act in user.activity_organizer.all()],
+        "alerts": alerts,
+    })
+
+def friend_activities_attend(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    acts = []
+    for friend in user.friends.all():
+        for act in friend.activity_member.all():
+            if not act in acts:
+                acts.append({
+                    "id": act.id,
+                    "name": act.name,
+                    "place": act.place,
+                    "start_time": act.start_time,
+                    "explanation": act.explanation,
+                    "attend": True if (act in user.activity_member.all())or(act.organizer == user) else False
+                })
+
+    alerts = []
+    if (request.method == 'POST'):
+        if (request.POST['form_type'] == 'apply_activity'):
+            response = applyActivity(user.id, request.POST['activity_id'])
+            if (response != 'success'):
+                alerts.append(response)
+
+
+    return render_to_response("friend_activities_attend.html", {
+        'user': getUserObj(user.id),
+        "friend_attend_activities": acts,
+        "alerts": alerts,
+    })
+
+def friend_activities_launch(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    acts = []
+    for friend in user.friends.all():
+        for act in friend.activity_organizer.all():
+            if not act in acts:
+                acts.append({
+                    "id": act.id,
+                    "name": act.name,
+                    "place": act.place,
+                    "start_time": act.start_time,
+                    "explanation": act.explanation,
+                    "attend": True if (act in user.activity_member.all())or(act.organizer == user) else False
+                })
+
+    alerts = []
+    if (request.method == 'POST'):
+        if (request.POST['form_type'] == 'apply_activity'):
+            response = applyActivity(user.id, request.POST['activity_id'])
+            if (response != 'success'):
+                alerts.append(response)
+
+    return render_to_response("friend_activities_launch.html", {
+        'user': getUserObj(user.id),
+        "friend_launch_activities": acts,
+        "alerts": alerts,
+    })
+
+
 
 def add_group(request):
     if (not 'user_id' in request.session):
@@ -506,67 +652,7 @@ def upload_headimg(request):
         'uf': uf,
     })
 
-def my_activities_attend(request):
-    if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
-    try:
-        user = User.objects.get(id = request.session['user_id'])
-    except User.DoesNotExist:
-        return HttpResponseRedirect("/login/")
 
-    return render_to_response("my_activities_attend.html", {
-        'user': getUserObj(user.id),
-        "my_attend_activities": [act for act in user.activity_member.all()],
-    })
-
-def my_activities_launch(request):
-    if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
-    try:
-        user = User.objects.get(id = request.session['user_id'])
-    except User.DoesNotExist:
-        return HttpResponseRedirect("/login/")
-
-    return render_to_response("my_activities_launch.html", {
-        'user': getUserObj(user.id),
-        "my_launch_activities": [act for act in user.activity_organizer.all()],
-    })
-
-def friend_activities_attend(request):
-    if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
-    try:
-        user = User.objects.get(id = request.session['user_id'])
-    except User.DoesNotExist:
-        return HttpResponseRedirect("/login/")
-
-    acts = []
-    for friend in user.friends.all():
-        for act in friend.activity_member.all():
-            if not act in acts:
-                acts.append(act)
-    return render_to_response("friend_activities_attend.html", {
-        'user': getUserObj(user.id),
-        "friend_attend_activities": acts,
-    })
-
-def friend_activities_launch(request):
-    if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
-    try:
-        user = User.objects.get(id = request.session['user_id'])
-    except User.DoesNotExist:
-        return HttpResponseRedirect("/login/")
-
-    acts = []
-    for friend in user.friends.all():
-        for act in friend.activity_organizer.all():
-            if not act in acts:
-                acts.append(act)
-    return render_to_response("friend_activities_launch.html", {
-        'user': getUserObj(user.id),
-        "friend_launch_activities": acts,
-    })
 
 def my_friends(request):
     if (not 'user_id' in request.session):

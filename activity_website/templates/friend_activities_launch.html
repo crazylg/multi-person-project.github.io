@@ -16,28 +16,8 @@
                         </span>
                         </form>
                     </div>
-                {% for friend_launch_activity in friend_launch_activities %}
-                    <div class="col-lg-10" style="top:15px">
-                        <div class="col-lg-10 list-group">
-                            <a href="#" class="list-group-item active">
-                                <h4 class="list-group-item-heading">{{friend_launch_activity.name}}</h4>
-                                <h5 class="list-group-item-heading">{{friend_launch_activity.start_time}}</h5>
-                            </a>
-                            <div class="list-group-item">
-                                <h4 class="list-group-item-heading">
-                                    <span class="glyphicon glyphicon-map-marker" aria-hidden:true></span>{{friend_launch_activity.place}}</h4>
-                                <p class="list-group-item-text">{{friend_launch_activity.explanation}}</p>
-                            </div>
-                            {% if activity_attend %}
-                                 <button type="submit" class="btn btn-md pull-right disabled" style="position:relative;top:4px">已参加</button>
-                            {% else %}
-                            <form role="form" method="post" action="">
-                                <input type="hidden" name="id" value={{activity.id}} />
-                                <button type="submit" class="btn btn-md btn-danger pull-right" style="position:relative;top:4px">申请参加</button>
-                            </form>
-                            {% endif %}
-                        </div>
-                    </div>
+                {% for activity in friend_launch_activities %}
+                    {% include "activity_item.html" %}
                 {% endfor %}
                 </div>
 {% include "footer.html" %}
