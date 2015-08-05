@@ -393,14 +393,21 @@ def all_activities(request):
                 alerts.append("请求已发送")
 
     acts = []
-    for act in Activity.objects.all():
+    for act in Activity.objects.all().order_by("-post_time"):
+        if (act in user.activity_member.all())or(act.organizer == user):
+            status = "already_in"
+        else:
+            if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                status = "expired"
+            else:
+                status = "available"
         acts.append({
             "id": act.id,
             "name": act.name,
             "place": act.place,
             "start_time": act.start_time,
             "explanation": act.explanation,
-            "attend": True if (act in user.activity_member.all())or(act.organizer == user) else False
+            "status": status,
         })
 
     return render_to_response("all_activities.html", {
@@ -425,14 +432,21 @@ def my_activities_attend(request):
                 alerts.append(response)
 
     acts = []
-    for act in user.activity_member.all():
+    for act in user.activity_member.all().order_by("-post_time"):
+        if (act in user.activity_member.all())or(act.organizer == user):
+            status = "already_in"
+        else:
+            if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                status = "expired"
+            else:
+                status = "available"
         acts.append({
             "id": act.id,
             "name": act.name,
             "place": act.place,
             "start_time": act.start_time,
             "explanation": act.explanation,
-            "attend": True if (act in user.activity_member.all())or(act.organizer == user) else False
+            "status": status,
         })
 
     return render_to_response("my_activities_attend.html", {
@@ -457,19 +471,26 @@ def my_activities_launch(request):
                 alerts.append(response)
 
     acts = []
-    for act in user.activity_organizer.all():
+    for act in user.activity_organizer.all().order_by("-post_time"):
+        if (act in user.activity_member.all())or(act.organizer == user):
+            status = "already_in"
+        else:
+            if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                status = "expired"
+            else:
+                status = "available"
         acts.append({
             "id": act.id,
             "name": act.name,
             "place": act.place,
             "start_time": act.start_time,
             "explanation": act.explanation,
-            "attend": True if (act in user.activity_member.all())or(act.organizer == user) else False
+            "status": status,
         })
 
     return render_to_response("my_activities_launch.html", {
         'user': getUserObj(user.id),
-        "my_launch_activities": [act for act in user.activity_organizer.all()],
+        "my_launch_activities": acts,
         "alerts": alerts,
     })
 
@@ -484,15 +505,22 @@ def friend_activities_attend(request):
     acts = []
     for friend in user.friends.all():
         for act in friend.activity_member.all():
-            if not act in acts:
-                acts.append({
-                    "id": act.id,
-                    "name": act.name,
-                    "place": act.place,
-                    "start_time": act.start_time,
-                    "explanation": act.explanation,
-                    "attend": True if (act in user.activity_member.all())or(act.organizer == user) else False
-                })
+            if (act in user.activity_member.all())or(act.organizer == user):
+                status = "already_in"
+            else:
+                if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                    status = "expired"
+                else:
+                    status = "available"
+            acts.append({
+                "id": act.id,
+                "name": act.name,
+                "place": act.place,
+                "start_time": act.start_time,
+                "explanation": act.explanation,
+                "status": status,
+                "post_time": act.post_time.replace(tzinfo=None),
+            })
 
     alerts = []
     if (request.method == 'POST'):
@@ -520,13 +548,20 @@ def friend_activities_launch(request):
     for friend in user.friends.all():
         for act in friend.activity_organizer.all():
             if not act in acts:
+                if (act in user.activity_member.all())or(act.organizer == user):
+                    status = "already_in"
+                else:
+                    if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                        status = "expired"
+                    else:
+                        status = "available"
                 acts.append({
                     "id": act.id,
                     "name": act.name,
                     "place": act.place,
                     "start_time": act.start_time,
                     "explanation": act.explanation,
-                    "attend": True if (act in user.activity_member.all())or(act.organizer == user) else False
+                    "status": status,
                 })
 
     alerts = []
@@ -727,9 +762,10 @@ def my_friends(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
+    errors = {}
+    responses = {}
+    alerts = []
     if (request.method == "POST"):
-        errors = {}
-        responses = {}
         if (not 'account' in request.POST) or (not request.POST['account']):
             errors['search_friend'] = "请输入搜索账号"
         elif (len(request.POST['account']) > 30):
@@ -752,16 +788,11 @@ def my_friends(request):
             except User.DoesNotExist:
                 errors['search_friend'] = "账号不存在"
 
-        return render_to_response("my_friends.html", {
-            'user': getUserObj(user.id),
-            "errors": errors,
-            "responses": responses,
-            "friend_list": user.friends.all(),
-        })
-
-    else:
-        return render_to_response("my_friends.html", {
-            'user': getUserObj(user.id),
-            "friend_list": user.friends.all(),
-        })
+    return render_to_response("my_friends.html", {
+        'user': getUserObj(user.id),
+        "errors": errors,
+        "responses": responses,
+        "alerts": alerts,
+        "friend_list": user.friends.all(),
+    })
 
