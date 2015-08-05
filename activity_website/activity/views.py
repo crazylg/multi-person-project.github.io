@@ -622,8 +622,8 @@ def my_groups_create(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
-    return render_to_response("my_groups.html", {
-        "mygroups": user.group_owner.all(),
+    return render_to_response("my_groups_create.html", {
+        "my_create_groups": user.group_owner.all(),
     })
 
 def my_groups_attend(request):
@@ -634,6 +634,6 @@ def my_groups_attend(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
-    return render_to_response("my_groups.html", {
-        "mygroups": user.group_owner.all(),
+    return render_to_response("my_groups_attend.html", {
+        "my_attend_groups": user.group_member.all(),
     })
