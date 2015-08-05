@@ -1,4 +1,4 @@
-﻿{% include "header.html" %}                    
+﻿{% include "header.html" %}
             <div class="col-lg-7 col-lg-offset-1 col-sm-8">
                 <form class="form-horizontal" role="form" method="post" action="">
                     {% csrf_token %}
@@ -25,16 +25,50 @@
                             <textarea class="col-sm-8 form-control" rows="6" name="explanation" placeholder="请输入群组简介"></textarea>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="padding-left:2%;padding-right:2%">
                         <label for="group_friend" class="col-sm-2 control-label">邀请好友：</label>
-                        <div class="col-sm-8">
-                            <button type="button" class="btn btn-sm">选择好友</button>
+                        <div class="col-sm-8" style="border-radius:4px;border:1px solid #ccc;overflow-y:auto;overflow-x:none;height:180px">
+						{% for friend in friends %}
+                            <div class="checkbox" style="float:left;width:33%;">
+								<label><input type="checkbox" name= "add_friend_to_group_{{friend.id}}" value="">{{friend.nickname}}</label>
+							</div>
+						{% endfor %}
                         </div>
                     </div>
+					<div class="form-inline">
+					<button type="button" onclick="checkall()" class="btn btn-sm btn-default col-sm-offset-2">全选</button>
+					<button type="button" onclick="cancleall()" class="btn btn-sm btn-default">取消</button>
+					</div>
                     <div class="form-inline" style="float:right;margin-right:17%;margin-top:8px;">
                         <button type="submit" class="btn btn-primary btn-lg">送出</button>
                         <button type="reset" class="btn btn-danger btn-lg" style="margin-left:15px">重设</button>
                     </div>
                 </form>
             </div>
-{% include "footer.html" %}
+	    </div>
+    </div>
+	<script type="text/javascript">
+		function checkall(){
+			var my_checkbox = document.getElementsByTagName("input");
+			for (var i = 0; i < my_checkbox.length; i++) {
+				if (my_checkbox[i].type == "checkbox") {
+					my_checkbox[i].checked = true;
+				}
+			}
+		};
+		function cancleall(){
+			var my_checkbox = document.getElementsByTagName("input");
+			for (var i = 0; i < my_checkbox.length; i++) {
+				if (my_checkbox[i].type == "checkbox") {
+					my_checkbox[i].checked = false;
+				}
+			}
+		};
+	</script>
+    <script>
+        {% for alrt in alerts %}
+            alert("{{ alrt }}");
+        {% endfor %}
+    </script>
+</body>
+</html>
