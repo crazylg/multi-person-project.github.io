@@ -129,16 +129,24 @@ def register(request):
         }, context_instance = RequestContext(request))
 
 def welcome(request):
-    if 'user_id' in request.session:
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
         user = User.objects.get(id = request.session['user_id'])
-        return render_to_response("welcome.html", {
-            'nickname': user.nickname
-        }, context_instance = RequestContext(request))
-    else:
-        return HttpResponseRedirect('/login/')
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    return render_to_response("welcome.html", {
+        'nickname': user.nickname
+    }, context_instance = RequestContext(request))
 
 def my_request(request):
-    user = User.objects.get(id = request.session['user_id'])
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
 
     if (request.method == "POST"):
         req = Request.objects.get(id = request.POST["request_id"])
@@ -197,6 +205,13 @@ def apply_activity(request):
     return HttpResponseRedirect('/welcome/')
 
 def all_activities(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     if (request.method == 'POST'):
         #user = request.user
         #return HttpResponse(user.nickname)
@@ -213,6 +228,13 @@ def all_activities(request):
         }, context_instance = RequestContext(request))
 
 def add_activity(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     if (request.method == 'POST'):
         #return HttpResponse(request.POST['startDate'] + '    ' + request.POST['startTime'])
         errors = {}
@@ -274,73 +296,88 @@ def add_activity(request):
         }, context_instance = RequestContext(request))
 
 def change_userinfo(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     if (request.method == "POST"):
-        if 'user_id' in request.session:
-            user = User.objects.get(id = request.session['user_id'])
-            user.nickname = request.POST.get('nickname')
-            user.age = int(request.POST.get('age'))
-            #user.email = request.POST.get('email')
-            user.phone = request.POST.get('phone')
-            user.sex = request.POST.get('sex')
-            user.interest = request.POST.get('interest')
-            user.save()
-            return HttpResponseRedirect('/welcome/')
-        else:
-            return HttpResponseRedirect('/login/')
+        user.nickname = request.POST.get('nickname')
+        user.age = int(request.POST.get('age'))
+        #user.email = request.POST.get('email')
+        user.phone = request.POST.get('phone')
+        user.sex = request.POST.get('sex')
+        user.interest = request.POST.get('interest')
+        user.save()
+        return HttpResponseRedirect('/welcome/')
     else:
-        if 'user_id' in request.session:
-            user = User.objects.get(id = request.session['user_id'])
-            return render_to_response("change_userinfo_form.html", {
-                'account': user.account,
-                'password': user.password,
-                'nickname': user.nickname,
-                'sex': user.sex, #male/female
-                'age': user.age,
-                'email': user.email,
-                'phone': user.phone,
-                'interest': user.interest,
-            }, context_instance = RequestContext(request))
-        else:
-            return HttpResponseRedirect('/login/')
+        return render_to_response("change_userinfo_form.html", {
+            'account': user.account,
+            'password': user.password,
+            'nickname': user.nickname,
+            'sex': user.sex, #male/female
+            'age': user.age,
+            'email': user.email,
+            'phone': user.phone,
+            'interest': user.interest,
+        }, context_instance = RequestContext(request))
 
 def change_userpwd(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     if (request.method == 'POST'):
         errors = []
         old_password = ''
         new_password = ''
-        if 'user_id' in request.session:
-            user = User.objects.get(id = request.session['user_id'])
-            if ('old_password' in request.POST) and (request.POST['old_password']):
-                old_password = request.POST['old_password']
-            else:
-                errors.append('Please enter your old password.')
-            if ('new_password1' in request.POST) and ('new_password2' in request.POST) and (request.POST['new_password1']) and (request.POST['new_password1'] == request.POST['new_password2']):
-                new_password = request.POST['new_password1']
-            else:
-                errors.append('Please enter your new password correctly.')
-            if (not errors):
-                if (old_password == user.password):
-                    User.objects.filter(id = user.id).update(password = new_password)
-                else:
-                    errors.append('Your old password is wrong.')
-            if (errors):
-                return render_to_response("change_userpwd_form.html", {
-                    'errors': errors
-                }, context_instance = RequestContext(request))
-            else:
-                return HttpResponseRedirect('/welcome/')
+        if ('old_password' in request.POST) and (request.POST['old_password']):
+            old_password = request.POST['old_password']
         else:
-            errors.append('Please login.')
-            return HttpResponseRedirect('/login/')
+            errors.append('Please enter your old password.')
+        if ('new_password1' in request.POST) and ('new_password2' in request.POST) and (request.POST['new_password1']) and (request.POST['new_password1'] == request.POST['new_password2']):
+            new_password = request.POST['new_password1']
+        else:
+            errors.append('Please enter your new password correctly.')
+        if (not errors):
+            if (old_password == user.password):
+                User.objects.filter(id = user.id).update(password = new_password)
+            else:
+                errors.append('Your old password is wrong.')
+        if (errors):
+            return render_to_response("change_userpwd_form.html", {
+                'errors': errors
+            }, context_instance = RequestContext(request))
+        else:
+            return HttpResponseRedirect('/welcome/')
     else:
         return render_to_response("change_userpwd_form.html", {
         }, context_instance = RequestContext(request))
 
 def add_group(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     return render_to_response('add_group.html',{
     })
 
 def group_info(request, group_id):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     try:
         group_id = int(group_id)
     except ValueError:
@@ -356,6 +393,13 @@ def group_info(request, group_id):
     })
 
 def group_members(request, group_id):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     try:
         group_id = int(group_id)
     except ValueError:
@@ -369,6 +413,13 @@ def group_members(request, group_id):
     })
 
 def group_activities(request, group_id):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     try:
         group_id = int(group_id)
     except ValueError:
@@ -386,12 +437,6 @@ def group_activities(request, group_id):
         } for act in group.activities],
     })
 
-def home(request):
-    activities = Activity.objects.all()
-    return render_to_response("index.html", {
-        'activities': activities
-    }, context_instance = RequestContext(request))
-
 class UserForm(forms.Form):
     username = forms.CharField()
     headimg = forms.FileField()
@@ -408,23 +453,39 @@ def upload_headimg(request):
         uf = UserForm()
     return render_to_response('upload_headimg.html',{'uf': uf})
 
-
-
 def my_activities_attend(request):
-    user = User.objects.get(id = request.session["user_id"])
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     return render_to_response("my_attend.html", {
         "my_attend_activities": [act for act in user.activity_member.all()],
     })
 
 
 def my_activities_launch(request):
-    user = User.objects.get(id = request.session["user_id"])
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     return render_to_response("my_launch.html", {
         "my_launch_activities": [act for act in user.activity_organizer.all()],
     })
 
 def friend_activities_attend(request):
-    user = User.objects.get(id = request.session["user_id"])
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     acts = []
     for friend in user.friends.all():
         for act in friend.activity_member.all():
@@ -435,7 +496,13 @@ def friend_activities_attend(request):
     })
 
 def friend_activities_launch(request):
-    user = User.objects.get(id = request.session["user_id"])
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     acts = []
     for friend in user.friends.all():
         for act in friend.activity_organizer.all():
@@ -446,5 +513,11 @@ def friend_activities_launch(request):
     })
 
 def my_friends(request):
-    user = User.objects.get(id = request.session["user_id"])
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
     return render_to_response("my_friends.html")
