@@ -79,6 +79,10 @@ def register(request):
             errors['password1'] = '请输入密码'
         elif (len(request.POST['password1']) < 6) or (len(request.POST['password1']) > 20):
             errors['password1'] = '密码应为6-20位'
+        if (not 'password2' in request.POST) or (not request.POST['password2']):
+            errors['password2'] = '请再次输入密码'
+        elif (not request.POST['password1'] == request.POST['password2']):
+            errors['password2'] = '两次密码输入不一致'
         if (not 'nickname' in request.POST) or (not request.POST['nickname']):
             errors['nickname'] = '请输入昵称'
         if (not 'sex' in request.POST) or (not request.POST['sex']):
@@ -115,7 +119,7 @@ def register(request):
 
         user = User(
             account = request.POST.get('account', ''),
-            password = request.POST.get('password', ''),
+            password = request.POST.get('password1', ''),
             nickname = request.POST.get('nickname', ''),
             sex = request.POST.get('sex', ''), #male/female
             age = int(request.POST.get('age', '')),
@@ -141,10 +145,12 @@ def welcome(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
+    return HttpResponseRedirect("/user_info/" + str(user.id) + "/")
+
     #return HttpResponse(getUserObj(user.id)["nickname"])
-    return render_to_response("welcome.html", {
-        'user': getUserObj(user.id),
-    }, context_instance = RequestContext(request))
+    #return render_to_response("welcome.html", {
+    #    'user': getUserObj(user.id),
+    #}, context_instance = RequestContext(request))
 
 def change_userinfo(request):
     if (not 'user_id' in request.session):
@@ -323,6 +329,7 @@ def user_groups(request, user_id):
             "name": grp.name,
             "owner": grp.owner.nickname,
             "explanation": grp.explanation,
+            "attend": True if (user in grp.members.all())or(user == grp.owner) else False,
         })
     for grp in tar.group_owner.all():
         grps.append({
@@ -330,6 +337,7 @@ def user_groups(request, user_id):
             "name": grp.name,
             "owner": grp.owner.nickname,
             "explanation": grp.explanation,
+            "attend": True if (user in grp.members.all())or(user == grp.owner) else False,
         })
 
     return render_to_response("user_groups.html", {
