@@ -588,7 +588,7 @@ def add_activity(request):
             for friend in user.friends.all():
                 if (("add_friend_to_activity_" + str(friend.id)) in request.POST):
                     req = Request(
-                        type = "acvitity_invitation",
+                        type = "activity_invitation",
                         title = user.nickname + " 邀请您参加活动",
                         content = "账号 " + user.account + " 刚刚发起了活动'" + act.name + "', 并邀请你参加",
                         poster = user,
@@ -1186,6 +1186,21 @@ def add_group_activity(request):
             )
             act.save()
             group.activities.add(act)
+            if ("send_invitation_to_members" in request.POST):
+                for member in group.members.all():
+                    req = Request(
+                        type = "activity_invitation",
+                        title = user.nickname + " 邀请您参加活动",
+                        content = "账号 " + user.account + " 刚刚发起了活动'" + act.name + "', 并邀请你参加",
+                        poster = user,
+                        receiver = member,
+                        status = "unread",
+                        goal = str(act.id),
+                        target = act.name,
+                        time = datetime.datetime.now(),
+                    )
+                    req.save()
+
             alerts.append("群组活动创建成功")
             return HttpResponseRedirect("/activity_detail/" + str(act.id) + "/")
 
@@ -1300,6 +1315,10 @@ def group_info(request, group_id):
         group = Group.objects.get(id = group_id)
     except Group.DoesNotExist:
         raise Http404()
+
+    alerts = []
+    if (request.method == "POST"):
+        if (request.POST['form_type'])
 
     return render_to_response('group_info.html',{
         'user': getUserObj(user.id),

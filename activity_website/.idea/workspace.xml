@@ -28,8 +28,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/activity/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.424242">
-              <caret line="265" column="25" selection-start-line="265" selection-start-column="25" selection-end-line="265" selection-end-column="25" />
+            <state vertical-scroll-proportion="-8.16923">
+              <caret line="1320" column="35" selection-start-line="1320" selection-start-column="35" selection-end-line="1320" selection-end-column="35" />
               <folding>
                 <element signature="e#0#100#0" expanded="true" />
                 <element signature="e#265#317#0" expanded="false" />
@@ -45,12 +45,12 @@
                 <element signature="e#5667#6170#0" expanded="false" />
                 <element signature="e#6206#7301#0" expanded="false" />
                 <element signature="e#7336#8919#0" expanded="false" />
+                <element signature="e#8958#10431#0" expanded="false" />
                 <element signature="e#10476#11676#0" expanded="false" />
                 <element signature="e#11718#12310#0" expanded="false" />
                 <element signature="e#12351#13550#0" expanded="false" />
                 <element signature="e#13583#18438#0" expanded="false" />
                 <element signature="e#18486#19380#0" expanded="false" />
-                <element signature="e#19413#23642#0" expanded="false" />
                 <element signature="e#23677#25214#0" expanded="false" />
                 <element signature="e#25255#26711#0" expanded="false" />
                 <element signature="e#26752#28211#0" expanded="false" />
@@ -61,25 +61,34 @@
                 <element signature="e#39445#40804#0" expanded="false" />
                 <element signature="e#40847#41525#0" expanded="false" />
                 <element signature="e#41555#43656#0" expanded="false" />
-                <element signature="e#43695#47093#0" expanded="false" />
-                <element signature="e#47130#48024#0" expanded="false" />
-                <element signature="e#48061#48956#0" expanded="false" />
-                <element signature="e#48987#50034#0" expanded="false" />
-                <element signature="e#50075#50735#0" expanded="false" />
-                <element signature="e#50779#52091#0" expanded="false" />
-                <element signature="e#52138#53344#0" expanded="false" />
-                <element signature="e#53380#53440#0" expanded="false" />
-                <element signature="e#53475#53863#0" expanded="false" />
+                <element signature="e#43695#47773#0" expanded="false" />
+                <element signature="e#47810#48704#0" expanded="false" />
+                <element signature="e#48741#49636#0" expanded="false" />
+                <element signature="e#49667#50714#0" expanded="false" />
+                <element signature="e#51550#52862#0" expanded="false" />
+                <element signature="e#52909#54115#0" expanded="false" />
+                <element signature="e#54151#54211#0" expanded="false" />
+                <element signature="e#54246#54634#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user_info.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/user_info.html">
+      <file leaf-file-name="group_info.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/group_info.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.25433525">
-              <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
+              <caret line="43" column="93" selection-start-line="43" selection-start-column="69" selection-end-line="43" selection-end-column="93" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add_group_activity.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/add_group_activity.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.5161295">
+              <caret line="231" column="99" selection-start-line="231" selection-start-column="73" selection-end-line="231" selection-end-column="99" />
               <folding />
             </state>
           </provider>
@@ -143,12 +152,12 @@
         <option value="$PROJECT_DIR$/templates/all_groups.html" />
         <option value="$PROJECT_DIR$/templates/activity_item.html" />
         <option value="$PROJECT_DIR$/activity_website/settings.py" />
-        <option value="$PROJECT_DIR$/templates/group_info.html" />
         <option value="$PROJECT_DIR$/templates/login_form.html" />
         <option value="$PROJECT_DIR$/templates/add_activity.html" />
         <option value="$PROJECT_DIR$/templates/activity_detail.html" />
-        <option value="$PROJECT_DIR$/activity/views.py" />
         <option value="$PROJECT_DIR$/templates/user_info.html" />
+        <option value="$PROJECT_DIR$/activity/views.py" />
+        <option value="$PROJECT_DIR$/templates/group_info.html" />
       </list>
     </option>
   </component>
@@ -580,7 +589,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -612,12 +621,12 @@
             <element signature="e#5667#6170#0" expanded="false" />
             <element signature="e#6206#7301#0" expanded="false" />
             <element signature="e#7336#8919#0" expanded="false" />
+            <element signature="e#8958#10431#0" expanded="false" />
             <element signature="e#10476#11676#0" expanded="false" />
             <element signature="e#11718#12310#0" expanded="false" />
             <element signature="e#12351#13550#0" expanded="false" />
             <element signature="e#13583#18438#0" expanded="false" />
             <element signature="e#18486#19380#0" expanded="false" />
-            <element signature="e#19413#23642#0" expanded="false" />
             <element signature="e#23677#25214#0" expanded="false" />
             <element signature="e#25255#26711#0" expanded="false" />
             <element signature="e#26752#28211#0" expanded="false" />
@@ -628,15 +637,14 @@
             <element signature="e#39445#40804#0" expanded="false" />
             <element signature="e#40847#41525#0" expanded="false" />
             <element signature="e#41555#43656#0" expanded="false" />
-            <element signature="e#43695#47093#0" expanded="false" />
-            <element signature="e#47130#48024#0" expanded="false" />
-            <element signature="e#48061#48956#0" expanded="false" />
-            <element signature="e#48987#50034#0" expanded="false" />
-            <element signature="e#50075#50735#0" expanded="false" />
-            <element signature="e#50779#52091#0" expanded="false" />
-            <element signature="e#52138#53344#0" expanded="false" />
-            <element signature="e#53380#53440#0" expanded="false" />
-            <element signature="e#53475#53863#0" expanded="false" />
+            <element signature="e#43695#47773#0" expanded="false" />
+            <element signature="e#47810#48704#0" expanded="false" />
+            <element signature="e#48741#49636#0" expanded="false" />
+            <element signature="e#49667#50714#0" expanded="false" />
+            <element signature="e#51550#52862#0" expanded="false" />
+            <element signature="e#52909#54115#0" expanded="false" />
+            <element signature="e#54151#54211#0" expanded="false" />
+            <element signature="e#54246#54634#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -790,14 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.677419">
           <caret line="8" column="59" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/add_group_activity.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.096774">
-          <caret line="10" column="68" selection-start-line="10" selection-start-column="68" selection-end-line="10" selection-end-column="68" />
           <folding />
         </state>
       </provider>
@@ -980,14 +980,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/group_info.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.903226">
-          <caret line="27" column="114" selection-start-line="27" selection-start-column="114" selection-end-line="27" selection-end-column="114" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/login_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.4395448">
@@ -1022,10 +1014,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user_info.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.677419">
+          <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/add_group_activity.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.5161295">
+          <caret line="231" column="99" selection-start-line="231" selection-start-column="73" selection-end-line="231" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/activity/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.424242">
-          <caret line="265" column="25" selection-start-line="265" selection-start-column="25" selection-end-line="265" selection-end-column="25" />
+        <state vertical-scroll-proportion="-8.16923">
+          <caret line="1320" column="35" selection-start-line="1320" selection-start-column="35" selection-end-line="1320" selection-end-column="35" />
           <folding>
             <element signature="e#0#100#0" expanded="true" />
             <element signature="e#265#317#0" expanded="false" />
@@ -1041,12 +1049,12 @@
             <element signature="e#5667#6170#0" expanded="false" />
             <element signature="e#6206#7301#0" expanded="false" />
             <element signature="e#7336#8919#0" expanded="false" />
+            <element signature="e#8958#10431#0" expanded="false" />
             <element signature="e#10476#11676#0" expanded="false" />
             <element signature="e#11718#12310#0" expanded="false" />
             <element signature="e#12351#13550#0" expanded="false" />
             <element signature="e#13583#18438#0" expanded="false" />
             <element signature="e#18486#19380#0" expanded="false" />
-            <element signature="e#19413#23642#0" expanded="false" />
             <element signature="e#23677#25214#0" expanded="false" />
             <element signature="e#25255#26711#0" expanded="false" />
             <element signature="e#26752#28211#0" expanded="false" />
@@ -1057,23 +1065,22 @@
             <element signature="e#39445#40804#0" expanded="false" />
             <element signature="e#40847#41525#0" expanded="false" />
             <element signature="e#41555#43656#0" expanded="false" />
-            <element signature="e#43695#47093#0" expanded="false" />
-            <element signature="e#47130#48024#0" expanded="false" />
-            <element signature="e#48061#48956#0" expanded="false" />
-            <element signature="e#48987#50034#0" expanded="false" />
-            <element signature="e#50075#50735#0" expanded="false" />
-            <element signature="e#50779#52091#0" expanded="false" />
-            <element signature="e#52138#53344#0" expanded="false" />
-            <element signature="e#53380#53440#0" expanded="false" />
-            <element signature="e#53475#53863#0" expanded="false" />
+            <element signature="e#43695#47773#0" expanded="false" />
+            <element signature="e#47810#48704#0" expanded="false" />
+            <element signature="e#48741#49636#0" expanded="false" />
+            <element signature="e#49667#50714#0" expanded="false" />
+            <element signature="e#51550#52862#0" expanded="false" />
+            <element signature="e#52909#54115#0" expanded="false" />
+            <element signature="e#54151#54211#0" expanded="false" />
+            <element signature="e#54246#54634#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/user_info.html">
+    <entry file="file://$PROJECT_DIR$/templates/group_info.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25433525">
-          <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
+          <caret line="43" column="93" selection-start-line="43" selection-start-column="69" selection-end-line="43" selection-end-column="93" />
           <folding />
         </state>
       </provider>
