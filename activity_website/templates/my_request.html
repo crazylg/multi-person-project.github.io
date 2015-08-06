@@ -31,51 +31,10 @@
                     <div class="col-lg-10">
                         <div class="col-lg-10 list-group">
                             {% if request.status == 'unread' %}
-								{% if request.type == 'group_invitation' %}
-								<div class="list-group-item">
-									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
-									邀请你加入群
-									<a href="/group_info/{{request.goal}}/">{{request.target}}</a>
-									<p>{{request.time}}</p>
-								</div>
-								{% endif %}
-								{% if request.type == 'activity_invitation' %}
-								<div class="list-group-item">
-									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
-									邀请你加入活动
-									<a href="/activity_detail/{{request.goal}}/">{{request.target}}</a>
-									<p>{{request.time}}</p>
-								</div>
-								{% endif %}
-								{% if request.type == 'group_application' %}
-								<div class="list-group-item">
-									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
-									申请加入群
-									<a href="/group_info/{{request.goal}}/">{{request.target}}</a>
-									<p>{{request.time}}</p>
-								</div>
-								{% endif %}
-								{% if request.type == 'friend_application' %}
-								<div class="list-group-item">
-									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
-									申请添加您为好友
-									<p>{{request.time}}</p>
-								</div>
-								{% endif %}
-								{% if request.type == 'activity_application' %}
-								<div class="list-group-item">
-									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
-									申请加入活动
-									<a href="/activity_detail/{{request.goal}}/">{{request.target}}</a>
-									<p>{{request.time}}</p>
-								</div>
-								{% endif %}
+								{% include "request_item.html" %}
                             {% else %}
-                            <a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.title}} {{request.time}}</h5></a>
+								{% include "request_item.html" %}
                             {% endif %}
-                            <a href="#" class="list-group-item">
-                                <h5 class="list-group-item-text">{{request.content}}</h5>
-                            </a>
                             <form name="send_back" id="invitation" role="form" method="post" action="">
                                 <input type="hidden" name="request_id" value={{request.id}}>
                                 <input type="hidden" id={{request.id}} name="reply" value="">
