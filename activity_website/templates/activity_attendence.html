@@ -12,6 +12,15 @@
                         <div class="col-lg-3 col-lg-offset-1 list-group">
                             <h3>{{attendence.name}}</h3>
                         </div>
+                        {% if organizer %}
+                        <div class="col-lg-1 col-lg-offset-1" style="top:10px">
+                            <form role="form" method="post" action="">
+                            <input type="hidden" name="attendence_id" value={{attendence.id}} />
+                            <input type="hidden" name="form_type" value="cancel_attendence" />
+                            <button type="submit" class="btn btn-md btn-danger pull-right" style="position:relative;top:4px">删除</button>
+                            </form>
+                        </div>
+                        {% endif %}
  				    </div>
                     {% endfor %}
             </div>
