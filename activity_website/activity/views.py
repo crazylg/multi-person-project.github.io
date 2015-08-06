@@ -714,6 +714,9 @@ def add_group(request):
         'friends': user.friends.all(),
     })
 
+#def add_group_activity(request, group_id):
+
+
 def my_groups_create(request):
     if (not 'user_id' in request.session):
         return HttpResponseRedirect("/login/")
@@ -903,34 +906,54 @@ def my_friends(request):
     errors = {}
     responses = {}
     alerts = []
+    current_talker = user.friends.all().order_by("nickname")[0].id
     if (request.method == "POST"):
-        if (not 'account' in request.POST) or (not request.POST['account']):
-            errors['search_friend'] = "请输入搜索账号"
-        elif (len(request.POST['account']) > 30):
-            errors['search_friend'] = "账号不存在"
-        if (not errors):
-            try:
-                tar = User.objects.get(account = request.POST['account'])
-                req = Request(
-                    type = "friend_application",
-                    title = "来自 " + user.nickname + " 的好友请求",
-                    content = "账号 " + user.account + " 想加你为好友",
-                    poster = user,
-                    receiver = tar,
-                    status = "unread",
-                    goal = tar.id,
-                    time = datetime.datetime.now(),
-                )
-                req.save()
-                responses['search_friend'] = "请求已发送"
-            except User.DoesNotExist:
+        if (request.POST['form_type'] == 'add_friend'):
+            if (not 'account' in request.POST) or (not request.POST['account']):
+                errors['search_friend'] = "请输入搜索账号"
+            elif (len(request.POST['account']) > 30):
                 errors['search_friend'] = "账号不存在"
+            if (not errors):
+                try:
+                    tar = User.objects.get(account = request.POST['account'])
+                    req = Request(
+                        type = "friend_application",
+                        title = "来自 " + user.nickname + " 的好友请求",
+                        content = "账号 " + user.account + " 想加你为好友",
+                        poster = user,
+                        receiver = tar,
+                        status = "unread",
+                        goal = tar.id,
+                        time = datetime.datetime.now(),
+                    )
+                    req.save()
+                    responses['search_friend'] = "请求已发送"
+                except User.DoesNotExist:
+                    errors['search_friend'] = "账号不存在"
+        if (request.POST['form_type'] == 'change_talker'):
+            return HttpResponse(request.POST['click_friend_id'])
+        if (request.POST['form_type'] == 'search_talker'):
+            #return HttpResponse(request.POST['search_word'])
+            #try:
+            frds = user.friends.all().filter(nickname__contains = request.POST['search_word'])
+            if (not frds):
+                alerts.append('未找到该用户')
+            else:
+                current_talker = frds[0].id
+
+    friends = []
+    for frd in user.friends.all().order_by("nickname"):
+        friends.append({
+            "id": frd.id,
+            "nickname": frd.nickname,
+            "current_talker": True if (frd.id == current_talker) else False,
+        })
 
     return render_to_response("my_friends.html", {
         'user': getUserObj(user.id),
         "errors": errors,
         "responses": responses,
         "alerts": alerts,
-        "friend_list": user.friends.all(),
+        "friend_list": friends,
     })
 
