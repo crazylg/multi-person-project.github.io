@@ -24,7 +24,9 @@
                             </tr>
                             <tr>
                                 <td>性别</td>
-                                <td>{{tar.sex}} 人</td>
+                                <td>{% if tar.sex == "male" %} 男 {% endif %}
+                                    {% if tar.sex == "female" %} 女 {% endif %}
+                                </td>
                             </tr>
                             <tr>
                                 <td>兴趣</td>
