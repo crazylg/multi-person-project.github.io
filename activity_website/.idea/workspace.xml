@@ -28,7 +28,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/activity/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="74.63636">
+            <state vertical-scroll-proportion="-19.454546">
               <caret line="139" column="21" selection-start-line="139" selection-start-column="21" selection-end-line="139" selection-end-column="21" />
               <folding>
                 <element signature="e#0#100#0" expanded="true" />
@@ -38,7 +38,6 @@
                 <element signature="e#491#558#0" expanded="false" />
                 <element signature="e#584#827#0" expanded="false" />
                 <element signature="e#867#990#0" expanded="false" />
-                <element signature="e#1018#1975#0" expanded="false" />
                 <element signature="e#2002#2118#0" expanded="false" />
                 <element signature="e#2147#5552#0" expanded="false" />
                 <element signature="e#5589#5639#0" expanded="false" />
@@ -51,6 +50,7 @@
                 <element signature="e#11425#12624#0" expanded="false" />
                 <element signature="e#12657#16524#0" expanded="false" />
                 <element signature="e#16572#17441#0" expanded="false" />
+                <element signature="e#17474#20966#0" expanded="false" />
                 <element signature="e#21001#22538#0" expanded="false" />
                 <element signature="e#22579#24035#0" expanded="false" />
                 <element signature="e#24076#25535#0" expanded="false" />
@@ -60,6 +60,7 @@
                 <element signature="e#35187#35854#0" expanded="false" />
                 <element signature="e#35902#37261#0" expanded="false" />
                 <element signature="e#37304#37982#0" expanded="false" />
+                <element signature="e#38012#40073#0" expanded="false" />
                 <element signature="e#40112#43510#0" expanded="false" />
                 <element signature="e#43547#44441#0" expanded="false" />
                 <element signature="e#44478#45373#0" expanded="false" />
@@ -75,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_detail.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/activity_detail.html">
+      <file leaf-file-name="login_form.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/login_form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68847793">
-              <caret line="62" column="189" selection-start-line="62" selection-start-column="189" selection-end-line="62" selection-end-column="189" />
+            <state vertical-scroll-proportion="0.4679943">
+              <caret line="46" column="26" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -109,7 +110,6 @@
         <option value="$PROJECT_DIR$/templates/user_center.html" />
         <option value="$PROJECT_DIR$/templates/group_namelist.html" />
         <option value="$PROJECT_DIR$/templates/group_page.html" />
-        <option value="$PROJECT_DIR$/templates/login_form.html" />
         <option value="$PROJECT_DIR$/templates/register_detail_form.html" />
         <option value="$PROJECT_DIR$/templates/activities.html" />
         <option value="$PROJECT_DIR$/templates/add_activity.html" />
@@ -144,11 +144,12 @@
         <option value="$PROJECT_DIR$/templates/my_groups_attend.html" />
         <option value="$PROJECT_DIR$/templates/my_groups_create.html" />
         <option value="$PROJECT_DIR$/templates/all_groups.html" />
-        <option value="$PROJECT_DIR$/templates/group_info.html" />
         <option value="$PROJECT_DIR$/templates/activity_item.html" />
         <option value="$PROJECT_DIR$/activity_website/settings.py" />
         <option value="$PROJECT_DIR$/activity/views.py" />
         <option value="$PROJECT_DIR$/templates/activity_detail.html" />
+        <option value="$PROJECT_DIR$/templates/group_info.html" />
+        <option value="$PROJECT_DIR$/templates/login_form.html" />
       </list>
     </option>
   </component>
@@ -605,7 +606,6 @@
             <element signature="e#491#558#0" expanded="false" />
             <element signature="e#584#827#0" expanded="false" />
             <element signature="e#867#990#0" expanded="false" />
-            <element signature="e#1018#1975#0" expanded="false" />
             <element signature="e#2002#2118#0" expanded="false" />
             <element signature="e#2147#5552#0" expanded="false" />
             <element signature="e#5589#5639#0" expanded="false" />
@@ -618,6 +618,7 @@
             <element signature="e#11425#12624#0" expanded="false" />
             <element signature="e#12657#16524#0" expanded="false" />
             <element signature="e#16572#17441#0" expanded="false" />
+            <element signature="e#17474#20966#0" expanded="false" />
             <element signature="e#21001#22538#0" expanded="false" />
             <element signature="e#22579#24035#0" expanded="false" />
             <element signature="e#24076#25535#0" expanded="false" />
@@ -627,6 +628,7 @@
             <element signature="e#35187#35854#0" expanded="false" />
             <element signature="e#35902#37261#0" expanded="false" />
             <element signature="e#37304#37982#0" expanded="false" />
+            <element signature="e#38012#40073#0" expanded="false" />
             <element signature="e#40112#43510#0" expanded="false" />
             <element signature="e#43547#44441#0" expanded="false" />
             <element signature="e#44478#45373#0" expanded="false" />
@@ -708,13 +710,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.7096774">
           <caret line="28" column="75" selection-start-line="28" selection-start-column="75" selection-end-line="28" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.741936">
-          <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -979,14 +974,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/group_info.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4694168">
-          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/activity_website/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1019,9 +1006,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/activity_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.612904">
+          <caret line="62" column="189" selection-start-line="62" selection-start-column="189" selection-end-line="62" selection-end-column="189" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/group_info.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.903226">
+          <caret line="27" column="114" selection-start-line="27" selection-start-column="114" selection-end-line="27" selection-end-column="114" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/activity/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="74.63636">
+        <state vertical-scroll-proportion="-19.454546">
           <caret line="139" column="21" selection-start-line="139" selection-start-column="21" selection-end-line="139" selection-end-column="21" />
           <folding>
             <element signature="e#0#100#0" expanded="true" />
@@ -1031,7 +1034,6 @@
             <element signature="e#491#558#0" expanded="false" />
             <element signature="e#584#827#0" expanded="false" />
             <element signature="e#867#990#0" expanded="false" />
-            <element signature="e#1018#1975#0" expanded="false" />
             <element signature="e#2002#2118#0" expanded="false" />
             <element signature="e#2147#5552#0" expanded="false" />
             <element signature="e#5589#5639#0" expanded="false" />
@@ -1044,6 +1046,7 @@
             <element signature="e#11425#12624#0" expanded="false" />
             <element signature="e#12657#16524#0" expanded="false" />
             <element signature="e#16572#17441#0" expanded="false" />
+            <element signature="e#17474#20966#0" expanded="false" />
             <element signature="e#21001#22538#0" expanded="false" />
             <element signature="e#22579#24035#0" expanded="false" />
             <element signature="e#24076#25535#0" expanded="false" />
@@ -1053,6 +1056,7 @@
             <element signature="e#35187#35854#0" expanded="false" />
             <element signature="e#35902#37261#0" expanded="false" />
             <element signature="e#37304#37982#0" expanded="false" />
+            <element signature="e#38012#40073#0" expanded="false" />
             <element signature="e#40112#43510#0" expanded="false" />
             <element signature="e#43547#44441#0" expanded="false" />
             <element signature="e#44478#45373#0" expanded="false" />
@@ -1067,10 +1071,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/activity_detail.html">
+    <entry file="file://$PROJECT_DIR$/templates/login_form.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68847793">
-          <caret line="62" column="189" selection-start-line="62" selection-start-column="189" selection-end-line="62" selection-end-column="189" />
+        <state vertical-scroll-proportion="0.4679943">
+          <caret line="46" column="26" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
           <folding />
         </state>
       </provider>
