@@ -236,9 +236,34 @@ def user_info(request, user_id):
     except User.DoesNotExist:
         raise Http404()
 
+    alerts = []
+    if (request.method == "POST"):
+        if (request.POST['form_type'] == 'add_friend'):
+            if (tar == user):
+                alerts.append("这是您自己的账号")
+            else:
+                if (tar in user.friends.all()):
+                    alerts.append("你们已经是好友关系了")
+                else:
+                    req = Request(
+                        type = "friend_application",
+                        title = "来自 " + user.nickname + " 的好友请求",
+                        content = "账号 " + user.account + " 想加你为好友",
+                        poster = user,
+                        receiver = tar,
+                        status = "unread",
+                        goal = tar.id,
+                        target = user.nickname,
+                        time = datetime.datetime.now(),
+                    )
+                    req.save()
+                    alerts.append("请求已发送")
+
+
     return render_to_response("user_info.html", {
         "user": getUserObj(user.id),
         "tar": tar,
+        "alerts": alerts,
     })
 
 def user_activities(request, user_id):
@@ -377,6 +402,25 @@ def my_request(request):
                         receiver = req.poster,
                         status = "unread",
                         goal = " ",
+                        target = " ",
+                        time = datetime.datetime.now(),
+                    )
+                    tmp_req.save()
+                if (req.type == 'activity_invitation'):
+                    act = Activity.objects.get(id = req.goal)
+                    #if (act.add_member(req.poster) == 'success'):
+                    act.members.add(user)
+                    act.current_size += 1
+                    act.save()
+                    tmp_req = Request(
+                        type = "notice",
+                        title = "提醒",
+                        content = "账号 " + user.account + " 接受了你的邀请, 参加了活动'" + act.name + "'",
+                        poster = req.receiver,
+                        receiver = req.poster,
+                        status = "unread",
+                        goal = " ",
+                        target = " ",
                         time = datetime.datetime.now(),
                     )
                     tmp_req.save()
@@ -390,6 +434,7 @@ def my_request(request):
                         receiver = req.poster,
                         status = "unread",
                         goal = " ",
+                        target = " ",
                         time = datetime.datetime.now(),
                     )
                     tmp_req.save()
@@ -406,6 +451,7 @@ def my_request(request):
                         receiver = req.poster,
                         status = "unread",
                         goal = " ",
+                        target = " ",
                         time = datetime.datetime.now(),
                     )
                     tmp_req.save()
@@ -422,6 +468,7 @@ def my_request(request):
                         receiver = req.poster,
                         status = "unread",
                         goal = " ",
+                        target = " ",
                         time = datetime.datetime.now(),
                     )
                     tmp_req.save()
@@ -469,6 +516,7 @@ def applyActivity(user_id, activity_id):
         status = "unread",
         time = datetime.datetime.now(),
         goal = acti.id,
+        tar = acti.name,
     )
     req.save()
     return "success"
@@ -537,10 +585,25 @@ def add_activity(request):
                 current_size = 0,
             )
             act.save()
+            for friend in user.friends.all():
+                if (("add_friend_to_activity_" + str(friend.id)) in request.POST):
+                    req = Request(
+                        type = "acvitity_invitation",
+                        title = user.nickname + " 邀请您参加活动",
+                        content = "账号 " + user.account + " 刚刚发起了活动'" + act.name + "', 并邀请你参加",
+                        poster = user,
+                        receiver = friend,
+                        status = "unread",
+                        goal = str(act.id),
+                        target = act.name,
+                        time = datetime.datetime.now(),
+                    )
+                    req.save()
             return HttpResponseRedirect("/activity_detail/" + str(act.id) + "/")
     else:
         return render_to_response("add_activity.html", {
             'user': getUserObj(user.id),
+            'friends': user.friends.all(),
         }, context_instance = RequestContext(request))
 
 def all_activities(request):
@@ -912,11 +975,31 @@ def activity_detail(request, act_id):
     except Activity.DoesNotExist:
         raise Http404()
 
+    alerts = []
+    if (request.method == "POST"):
+        if (request.POST['form_type'] == 'add_friend_to_activity'):
+            for friend in user.friends.all():
+                if (("add_friend_to_activity_" + str(friend.id)) in request.POST):
+                    req = Request(
+                        type = "activity_invitation",
+                        title = user.nickname + " 邀请您参加活动",
+                        content = "账号 " + user.account + " 邀请你参加活动'" + act.name + "'",
+                        poster = user,
+                        receiver = friend,
+                        status = "unread",
+                        goal = str(act.id),
+                        target = act.name,
+                        time = datetime.datetime.now(),
+                    )
+                    req.save()
+            alerts.append('请求已发送')
+
     return render_to_response("activity_detail.html", {
         "user": getUserObj(user.id),
         "organizer": True if (act.organizer == user) else False,
         "activity": act,
         "friends": user.friends.all(),
+        'alerts': alerts,
     })
 
 def activity_attendance(request, act_id):
@@ -1029,7 +1112,8 @@ def add_group(request):
                         poster = user,
                         receiver = friend,
                         status = "unread",
-                        goal = str(group.id),
+                        goal = group.id,
+                        target = group.name,
                         time = datetime.datetime.now(),
                     )
                     req.save()
@@ -1220,6 +1304,8 @@ def group_info(request, group_id):
     return render_to_response('group_info.html',{
         'user': getUserObj(user.id),
         'group': group,
+        "organizer": True if (group.owner == user) else False,
+        "friends": user.friends.all(),
     })
 
 def group_members(request, group_id):
@@ -1355,7 +1441,8 @@ def my_friends(request):
                         poster = user,
                         receiver = tar,
                         status = "unread",
-                        goal = tar.id,
+                        goal = user.id,
+                        target = user.nickname,
                         time = datetime.datetime.now(),
                     )
                     req.save()

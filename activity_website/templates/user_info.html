@@ -6,7 +6,7 @@
                     <li><a href="/user_activities/{{ tar.id }}/">活动</a></li>
                     <li><a href="/user_friends/{{ tar.id }}/">好友</a></li>
    					<li><a href="/user_groups/{{ tar.id }}/">群组</a></li>
-                    <li><form role="form" method="post" action="/add_friend/">
+                    <li><form role="form" method="post" action="">
                         <input type="hidden" name="friend_id" value={{tar.id}} />
                         <input type="hidden" name="form_type" value="add_friend" />
                         <button type="submit" class="btn btn-md btn-danger pull-right" style="position:relative;top:4px">发送好友请求</button>
