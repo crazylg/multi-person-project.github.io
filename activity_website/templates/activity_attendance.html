@@ -23,7 +23,7 @@
                             </tr>
                             {% for attendance in attendances %}
                                 <tr>
-                                <td>{{attendance.account}}</td>
+                                <td><a href="/user_info/{{ attendance.id }}/">{{attendance.account}}</a></td>
                                 <td>{{attendance.nickname}}</td>
                                 <td>{% if attendance.sex == "male" %}男{% endif %}
                                     {% if attendance.sex == "female" %}女{% endif %}
