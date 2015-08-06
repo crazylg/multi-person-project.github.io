@@ -6,8 +6,8 @@
                     <li><a href="/group_members/{{ group.id }}/">成员</a></li>
                     <li><a href="/group_info/{{ group.id }}/">介绍</a></li>
                     <li><form role="form" method="post" action="/add_group_activity/">
-                        <input type="hidden" name="lauch_group_activity" value={{group.id}} />
-                        <input type="hidden" name="form_type" value="launch_group_activity" />
+                        <input type="hidden" name="group_id" value={{group.id}} />
+                        <input type="hidden" name="form_type" value="add_group_activity" />
                         <button type="submit" class="btn btn-md btn-danger pull-right" style="position:relative;top:4px">发起群组活动</button>
                     </form></li>
                     </ul>
@@ -21,29 +21,8 @@
                         </span>
                         </form>
                     </div>
-                {% for groupactivity in groupactivities %}
-                    <div class="col-lg-10" style="top:15px">
-                        
-                        <div class="col-lg-10 list-group">
-                            <a href="#" class="list-group-item active">
-                                <h4 class="list-group-item-heading">{{groupactivity.name}}</h4>
-                                <h5 class="list-group-item-heading">{{groupactivity.start_time}}</h5>
-                            </a>
-                            <div class="list-group-item">
-                                <h4 class="list-group-item-heading">
-                                    <span class="glyphicon glyphicon-map-marker"></span>{{groupactivity.place}}</h4>
-                                <p class="list-group-item-text">{{groupactivity.explanation}}</p>
-                            </div>
-                            {% if groupactivity.attend %}
-                                 <button type="submit" class="btn btn-md pull-right disabled" style="position:relative;top:4px">已参加</button>
-                            {% else %}
-                            <form role="form" method="post" action="/apply_activity/">
-                                <input type="hidden" name="id" value={{activity.id}} />
-                                <button type="submit" class="btn btn-md btn-danger pull-right" style="position:relative;top:4px">申请参加</button>
-                            </form>
-                            {% endif %}
-                        </div>
-                    </div>
+                {% for activity in groupactivities %}
+                    {% include "activity_item.html" %}
                 {% endfor %}
                 </div>
 {% include "footer.html" %}

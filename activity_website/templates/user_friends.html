@@ -1,0 +1,39 @@
+{% include "header.html" %}
+                <div class="col-lg-8 col-lg-offset-1 col-sm-8">
+                    <h2>{{user.name}} 的好友列表</h2>
+                    <ul class="nav nav-pills">
+                    <li><a href="/user_info/{{ user.id }}/">个人档案</a></li>
+                    <li><a href="/user_activities/{{ uesr.id }}/">活动</a></li>
+                    <li class="active"><a href="#">好友</a></li>
+                    </ul>
+                    <div class="col-lg-12">
+                        <table class="table table-hover" style="font-family:'Microsoft YaHei';font-size:1.3em">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>用户账号</td>
+                                <td>用户昵称</td>
+                                <td>用户性别</td>
+                                <td>用户年龄</td>
+                            </tr>
+                            {% for userfriend in userfriends %}
+                                <tr>
+                                <td><a href="/user_page/{{ userfriend.id }}/">{{userfriend.account}}</a></td>
+                                <td>{{userfriend.nickname}}</td>
+                                <td>{% if userfriend.sex == "male" %}男{% endif %}
+                                    {% if userfriend.sex == "female" %}女{% endif %}
+                                </td>
+                                <td>{{userfriend.age}}</td>
+                                <td></td>     
+                            {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+{% include "footer.html" %}

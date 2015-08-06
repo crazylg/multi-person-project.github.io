@@ -30,11 +30,11 @@
                                 </td>
                                 <td>{{attendance.age}}</td>
                                 <td></td>
-                                {% if owner %}
+                                {% if organizer %}
                                 <td>
                                     <form role="form" method="post" action="">
-                                    <input type="hidden" name="member_id" value={{attendace.id}} />
-                                    <input type="hidden" name="form_type" value="cancel_member" />
+                                    <input type="hidden" name="attendance_id" value={{attendance.id}} />
+                                    <input type="hidden" name="form_type" value="cancel_attendance" />
                                     <button type="submit" class="btn btn-md btn-danger pull-right" style="position:relative;top:4px">删除</button>
                                     </form>
                                 </td>
