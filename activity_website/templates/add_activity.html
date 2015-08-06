@@ -26,9 +26,6 @@
                             data-link-field="dtp_input1" data-link-format="yyyy-mm-dd" style="float:left;margin: 0 10px 0 0;">
                                 <input class="form-control" type="text" readonly="" name="start_date" {% if start_date %} value="{{start_date}}" {% endif %}
                                 />
-                                {% if errors.start_date %}
-                                {{errors.start_date}}
-                                {% endif %}
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar">
                                     </span>
@@ -38,14 +35,14 @@
                             data-link-field="dtp_input2" data-link-format="hh:ii">
                                 <input class="form-control" size="16" type="text" readonly=""
                                 name="start_time" {% if start_time %} value="{{start_time}}" {% endif %}/>
-                                {% if errors.start_time %}
-                                {{errors.start_time}}
-                                {% endif %}
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-time">
                                     </span>
                                 </span>
                             </div>
+                                {% if errors.start_time %}
+                                <br/>{{errors.start_time}}
+                                {% endif %}
                             <input type="hidden" id="dtp_input1" value="" />
                             <br />
                             <input type="hidden" id="dtp_input2" value="" />
@@ -58,9 +55,6 @@
                             data-link-field="dtp_input3" data-link-format="yyyy-mm-dd" style="float:left;margin: 0 10px 0 0;">
                                 <input class="form-control" type="text" readonly="" name="end_date"
                                 {% if end_date %} value="{{end_date}}" {% endif %}/>
-                                {% if errors.end_date %}
-                                {{errors.end_date}}
-                                {% endif %}
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar">
                                     </span>
@@ -70,14 +64,14 @@
                             data-link-field="dtp_input4" data-link-format="hh:ii">
                                 <input class="form-control" size="16" type="text" readonly=""
                                 name="end_time" {% if end_time %} value="{{end_time}}" {% endif %} />
-                                {% if errors.end_time %}
-                                {{errors.end_time}}
-                                {% endif %}
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-time">
                                     </span>
                                 </span>
                             </div>
+                                {% if errors.end_time %}
+                                <br/>{{errors.end_time}}
+                                {% endif %}
                             <input type="hidden" id="dtp_input3" value="" />
                             <br />
                             <input type="hidden" id="dtp_input4" value="" />
@@ -91,9 +85,6 @@
                             data-link-field="dtp_input5" data-link-format="yyyy-mm-dd" style="float:left;margin: 0 10px 0 0;">
                                 <input class="form-control" type="text" readonly="" name="applyend_date" {% if applyend_date %} value="{{applyend_date}}" {% endif %}
                                 />
-                                {% if errors.applyend_date %}
-                                {{errors.applyend_date}}
-                                {% endif %}
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar">
                                     </span>
@@ -103,14 +94,14 @@
                             data-link-field="dtp_input6" data-link-format="hh:ii">
                                 <input class="form-control" size="16" type="text" readonly=""
                                 name="applyend_time" {% if applyend_time %} value="{{applyend_time}}" {% endif %} />
-                                {% if errors.applyend_time %}
-                                {{errors.applyend_time}}
-                                {% endif %}
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-time">
                                     </span>
                                 </span>
                             </div>
+                                {% if errors.applyend_time %}
+                                <br/>{{errors.applyend_time}}
+                                {% endif %}
                             <input type="hidden" id="dtp_input5" value="" />
                             <br />
                             <input type="hidden" id="dtp_input6" value="" />
