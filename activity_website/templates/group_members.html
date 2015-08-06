@@ -29,7 +29,7 @@
                             </tr>
                             {% for groupmember in groupmembers %}
                                 <tr>
-                                <td>{{groupmember.account}}</td>
+                                <td><a href="/user_info/{{ groupmember.id }}/">{{groupmember.account}}</a></td>
                                 <td>{{groupmember.nickname}}</td>
                                 <td>{% if groupmember.sex == "male" %}男{% endif %}
                                     {% if groupmember.sex == "female" %}女{% endif %}
