@@ -26,6 +26,7 @@ urlpatterns = [
     #url(r'^test/$', 'activity.views.test', name = 'test'),
     url(r'^welcome/$', 'activity.views.welcome', name = 'welcome'),
     url(r'^register/$', 'activity.views.register', name = 'register'),
+    url(r'^register_success/$', 'activity.views.register_success', name = 'register_success'),
     url(r'^login/$', 'activity.views.login', name = 'login'),
     url(r'^logout/$', 'activity.views.logout', name = 'logout'),
 
@@ -55,6 +56,7 @@ urlpatterns = [
     url(r'^user_info/(\d+)/$', 'activity.views.user_info', name = 'user_info'),
     url(r'^user_friends/(\d+)/$', 'activity.views.user_friends', name = 'user_friends'),
     url(r'^user_activities/(\d+)/$', 'activity.views.user_activities', name = 'user_activities'),
+    url(r'^user_groups/(\d+)/$', 'activity.views.user_groups', name = 'user_groups'),
     url(r'^change_userinfo/$', 'activity.views.change_userinfo', name = 'change_userinfo'),
     url(r'^change_userpwd/$', 'activity.views.change_userpwd', name = 'change_userpwd'),
     url(r'^upload_headimg/$', 'activity.views.upload_headimg', name = 'upload_headimg'),

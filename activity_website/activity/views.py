@@ -53,7 +53,6 @@ def login(request):
         except User.DoesNotExist:
             errors['account'] = '该账号不存在'
             return render_to_response("login_form.html", {
-                'user': getUserObj(user.id),
                 'errors': errors
             }, context_instance = RequestContext(request))
     else:
@@ -126,7 +125,7 @@ def register(request):
         )
         user.save()
         request.session['user_id'] = user.id
-        return HttpResponseRedirect('/welcome/')
+        return HttpResponseRedirect('/register_success/')
     else:
         return render_to_response("register.html", {
         }, context_instance = RequestContext(request))
@@ -291,10 +290,33 @@ def user_friends(request, user_id):
     except User.DoesNotExist:
         raise Http404()
 
-    return render_to_response("user_activities.html", {
+    return render_to_response("user_friends.html", {
         "user": getUserObj(user.id),
         "tar": tar,
         "userfriends": tar.friends.all(),
+    })
+
+def user_groups(request, user_id):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    try:
+        user_id = int(user_id)
+    except ValueError:
+        raise Http404()
+    try:
+        tar = User.objects.get(id = user_id)
+    except User.DoesNotExist:
+        raise Http404()
+
+    return render_to_response("user_groups.html", {
+        "user": getUserObj(user.id),
+        "tar": tar,
+        "usergroups": list(tar.group_member.all()) + list(tar.group_owner.all()),
     })
 
 
@@ -510,6 +532,7 @@ def all_activities(request):
                 alerts.append(response)
             else:
                 alerts.append("请求已发送")
+        #if (request.POST)
 
     acts = []
     for act in Activity.objects.all().order_by("-post_time"):
