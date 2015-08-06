@@ -61,10 +61,11 @@
                         </tbody>
                     </table>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 {% if organizer %}
+			<form class="form-horizontal" role="form" method="post" action="">
                 <div class="form-group" style="padding-left:2%;padding-right:2%">
-                        <label for="friend" class="col-sm-2 control-label">邀请好友：</label>
+                        <label for="friend" class="col-sm-3 control-label">邀请好友：</label>
                         <div class="col-sm-8" style="border-radius:4px;border:1px solid #ccc;overflow-y:auto;overflow-x:none;height:600px;width:100%">
                         {% for friend in friends %}
                             <div class="checkbox" style="float:left;width:50%;">
@@ -73,6 +74,7 @@
                         {% endfor %}
                         </div>
                     </div>
+			</form>
                     <div class="form-inline">
                     <button type="button" onclick="checkall()" class="btn btn-sm btn-default col-sm-offset-2">全选</button>
                     <button type="button" onclick="cancelall()" class="btn btn-sm btn-default">取消全选</button>
