@@ -37,5 +37,46 @@
                             </tr>
                         </tbody>
                     </table>
-            </div>
+				</div>
+				<div class="col-lg-2">
+                {% if organizer %}
+					<form class="form-horizontal" role="form" method="post" action="">
+						<input type="hidden" name="form_type" value="invite_friend_into_group"/>
+						<div class="form-group" style="padding-left:2%;padding-right:2%">
+							<label for="friend" class="col-sm-6 control-label">邀请好友加入群：</label>
+							<div class="col-sm-8" style="border-radius:4px;border:1px solid #ccc;overflow-y:auto;overflow-x:none;height:600px;width:100%">
+							{% for friend in friends %}
+								<div class="checkbox" style="float:left;width:48%;">
+									<label><input type="checkbox" name= "add_friend_to_group_{{friend.id}}" value="">{{friend.nickname}}</label>
+								</div>
+							{% endfor %}
+							</div>
+						</div>
+					</form>
+						<div class="form-inline">
+						<button type="button" onclick="checkall()" class="btn btn-sm btn-default">全选</button>
+						<button type="button" onclick="cancelall()" class="btn btn-sm btn-default">取消</button>
+						<button type="submit" class="btn btn-primary btn-sm">发送邀请</button>
+						</div>
+					</div>
+				{% endif %}
+		
+				<script type="text/javascript">
+				function checkall(){
+					var my_checkbox = document.getElementsByTagName("input");
+					for (var i = 0; i < my_checkbox.length; i++) {
+						if (my_checkbox[i].type == "checkbox") {
+							my_checkbox[i].checked = true;
+						}
+					}
+				};
+				function cancelall(){
+					var my_checkbox = document.getElementsByTagName("input");
+					for (var i = 0; i < my_checkbox.length; i++) {
+						if (my_checkbox[i].type == "checkbox") {
+							my_checkbox[i].checked = false;
+						}
+					}
+				};
+				</script>
 {% include "footer.html" %}
