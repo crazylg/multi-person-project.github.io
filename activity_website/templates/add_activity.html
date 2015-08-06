@@ -161,17 +161,15 @@
                             <label for="place" class="col-sm-2 control-label">
                                 参与年龄：
                             </label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <input type="text" class="form-control" name="min_age" placeholder="最低年龄" {% if min_age %} value="{{min_age}}" {% endif %}
                                 />
                                 {% if errors.min_age %}
                                 {{errors.min_age}}
                                 {% endif %}
                             </div>
-                            <div class="col-sm-1">
-                                ~
-                            </div>
-                            <div class="col-sm-2">
+                            <b>  ~  </b>
+                            <div class="col-sm-3">
                                 <input type="text" class="form-control" name="max_age" placeholder="最高年龄" {% if max_age %} value="{{max_age}}" {% endif %}
                                 />
                                 {% if errors.max_age %}
