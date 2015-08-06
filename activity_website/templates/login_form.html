@@ -46,8 +46,8 @@
                        <div class="col-sm-10">
                           <input type="password" class="form-control" id="password" name="password"
                              placeholder="请输入密码" {% if password1 %} value="{{ password1 }}" {% endif %}>
-                   {% if errors.password1 %}
-                        {{errors.password1}}
+                   {% if errors.password %}
+                        {{errors.password}}
                    {% endif %}
                        </div>
                     </div>

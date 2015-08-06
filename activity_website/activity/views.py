@@ -45,10 +45,10 @@ def login(request):
                 request.session['user_id'] = user.id
                 return HttpResponseRedirect('/welcome/')
             else:
-                errors['password'] = 'Your password is wrong!'
+                errors['password'] = '密码错误'
                 return render_to_response("login_form.html", {
                     'user': getUserObj(user.id),
-                    'errors': errors
+                    'errors': errors,
                 }, context_instance = RequestContext(request))
         except User.DoesNotExist:
             errors['account'] = '该账号不存在'
@@ -560,6 +560,17 @@ def add_activity(request):
             errors['max_size'] = '请输入最大参与人数'
         elif (not isSize(request.POST['max_size'], 1000)):
             errors['max_size'] = '最大参与人数应为不大于1000的正整数'
+        #if (not 'applyend_date')
+
+
+        applyend_time = datetime.datetime.strptime(request.POST['applyend_date'] + ' ' + request.POST['applyend_time'], '%Y/%m/%d %H:%M')
+        start_time = datetime.datetime.strptime(request.POST['start_date'] + ' ' + request.POST['start_time'], '%Y/%m/%d %H:%M')
+        end_time = datetime.datetime.strptime(request.POST['end_date'] + ' ' + request.POST['end_time'], '%Y/%m/%d %H:%M')
+
+        if (applyend_time > start_time):
+            errors['applyend_date'] = '报名结束时间应早于活动开始时间'
+        if (start_time > end_time):
+            errors['start_date'] = '活动开始时间应早于结束时间'
 
         if (errors):
             return render_to_response("add_activity.html", {
@@ -573,9 +584,9 @@ def add_activity(request):
                 explanation = request.POST['explanation'],
                 organizer = User.objects.get(id = request.session['user_id']),
                 post_time = datetime.datetime.now(),
-                applyend_time = datetime.datetime.strptime(request.POST['applyend_date'] + ' ' + request.POST['applyend_time'], '%Y/%m/%d %H:%M'),
-                start_time = datetime.datetime.strptime(request.POST['start_date'] + ' ' + request.POST['start_time'], '%Y/%m/%d %H:%M'),
-                end_time = datetime.datetime.strptime(request.POST['end_date'] + ' ' + request.POST['end_time'], '%Y/%m/%d %H:%M'),
+                applyend_time = applyend_time,
+                start_time = start_time,
+                end_time = end_time,
                 place = request.POST['place'],
                 min_age = int(request.POST['min_age']),
                 max_age = int(request.POST['max_age']),
@@ -979,7 +990,7 @@ def activity_detail(request, act_id):
     if (request.method == "POST"):
         if (request.POST['form_type'] == 'add_friend_to_activity'):
             for friend in user.friends.all():
-                if (("add_friend_to_activity_" + str(friend.id)) in request.POST):
+                if (("add_friend_to_activity_" + str(friend.id)) in request.POST) and (not friend in act.members.all()):
                     req = Request(
                         type = "activity_invitation",
                         title = user.nickname + " 邀请您参加活动",
@@ -1166,6 +1177,16 @@ def add_group_activity(request):
             errors['max_size'] = '请输入最大参与人数'
         elif (not isSize(request.POST['max_size'], 1000)):
             errors['max_size'] = '最大参与人数应为不大于1000的正整数'
+
+        applyend_time = datetime.datetime.strptime(request.POST['applyend_date'] + ' ' + request.POST['applyend_time'], '%Y/%m/%d %H:%M')
+        start_time = datetime.datetime.strptime(request.POST['start_date'] + ' ' + request.POST['start_time'], '%Y/%m/%d %H:%M')
+        end_time = datetime.datetime.strptime(request.POST['end_date'] + ' ' + request.POST['end_time'], '%Y/%m/%d %H:%M')
+
+        if (applyend_time > start_time):
+            errors['applyend_date'] = '报名结束时间应早于活动开始时间'
+        if (start_time > end_time):
+            errors['start_date'] = '活动开始时间应早于结束时间'
+
         if (not errors):
             act = Activity(
                 type = request.POST['type'],
@@ -1173,9 +1194,9 @@ def add_group_activity(request):
                 explanation = request.POST['explanation'],
                 organizer = User.objects.get(id = request.session['user_id']),
                 post_time = datetime.datetime.now(),
-                applyend_time = datetime.datetime.strptime(request.POST['applyend_date'] + ' ' + request.POST['applyend_time'], '%Y/%m/%d %H:%M'),
-                start_time = datetime.datetime.strptime(request.POST['start_date'] + ' ' + request.POST['start_time'], '%Y/%m/%d %H:%M'),
-                end_time = datetime.datetime.strptime(request.POST['end_date'] + ' ' + request.POST['end_time'], '%Y/%m/%d %H:%M'),
+                applyend_time = applyend_time,
+                start_time = start_time,
+                end_time = end_time,
                 place = request.POST['place'],
                 min_age = int(request.POST['min_age']),
                 max_age = int(request.POST['max_age']),
@@ -1318,13 +1339,29 @@ def group_info(request, group_id):
 
     alerts = []
     if (request.method == "POST"):
-        if (request.POST['form_type'])
+        if (request.POST['form_type'] == 'invite_friend_into_group'):
+            for friend in user.friends.all():
+                if (("add_friend_to_group_" + str(friend.id)) in request.POST) and (not friend in group.members.all()):
+                    req = Request(
+                        type = "group_invitation",
+                        title = user.nickname + " 邀请您加入群组",
+                        content = "账号 " + user.account + " 邀请你加入群组'" + group.name + "'",
+                        poster = user,
+                        receiver = friend,
+                        status = "unread",
+                        goal = str(group.id),
+                        target = group.name,
+                        time = datetime.datetime.now(),
+                    )
+                    req.save()
+            alerts.append('请求已发送')
 
     return render_to_response('group_info.html',{
         'user': getUserObj(user.id),
         'group': group,
         "organizer": True if (group.owner == user) else False,
         "friends": user.friends.all(),
+        "alerts": alerts,
     })
 
 def group_members(request, group_id):
