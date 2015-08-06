@@ -145,7 +145,7 @@ def welcome(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
-    return HttpResponseRedirect("/user_info/" + str(user.id) + "/")
+    return HttpResponseRedirect("/all_activities/")
 
     #return HttpResponse(getUserObj(user.id)["nickname"])
     #return render_to_response("welcome.html", {
