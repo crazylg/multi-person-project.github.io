@@ -2,17 +2,26 @@
                 <div class="col-lg-7 col-lg-offset-1 col-sm-8">
                 	<h2>{{group.name}}</h2>
                 	<ul class="nav nav-pills">
-                    <li><a href="/group/activities/">活动</a></li>
-                    <li class="active"><a href="#">成员</a></li>        
-                    <li><a href="/group/info/">介绍</a></li>
+                    <li><a href="/group_activities/{{ group.id }}/">活动</a></li>
+                    <li class="active"><a href="#">成员</a></li>
+                    <li><a href="/group_info/{{ group.id }}/">介绍</a></li>
                     </ul>
                     {% for groupmember in groupmembers %}
 					<div class="col-lg-10">
                         <div class="col-lg-1">
                         </div>
                         <div class="col-lg-3 col-lg-offset-1 list-group">
-                            <h3>{{groupmember.name}}</h3>
+                            <h3>{{groupmember.nickname}}</h3>
                         </div>
+                        {% if owner %}
+                        <div class="col-lg-1 col-lg-offset-1" style="top:10px">
+                            <form role="form" method="post" action="">
+                            <input type="hidden" name="member_id" value={{groupmember.id}} />
+                            <input type="hidden" name="form_type" value="cancel_member" />
+                            <button type="submit" class="btn btn-md btn-danger pull-right" style="position:relative;top:4px">删除</button>
+                            </form>
+                        </div>
+                        {% endif %}
  				    </div>
                     {% endfor %}
             </div>

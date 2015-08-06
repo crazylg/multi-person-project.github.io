@@ -2,14 +2,14 @@
             <div class="col-lg-7 col-sm-8">
                 <ul class="nav nav-pills">
                     <li class="active"><a href="#">活动介绍</a></li>
-                    <li><a href="/activity/attendence/">参加人员</a></li>        
+                    <li><a href="/activity_attendance/{{ activity.id }}/">参加人员</a></li>
                 </ul>
                 <div style="top:10px">
                 <blockquote>
                     <p></p>
                     <h2>{{activity.name}}</h2>
-                    <p><h3>{{activity.status}}</h3></p>
-                    <h4>目前报名人数： {{activity.current_size}}   /  {{activity.maxsize}}</h4>
+                    <!--<p><h3>{{activity.status}}</h3></p>-->
+                    <h4>目前参加人数： {{activity.current_size}}   /  {{activity.max_size}}</h4>
                     <p></p>
                 </blockquote>
                 </div>
@@ -43,7 +43,7 @@
                             </tr>
                             <tr>
                                 <td>年龄要求</td>
-                                <td>{{activity.min_age}} ~ {{avctivity.max_age}}  岁</td>
+                                <td>{{activity.min_age}} ~ {{activity.max_age}}  岁</td>
                             </tr>
                             <tr>
                                 <td>性别要求</td>

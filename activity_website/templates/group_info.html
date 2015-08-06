@@ -2,25 +2,35 @@
                 <div class="col-lg-7 col-lg-offset-1 col-sm-8">
                 	<h2>{{group.name}}</h2>
                     <ul class="nav nav-pills">
-   					<li><a href="/group/activities/">活动</a></li>
-   					<li><a href="/group/member/">成员</a></li> 		
+   					<li><a href="/group_activities/{{ group.id }}/">活动</a></li>
+   					<li><a href="/group_members/{{ group.id }}/">成员</a></li>
    					<li class="active"><a href="#">介绍</a></li>
 					</ul>
-                    <div class="col-lg-9">
-                        <ul class="list-group" data-view="list">
-                                <label class="col-md-3 control-label">
-                                    当前群组人数：
-                                </label>
-                                <h3>{{group.current_size}} / {{group.max_size}} 人</h3>
-                                <label class="col-md-3 control-label">
-                                    群组拥有者：
-                                </label>
-                                <h3>{{group.owner}}</h3>
-                                <label class="col-md-3 control-label">
-                                    群组简介：
-                                </label>
-                                <h3>{{group.explanation}}</h3>
-                            </ul>
-                    </div>
+                    <table class="table table-hover" style="font-family:'Microsoft YaHei';font-size:1.7em">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>群组建立人</td>
+                                <td>{{group.owner}}</td>
+                            </tr>
+                            <tr>
+                                <td>群组创建日期</td>
+                                <td>{{group.found_time}}</td>
+                            </tr>
+                            <tr>
+                                <td>当前群组人数</td>
+                                <td>{{group.current_size}} / {{group.max_size}} 人</td>
+                            </tr>
+                            <tr>
+                                <td>群组简介</td>
+                                <td>{{group.explanation}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
             </div>
 {% include "footer.html" %}

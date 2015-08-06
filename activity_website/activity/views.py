@@ -258,6 +258,23 @@ def my_request(request):
                         time = datetime.datetime.now(),
                     )
                     tmp_req.save()
+                if (req.type == 'group_invitation'):
+                    grp = Group.objects.get(id = req.goal)
+                    grp.members.add(user)
+                    grp.current_size += 1
+                    grp.save()
+                    tmp_req = Request(
+                        type = "notice",
+                        title = user.nickname + " 接受了你的邀请",
+                        content = "账号 " + user.account + " 接受了你的邀请, 加入了群组'" + grp.name + "'",
+                        poster = req.receiver,
+                        receiver = req.poster,
+                        status = "unread",
+                        goal = " ",
+                        time = datetime.datetime.now(),
+                    )
+                    tmp_req.save()
+
         req.save()
 
         reqs = [req for req in Request.objects.filter(receiver = user)]
@@ -577,6 +594,66 @@ def friend_activities_launch(request):
         "alerts": alerts,
     })
 
+def activity_detail(request, act_id):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    try:
+        act_id = int(act_id)
+    except ValueError:
+        raise Http404()
+    try:
+        act = Activity.objects.get(id = act_id)
+    except Activity.DoesNotExist:
+        raise Http404()
+
+    return render_to_response("activity_detail.html", {
+        "user": getUserObj(user.id),
+        "organizer": True if (act.organizer == user) else False,
+        "activity": act,
+        "friends": user.friends.all(),
+    })
+
+def activity_attendance(request, act_id):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    try:
+        act_id = int(act_id)
+    except ValueError:
+        raise Http404()
+    try:
+        act = Activity.objects.get(id = act_id)
+    except Activity.DoesNotExist:
+        raise Http404()
+
+    alerts = []
+    if (request.method == 'POST'):
+        if (request.POST["form_type"] == "cancel_attendance"):
+            try:
+                tar = User.objects.get(id = request.POST['attendance_id'])
+            except User.DoesNotExist:
+                alerts.append('该用户不存在')
+            #if (not alerts)
+
+    return render_to_response("activity_attendance.html", {
+        "user": getUserObj(user.id),
+        "organizer": True if (act.organizer == user) else False,
+        "activity": act,
+        "attendances": act.members.all(),
+        "friends": user.friends.all(),
+        "alerts": alerts,
+    })
+
+
 
 
 def add_group(request):
@@ -590,6 +667,7 @@ def add_group(request):
     errors = {}
     responses = {}
     if (request.method == 'POST'):
+        #return HttpResponse("Jiang: " + request.POST["add_friend_to_group_3"] + " Ligen: " + request.POST["add_friend_to_group_4"])
         if (not 'name' in request.POST) or (not request.POST['name']):
             errors['name'] = '请输入群组名称'
         elif (len(request.POST['name']) > 20):
@@ -608,6 +686,19 @@ def add_group(request):
                 max_size = 100,
             )
             group.save()
+            for friend in user.friends.all():
+                if (("add_friend_to_group_" + str(friend.id)) in request.POST):
+                    req = Request(
+                        type = "group_invitation",
+                        title = user.nickname + " 邀请您参加群组",
+                        content = "账号 " + user.account + " 刚刚创建了群组'" + group.name + "', 并邀请你加入",
+                        poster = user,
+                        receiver = friend,
+                        status = "unread",
+                        goal = str(group.id),
+                        time = datetime.datetime.now(),
+                    )
+                    req.save()
 
     return render_to_response('add_group.html',{
         'user': getUserObj(user.id),
@@ -624,9 +715,19 @@ def my_groups_create(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
+    grps = []
+    for grp in user.group_owner.all():
+        grps.append({
+            "id": grp.id,
+            "name": grp.name,
+            "explanation": grp.explanation,
+            "owner": grp.owner.nickname,
+            "attend": True if (user in grp.members.all())or(user == grp.owner) else False,
+        })
+
     return render_to_response("my_groups_create.html", {
         'user': getUserObj(user.id),
-        "my_create_groups": user.group_owner.all(),
+        "my_create_groups": grps,
     })
 
 def my_groups_attend(request):
@@ -637,9 +738,19 @@ def my_groups_attend(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
+    grps = []
+    for grp in user.group_member.all():
+        grps.append({
+            "id": grp.id,
+            "name": grp.name,
+            "explanation": grp.explanation,
+            "owner": grp.owner.nickname,
+            "attend": True if (user in grp.members.all())or(user == grp.owner) else False,
+        })
+
     return render_to_response("my_groups_attend.html", {
         'user': getUserObj(user.id),
-        "my_attend_groups": user.group_member.all(),
+        "my_attend_groups": grps,
     })
 
 def all_groups(request):
@@ -681,11 +792,10 @@ def group_info(request, group_id):
         group = Group.objects.get(id = group_id)
     except Group.DoesNotExist:
         raise Http404()
+
     return render_to_response('group_info.html',{
         'user': getUserObj(user.id),
-        'group_time': group.found_time,
-        'group_number': group.size,
-        'group_content': group.explanation,
+        'group': group,
     })
 
 def group_members(request, group_id):
@@ -704,9 +814,11 @@ def group_members(request, group_id):
         group = Group.objects.get(id = group_id)
     except Group.DoesNotExist:
         raise Http404()
+
     return render_to_response('group_members.html',{
         'user': getUserObj(user.id),
-        'group_usernamelist': [user.nickname for user in group.members],
+        'group': group,
+        'groupmembers': group.members.all(),
     })
 
 def group_activities(request, group_id):
@@ -725,15 +837,14 @@ def group_activities(request, group_id):
         group = Group.objects.get(id = group_id)
     except Group.DoesNotExist:
         raise Http404()
+
     return render_to_response('group_activities.html',{
         'user': getUserObj(user.id),
-        'group_activity_list': [{
-            'act_name': act.name,
-            'act_content': act.explanation,
-            'date': act.start_time.date,
-            'time': act.start_time.time,
-        } for act in group.activities],
+        'group': group,
+        'groupactivities': group.activities.all(),
     })
+
+
 
 class UserForm(forms.Form):
     username = forms.CharField()

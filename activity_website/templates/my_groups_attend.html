@@ -15,17 +15,8 @@
                         </span>
                         </form>
                     </div>
-                {% for my_attend_group in my_attend_groups %}
-                    <div class="col-lg-10" style="top:15px">
-                        <div class="col-lg-10 list-group">
-                            <a href="#" class="list-group-item active">
-                                <h4 class="list-group-item-heading">{{my_attend_group.name}}</h4>
-                            </a>
-                            <div class="list-group-item">
-                                <p class="list-group-item-text">{{my_attend_group.explanation}}</p>
-                            </div>
-                        </div>
-                    </div>
+                {% for group in my_attend_groups %}
+                    {% include "group_item.html" %}
                 {% endfor %}
                 </div>
 {% include "footer.html" %}
