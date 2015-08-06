@@ -554,7 +554,7 @@ def add_activity(request):
             errors['max_age'] = '请输入最大年龄要求'
         elif (not isAge(request.POST['max_age'])):
             errors['max_age'] = '请输入正确的最大年龄'
-        elif (int(request.POST['min_age']) > int(request.POST['max_age'])):
+        if (not 'min_age' in errors) and(not 'max_age' in errors) and (int(request.POST['min_age']) > int(request.POST['max_age'])):
             errors['max_age'] = '最大年龄应不小于最小年龄'
         if (not 'max_size' in request.POST) or (not request.POST['max_size']):
             errors['max_size'] = '请输入最大参与人数'
@@ -1188,7 +1188,7 @@ def add_group_activity(request):
             errors['max_age'] = '请输入最大年龄要求'
         elif (not isAge(request.POST['max_age'])):
             errors['max_age'] = '请输入正确的最大年龄'
-        elif (int(request.POST['min_age']) > int(request.POST['max_age'])):
+        if (not 'min_age' in errors) and(not 'max_age' in errors) and (int(request.POST['min_age']) > int(request.POST['max_age'])):
             errors['max_age'] = '最大年龄应不小于最小年龄'
         if (not 'max_size' in request.POST) or (not request.POST['max_size']):
             errors['max_size'] = '请输入最大参与人数'
@@ -1244,9 +1244,27 @@ def add_group_activity(request):
                         time = datetime.datetime.now(),
                     )
                     req.save()
-
             alerts.append("群组活动创建成功")
             return HttpResponseRedirect("/activity_detail/" + str(act.id) + "/")
+        else:
+            return render_to_response("add_group_activity.html", {
+                "group": group,
+                "user": getUserObj(user.id),
+                "errors": errors,
+                "alerts": alerts,
+                'name': request.POST.get('name'),
+                'start_date': request.POST.get('start_date'),
+                'start_time': request.POST.get('start_time'),
+                'end_date': request.POST.get('end_date'),
+                'end_time': request.POST.get('end_time'),
+                'applyend_date': request.POST.get('applyend_date'),
+                'applyend_time': request.POST.get('applyend_time'),
+                'place': request.POST.get('place'),
+                'explanation': request.POST.get('explanation'),
+                'min_age': request.POST.get('min_age'),
+                'max_age': request.POST.get('max_age'),
+                'max_size': request.POST.get('max_size'),
+            })
 
     return render_to_response("add_group_activity.html", {
         "group": group,
