@@ -73,29 +73,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="all_activities_new.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="all_activities_new.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/all_activities_new.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33236995">
+            <state vertical-scroll-proportion="-7.419355">
               <caret line="44" column="89" selection-start-line="44" selection-start-column="89" selection-end-line="44" selection-end-column="89" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add_activity.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="add_activity.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/add_activity.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.967742">
-              <caret line="226" column="49" selection-start-line="226" selection-start-column="49" selection-end-line="226" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.26878613">
+              <caret line="230" column="62" selection-start-line="230" selection-start-column="62" selection-end-line="230" selection-end-column="62" />
               <folding>
                 <element signature="e#1408#1446#0#HTML" expanded="true" />
                 <element signature="e#3495#3533#0#HTML" expanded="true" />
                 <element signature="e#5566#5604#0#HTML" expanded="true" />
-                <element signature="e#13573#13597#0#HTML" expanded="true" />
-                <element signature="e#14175#14204#0#HTML" expanded="true" />
-                <element signature="e#14832#14884#0#HTML" expanded="true" />
-                <element signature="e#15120#15144#0#HTML" expanded="true" />
+                <element signature="e#13924#13953#0#HTML" expanded="true" />
+                <element signature="e#14581#14633#0#HTML" expanded="true" />
+                <element signature="e#14869#14893#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -105,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/templates/change_userinfo_form.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-13.4838705">
-              <caret line="59" column="36" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+              <caret line="54" column="36" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -183,8 +182,8 @@
         <option value="$PROJECT_DIR$/templates/upload_headimg.html" />
         <option value="$PROJECT_DIR$/activity/models.py" />
         <option value="$PROJECT_DIR$/activity/views.py" />
-        <option value="$PROJECT_DIR$/templates/add_activity.html" />
         <option value="$PROJECT_DIR$/templates/all_activities_new.html" />
+        <option value="$PROJECT_DIR$/templates/add_activity.html" />
       </list>
     </option>
   </component>
@@ -957,26 +956,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/add_activity.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.967742">
-          <caret line="226" column="49" selection-start-line="226" selection-start-column="49" selection-end-line="226" selection-end-column="49" />
-          <folding>
-            <element signature="e#1408#1446#0#HTML" expanded="true" />
-            <element signature="e#3495#3533#0#HTML" expanded="true" />
-            <element signature="e#5566#5604#0#HTML" expanded="true" />
-            <element signature="e#13573#13597#0#HTML" expanded="true" />
-            <element signature="e#14175#14204#0#HTML" expanded="true" />
-            <element signature="e#14832#14884#0#HTML" expanded="true" />
-            <element signature="e#15120#15144#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/change_userinfo_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.4838705">
-          <caret line="59" column="36" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+          <caret line="54" column="36" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -1029,9 +1012,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/all_activities_new.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33236995">
+        <state vertical-scroll-proportion="-7.419355">
           <caret line="44" column="89" selection-start-line="44" selection-start-column="89" selection-end-line="44" selection-end-column="89" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/add_activity.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26878613">
+          <caret line="230" column="62" selection-start-line="230" selection-start-column="62" selection-end-line="230" selection-end-column="62" />
+          <folding>
+            <element signature="e#1408#1446#0#HTML" expanded="true" />
+            <element signature="e#3495#3533#0#HTML" expanded="true" />
+            <element signature="e#5566#5604#0#HTML" expanded="true" />
+            <element signature="e#13924#13953#0#HTML" expanded="true" />
+            <element signature="e#14581#14633#0#HTML" expanded="true" />
+            <element signature="e#14869#14893#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
