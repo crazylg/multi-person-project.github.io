@@ -233,6 +233,70 @@ def user_info(request, user_id):
         "tar": tar,
     })
 
+def user_activities(request, user_id):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    try:
+        user_id = int(user_id)
+    except ValueError:
+        raise Http404()
+    try:
+        tar = User.objects.get(id = user_id)
+    except User.DoesNotExist:
+        raise Http404()
+
+    acts = []
+    for act in tar.activity_organizer.all().order_by("-post_time"):
+        if (act in user.activity_member.all())or(act.organizer == user):
+            status = "already_in"
+        else:
+            if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                status = "expired"
+            else:
+                status = "available"
+        acts.append({
+            "id": act.id,
+            "name": act.name,
+            "place": act.place,
+            "start_time": act.start_time,
+            "explanation": act.explanation,
+            "status": status,
+        })
+
+    return render_to_response("user_activities.html", {
+        "user": getUserObj(user.id),
+        "tar": tar,
+        "useractivities": acts,
+    })
+
+def user_friends(request, user_id):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    try:
+        user_id = int(user_id)
+    except ValueError:
+        raise Http404()
+    try:
+        tar = User.objects.get(id = user_id)
+    except User.DoesNotExist:
+        raise Http404()
+
+    return render_to_response("user_activities.html", {
+        "user": getUserObj(user.id),
+        "tar": tar,
+        "userfriends": tar.friends.all(),
+    })
+
 
 
 def my_request(request):
