@@ -82,28 +82,34 @@
         <entry file="file://$PROJECT_DIR$/templates/activity_detail.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-2.8387096">
-              <caret line="4" column="50" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
+              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_attendance.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_attendance.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/activity_attendance.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43812233">
-              <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-              <folding />
+            <state vertical-scroll-proportion="-17.0">
+              <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+              <folding>
+                <element signature="e#783#799#0#HTML" expanded="true" />
+                <element signature="e#1155#1188#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add_group.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="add_group.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/add_group.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5161295">
-              <caret line="32" column="89" selection-start-line="32" selection-start-column="69" selection-end-line="32" selection-end-column="89" />
-              <folding />
+            <state vertical-scroll-proportion="1.0327169">
+              <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+              <folding>
+                <element signature="n#style#0;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#1;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -167,7 +173,6 @@
         <option value="$PROJECT_DIR$/templates/activity_item.html" />
         <option value="$PROJECT_DIR$/templates/activity_attendence.html" />
         <option value="$PROJECT_DIR$/templates/activity_detail.html" />
-        <option value="$PROJECT_DIR$/templates/activity_attendance.html" />
         <option value="$PROJECT_DIR$/templates/my_groups_create.html" />
         <option value="$PROJECT_DIR$/activity_website/urls.py" />
         <option value="$PROJECT_DIR$/templates/group_members.html" />
@@ -177,6 +182,7 @@
         <option value="$PROJECT_DIR$/templates/add_group.html" />
         <option value="$PROJECT_DIR$/activity/views.py" />
         <option value="$PROJECT_DIR$/templates/my_groups_attend.html" />
+        <option value="$PROJECT_DIR$/templates/activity_attendance.html" />
       </list>
     </option>
   </component>
@@ -1044,14 +1050,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/add_group.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5161295">
-          <caret line="32" column="89" selection-start-line="32" selection-start-column="69" selection-end-line="32" selection-end-column="89" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/activity/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5517711">
@@ -1120,16 +1118,30 @@
     <entry file="file://$PROJECT_DIR$/templates/activity_detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.8387096">
-          <caret line="4" column="50" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/activity_attendance.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43812233">
-          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-          <folding />
+        <state vertical-scroll-proportion="-17.0">
+          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+          <folding>
+            <element signature="e#783#799#0#HTML" expanded="true" />
+            <element signature="e#1155#1188#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/add_group.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0327169">
+          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
