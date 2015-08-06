@@ -11,7 +11,7 @@
     word-break: break-all;
     word-wrap:break-word;
     position:relative;
-    right:5px;
+	border-radius:5px;
 }
 
 .message_get {
@@ -27,5 +27,45 @@
     word-break: break-all;
     word-wrap:break-word;
     position:relative;
-    left:5px;
+	border-radius:5px;
+}
+
+.radius{
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+<span>	</span>border-radius:10px;
+}
+
+.triangle{  
+    height:0px;  
+    width:0px;  
+    border-width:20px;  
+    border-style:solid;  
+    border-color:green transparent transparent transparent;
+}  
+
+.left:before{
+	position:absolute;
+	content:"\00a0";
+	width:0px;
+	height:0px;
+	border-width:8px 18px 8px 0;
+	border-style:solid;
+	border-color:transparent #A6DADC transparent transparent;
+	top:50px;
+	left:0px;
+	float:left;
+}
+.right:before{
+	position:absolute;
+	content:"\00a0";
+	display:inline-block;
+	width:0px;
+	height:0px;
+	border-width:8px 0px 8px 18px;
+	border-style:solid;
+	border-color:transparent transparent transparent #A6DADC;
+	right:0px;
+	top:50px;
+	float:right;		
 }

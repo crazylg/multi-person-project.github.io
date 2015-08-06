@@ -27,8 +27,10 @@
                     <div id="chatbox" class="row" style="width:103%;height:400px;border:2px solid skyblue;padding-left:2px;padding-top:2px;padding-right:8px;display:block;position:relative;left:5px">
                         {% for message in messages %}
 							{% if message.type == "send" %}
+								<div class="right"></div>
 								<div class="message_send"><p>{{message.content}}</br>{{message.time}}<p></div>
 							{% else %}
+								<div class="left"></div>
 								<div class="message_get"><p>{{message.content}}</br>{{message.time}}<p></div>
 						<script type="text/javascript>
 							$("#chatbox").scrollTop = $('#chatbox').scrollHeight;
