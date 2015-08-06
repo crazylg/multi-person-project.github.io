@@ -2,7 +2,7 @@
 
             <div class="col-lg-7 col-sm-7">
                 <form id="new_activity" class="form-horizontal" role="form" method="post"
-                action="" onsubmit="return validate_form(this)">
+                action="" onsubmit="return validate_form(this)" enctype="multipart/form-data">
                     {% csrf_token %}
                     <h2>
                         发起新活动
@@ -228,13 +228,11 @@
                             <label for="upload" class="col-sm-2 control-label">
                                 选择活动照：
                             </label>
-                            <div class="col-sm-10 form-inline">
-                                <form id="upload_photo" role="form" method="post" action="/upload_headimg/">
-                                <input type="hidden" name="upload_photo" value="upload_photo" />
-                                <input class="btn btn btn-lg" id="headimg" type="file">
+                            <div class="col-sm-9 form-inline">
+                                <input id="headimg" type="file" name="headimg">
                                 <div class="col-sm-1">
                                 <input type="submit" class="btn btn-primary btn-sm" style="margin-left:15px" value="ok">
-                            </div>
+                                </div>
                             </form>
                             </div>
                         </div>
