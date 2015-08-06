@@ -33,7 +33,7 @@
 .radius{
 	-webkit-border-radius:10px;
 	-moz-border-radius:10px;
-<span>	</span>border-radius:10px;
+	border-radius:10px;
 }
 
 .triangle{  
@@ -51,8 +51,8 @@
 	height:0px;
 	border-width:8px 18px 8px 0;
 	border-style:solid;
-	border-color:transparent #A6DADC transparent transparent;
-	top:50px;
+	border-color:transparent whitesmoke transparent transparent;
+	top:15px;
 	left:0px;
 	float:left;
 }
@@ -64,8 +64,8 @@
 	height:0px;
 	border-width:8px 0px 8px 18px;
 	border-style:solid;
-	border-color:transparent transparent transparent #A6DADC;
-	right:0px;
-	top:50px;
+	border-color:transparent transparent transparent skyblue;
+	right:2px;
+	top:15px;
 	float:right;		
 }
