@@ -714,7 +714,67 @@ def add_group(request):
         'friends': user.friends.all(),
     })
 
-#def add_group_activity(request, group_id):
+def add_group_activity(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    errors = {}
+    alerts = []
+
+    group = Group.objects.get(id = request.POST['group_id'])
+    if (request.POST['form_type'] == 'add'):
+        if (not 'name' in request.POST) or (not request.POST['name']):
+            errors['name'] = '请输入活动名称'
+        elif (len(request.POST['name']) > 20):
+            errors['name'] = '活动名称应少于20字'
+        if (not 'type' in request.POST) or (not request.POST['type']):
+            errors['type'] = '请选择活动类型'
+        if (not 'explanation' in request.POST) or (not request.POST['explanation']):
+            errors['explanation'] = '请输入活动内容'
+        elif (len(request.POST['explanation']) > 400):
+            errors['explanation'] = '活动内容应少于400字'
+        if (not 'place' in request.POST) or (not request.POST['place']):
+            errors['place'] = '请输入活动地点'
+        elif (len(request.POST['place']) > 100):
+            errors['place'] = '活动地点应少于100字'
+        if (not 'min_age' in request.POST) or (not request.POST['min_age']):
+            errors['min_age'] = '请输入最小年龄要求'
+        elif (not isAge(request.POST['min_age'])):
+            errors['min_age'] = '请输入正确的最小年龄'
+        if (not 'max_age' in request.POST) or (not request.POST['max_age']):
+            errors['max_age'] = '请输入最大年龄要求'
+        elif (not isAge(request.POST['max_age'])):
+            errors['max_age'] = '请输入正确的最大年龄'
+        elif (int(request.POST['min_age']) > int(request.POST['max_age'])):
+            errors['max_age'] = '最大年龄应不小于最小年龄'
+        if (not 'max_size' in request.POST) or (not request.POST['max_size']):
+            errors['max_size'] = '请输入最大参与人数'
+        elif (not isSize(request.POST['max_size'], 1000)):
+            errors['max_size'] = '最大参与人数应为不大于1000的正整数'
+        if (not errors):
+            act = Activity(
+                type = request.POST['type'],
+                name = request.POST['name'],
+                explanation = request.POST['explanation'],
+                organizer = User.objects.get(id = request.session['user_id']),
+                post_time = datetime.datetime.now(),
+                applyend_time = datetime.datetime.strptime(request.POST['applyend_date'] + ' ' + request.POST['applyend_time'], '%Y/%m/%d %H:%M'),
+                start_time = datetime.datetime.strptime(request.POST['start_date'] + ' ' + request.POST['start_time'], '%Y/%m/%d %H:%M'),
+                end_time = datetime.datetime.strptime(request.POST['end_date'] + ' ' + request.POST['end_time'], '%Y/%m/%d %H:%M'),
+                place = request.POST['place'],
+                min_age = int(request.POST['min_age']),
+                max_age = int(request.POST['max_age']),
+                sex_requirement = request.POST['sex_requirement'],
+                status = 'Null',
+                max_size = int(request.POST['max_size']),
+                current_size = 0,
+            )
+            act.save()
+            group.activities.add(act)
 
 
 def my_groups_create(request):
