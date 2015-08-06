@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^my_groups/create/$', 'activity.views.my_groups_create', name = 'my_groups_create'),
 
     url(r'^add_group/$', 'activity.views.add_group', name = 'add_group'),
+    url(r'^add_group_activity/$', 'activity.views.add_group_activity', name = 'add_group_activity'),
     url(r'^all_groups/$', 'activity.views.all_groups', name = 'all_groups'),
     url(r'^group_info/(\d+)/$', 'activity.views.group_info', name = 'group_info'),
     url(r'^group_members/(\d+)/$', 'activity.views.group_members', name = 'group_members'),

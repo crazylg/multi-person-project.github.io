@@ -386,7 +386,7 @@ def add_activity(request):
                 current_size = 0,
             )
             act.save()
-            return HttpResponseRedirect('/welcome/')
+            return HttpResponseRedirect("/activity_detail/" + str(act.id) + "/")
     else:
         return render_to_response("add_activity.html", {
             'user': getUserObj(user.id),
@@ -775,7 +775,15 @@ def add_group_activity(request):
             )
             act.save()
             group.activities.add(act)
+            alerts.append("群组活动创建成功")
+            return HttpResponseRedirect("/activity_detail/" + str(act.id) + "/")
 
+    return render_to_response("add_group_activity.html", {
+        "group": group,
+        "user": getUserObj(user.id),
+        "errors": errors,
+        "alerts": alerts,
+    })
 
 def my_groups_create(request):
     if (not 'user_id' in request.session):
@@ -927,10 +935,28 @@ def group_activities(request, group_id):
     except Group.DoesNotExist:
         raise Http404()
 
+    acts = []
+    for act in group.activities.all().order_by("-post_time"):
+        if (act in user.activity_member.all())or(act.organizer == user):
+            status = "already_in"
+        else:
+            if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                status = "expired"
+            else:
+                status = "available"
+        acts.append({
+            "id": act.id,
+            "name": act.name,
+            "place": act.place,
+            "start_time": act.start_time,
+            "explanation": act.explanation,
+            "status": status,
+        })
+
     return render_to_response('group_activities.html',{
         'user': getUserObj(user.id),
         'group': group,
-        'groupactivities': group.activities.all(),
+        'groupactivities': acts,
     })
 
 

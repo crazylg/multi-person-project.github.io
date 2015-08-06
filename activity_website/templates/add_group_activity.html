@@ -5,8 +5,10 @@
                 action="" onsubmit="return validate_form(this)">
                     {% csrf_token %}
                     <h2>
-                        发起新活动
+                        发起群组活动
                     </h2>
+                    <input type="hidden" name="group_id" value={{group.id}} />
+                    <input type="hidden" name="form_type" value="add" />
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">
                                 活动名称：
