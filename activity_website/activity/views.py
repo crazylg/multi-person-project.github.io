@@ -283,6 +283,15 @@ def user_activities(request, user_id):
     except User.DoesNotExist:
         raise Http404()
 
+    alerts = []
+    if (request.method == 'POST'):
+        if (request.POST['form_type'] == 'apply_activity'):
+            response = applyActivity(user.id, request.POST['activity_id'])
+            if (response != 'success'):
+                alerts.append(response)
+            else:
+                alerts.append("请求已发送")
+
     acts = []
     for act in tar.activity_organizer.all().order_by("-post_time"):
         if (act in user.activity_member.all())or(act.organizer == user):
@@ -305,6 +314,7 @@ def user_activities(request, user_id):
         "user": getUserObj(user.id),
         "tar": tar,
         "useractivities": acts,
+        "alerts": alerts,
     })
 
 def user_friends(request, user_id):
@@ -346,6 +356,11 @@ def user_groups(request, user_id):
         tar = User.objects.get(id = user_id)
     except User.DoesNotExist:
         raise Http404()
+
+    alerts = []
+    if (request.method == 'POST'):
+        if (request.POST['form_type'] == 'apply_group'):
+            alerts.append(applyGroup(user.id, request.POST['group_id']))
 
     grps = []
     for grp in tar.group_member.all():
@@ -516,7 +531,7 @@ def applyActivity(user_id, activity_id):
         status = "unread",
         time = datetime.datetime.now(),
         goal = acti.id,
-        tar = acti.name,
+        target = acti.name,
     )
     req.save()
     return "success"
@@ -771,24 +786,27 @@ def friend_activities_attend(request):
         return HttpResponseRedirect("/login/")
 
     acts = []
+    actss = []
     for friend in user.friends.all():
         for act in friend.activity_member.all():
-            if (act in user.activity_member.all())or(act.organizer == user):
-                status = "already_in"
-            else:
-                if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
-                    status = "expired"
+            if (not act in actss):
+                if (act in user.activity_member.all())or(act.organizer == user):
+                    status = "already_in"
                 else:
-                    status = "available"
-            acts.append({
-                "id": act.id,
-                "name": act.name,
-                "place": act.place,
-                "start_time": act.start_time,
-                "explanation": act.explanation,
-                "status": status,
-                "post_time": act.post_time.replace(tzinfo=None),
-            })
+                    if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                        status = "expired"
+                    else:
+                        status = "available"
+                acts.append({
+                    "id": act.id,
+                    "name": act.name,
+                    "place": act.place,
+                    "start_time": act.start_time,
+                    "explanation": act.explanation,
+                    "status": status,
+                    "post_time": act.post_time.replace(tzinfo=None),
+                })
+                actss.append(act)
 
     alerts = []
     if (request.method == 'POST'):
@@ -796,6 +814,8 @@ def friend_activities_attend(request):
             response = applyActivity(user.id, request.POST['activity_id'])
             if (response != 'success'):
                 alerts.append(response)
+            else:
+                alerts.append("请求已发送")
         if (request.POST['form_type'] == 'search_activity'):
                 acts = []
                 for friend in user.friends.all():
@@ -858,6 +878,8 @@ def friend_activities_launch(request):
             response = applyActivity(user.id, request.POST['activity_id'])
             if (response != 'success'):
                 alerts.append(response)
+            else:
+                alerts.append("请求已发送")
         if (request.POST['form_type'] == 'search_activity'):
             acts = []
             for friend in user.friends.all():
@@ -1145,6 +1167,7 @@ def add_group(request):
                         time = datetime.datetime.now(),
                     )
                     req.save()
+            return HttpResponseRedirect('/group_info/' + str(group.id) + '/')
 
     return render_to_response('add_group.html',{
         'user': getUserObj(user.id),
@@ -1521,7 +1544,10 @@ def my_friends(request):
     errors = {}
     responses = {}
     alerts = []
-    current_talker = user.friends.all().order_by("nickname")[0].id
+    try:
+        current_talker = user.friends.all().order_by("nickname")[0].id
+    except:
+        current_talker = 0
     if (request.method == "POST"):
         if (request.POST['form_type'] == 'add_friend'):
             if (not 'account' in request.POST) or (not request.POST['account']):
