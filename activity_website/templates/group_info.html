@@ -1,5 +1,5 @@
 {% include "header.html" %}
-                <div class="col-lg-7 col-lg-offset-1 col-sm-8">
+                <div class="col-lg-6 col-lg-offset-1 col-sm-8">
                 	<h2>{{group.name}}</h2>
                     <ul class="nav nav-pills">
    					<li><a href="/group_activities/{{ group.id }}/">活动</a></li>
@@ -38,12 +38,12 @@
                         </tbody>
                     </table>
 				</div>
-				<div class="col-lg-2">
+				<div class="col-lg-3">
                 {% if organizer %}
 					<form class="form-horizontal" role="form" method="post" action="">
 						<input type="hidden" name="form_type" value="invite_friend_into_group"/>
 						<div class="form-group" style="padding-left:2%;padding-right:2%">
-							<label for="friend" class="col-sm-6 control-label">邀请好友加入群：</label>
+							<label for="friend" class="col-sm-7 control-label">邀请好友加入群：</label>
 							<div class="col-sm-8" style="border-radius:4px;border:1px solid #ccc;overflow-y:auto;overflow-x:none;height:600px;width:100%">
 							{% for friend in friends %}
 								<div class="checkbox" style="float:left;width:48%;">
