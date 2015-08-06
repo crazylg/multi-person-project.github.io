@@ -1,17 +1,7 @@
 {% include "header.html" %}
                 <div class="col-lg-7 col-lg-offset-1">
                 <h2>活动列表</h2>
-                    <div class="col-lg-10 input-group">
-                        <form method="post" action="">
-                            <div class="col-lg-10">
-                                <input type="hidden" name="form_type" value="search_activity" />
-                                <input type="text" class="form-control" placeholder="搜索" name="search_word">
-                            </div>
-                            <span class="input-group-btn">
-                                <button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                        </form>
-                    </div>
+                    {% include "search_activity.html" %}
                 {% for activity in activities %}
                     {% include "activity_item.html" %}
                 {% endfor %}

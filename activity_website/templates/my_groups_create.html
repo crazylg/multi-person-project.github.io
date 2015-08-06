@@ -5,16 +5,7 @@
                     <li><a href="/my_groups/attend/">我参加的群组</a></li>
                     <li class="active"><a href="#">我创建的群组</a></li>
                     </ul>
-                    <div class="col-lg-10 input-group">
-                        <form method="post" action="">
-                            <div class="col-lg-10" style="top:10px" >
-                            <input type="text" class="form-control" placeholder="搜索" name="search_word">               
-                        </div>                            
-                        <span class="input-group-btn" style="top:10px">
-                            <button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                        </span>
-                        </form>
-                    </div>
+                    {% include "search_group.html" %}
                 {% for group in my_create_groups %}
                     {% include "group_item.html" %}
                 {% endfor %}

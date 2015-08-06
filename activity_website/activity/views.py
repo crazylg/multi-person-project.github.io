@@ -130,6 +130,9 @@ def register(request):
         return render_to_response("register.html", {
         }, context_instance = RequestContext(request))
 
+def register_success(request):
+    return render_to_response("register_success.html")
+
 def welcome(request):
     if (not 'user_id' in request.session):
         return HttpResponseRedirect("/login/")
@@ -313,10 +316,26 @@ def user_groups(request, user_id):
     except User.DoesNotExist:
         raise Http404()
 
+    grps = []
+    for grp in tar.group_member.all():
+        grps.append({
+            "id": grp.id,
+            "name": grp.name,
+            "owner": grp.owner.nickname,
+            "explanation": grp.explanation,
+        })
+    for grp in tar.group_owner.all():
+        grps.append({
+            "id": grp.id,
+            "name": grp.name,
+            "owner": grp.owner.nickname,
+            "explanation": grp.explanation,
+        })
+
     return render_to_response("user_groups.html", {
         "user": getUserObj(user.id),
         "tar": tar,
-        "usergroups": list(tar.group_member.all()) + list(tar.group_owner.all()),
+        "usergroups": grps,
     })
 
 
@@ -534,7 +553,7 @@ def all_activities(request):
             else:
                 alerts.append("请求已发送")
         if (request.POST['form_type'] == 'search_activity'):
-            all_acts = Activity.objects.all().filter(name__contains = request.POST['search_word']).order_by("-post_time")
+            all_acts = all_acts.filter(name__contains = request.POST['search_word'])
 
     acts = []
     for act in all_acts:
@@ -569,14 +588,17 @@ def my_activities_attend(request):
         return HttpResponseRedirect("/login/")
 
     alerts = []
+    all_acts = user.activity_member.all().order_by("-post_time")
     if (request.method == 'POST'):
         if (request.POST['form_type'] == 'apply_activity'):
             response = applyActivity(user.id, request.POST['activity_id'])
             if (response != 'success'):
                 alerts.append(response)
+        if (request.POST['form_type'] == 'search_activity'):
+            all_acts = all_acts.filter(name__contains = request.POST['search_word'])
 
     acts = []
-    for act in user.activity_member.all().order_by("-post_time"):
+    for act in all_acts:
         if (act in user.activity_member.all())or(act.organizer == user):
             status = "already_in"
         else:
@@ -608,14 +630,17 @@ def my_activities_launch(request):
         return HttpResponseRedirect("/login/")
 
     alerts = []
+    all_acts = user.activity_organizer.all().order_by("-post_time")
     if (request.method == 'POST'):
         if (request.POST['form_type'] == 'apply_activity'):
             response = applyActivity(user.id, request.POST['activity_id'])
             if (response != 'success'):
                 alerts.append(response)
+        if (request.POST['form_type'] == 'search_activity'):
+            all_acts = all_acts.filter(name__contains = request.POST['search_word'])
 
     acts = []
-    for act in user.activity_organizer.all().order_by("-post_time"):
+    for act in all_acts:
         if (act in user.activity_member.all())or(act.organizer == user):
             status = "already_in"
         else:
@@ -672,6 +697,26 @@ def friend_activities_attend(request):
             response = applyActivity(user.id, request.POST['activity_id'])
             if (response != 'success'):
                 alerts.append(response)
+        if (request.POST['form_type'] == 'search_activity'):
+                acts = []
+                for friend in user.friends.all():
+                    for act in friend.activity_member.all().filter(name__contains = request.POST['search_word']):
+                        if (act in user.activity_member.all())or(act.organizer == user):
+                            status = "already_in"
+                        else:
+                            if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                                status = "expired"
+                            else:
+                                status = "available"
+                        acts.append({
+                            "id": act.id,
+                            "name": act.name,
+                            "place": act.place,
+                            "start_time": act.start_time,
+                            "explanation": act.explanation,
+                            "status": status,
+                            "post_time": act.post_time.replace(tzinfo=None),
+                        })
 
 
     return render_to_response("friend_activities_attend.html", {
@@ -714,6 +759,26 @@ def friend_activities_launch(request):
             response = applyActivity(user.id, request.POST['activity_id'])
             if (response != 'success'):
                 alerts.append(response)
+        if (request.POST['form_type'] == 'search_activity'):
+            acts = []
+            for friend in user.friends.all():
+                for act in friend.activity_organizer.all().filter(name__contains = request.POST['search_word']):
+                    if not act in acts:
+                        if (act in user.activity_member.all())or(act.organizer == user):
+                            status = "already_in"
+                        else:
+                            if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                                status = "expired"
+                            else:
+                                status = "available"
+                        acts.append({
+                            "id": act.id,
+                            "name": act.name,
+                            "place": act.place,
+                            "start_time": act.start_time,
+                            "explanation": act.explanation,
+                            "status": status,
+                        })
 
     return render_to_response("friend_activities_launch.html", {
         'user': getUserObj(user.id),
@@ -775,6 +840,46 @@ def my_group_activities(request):
             response = applyActivity(user.id, request.POST['activity_id'])
             if (response != 'success'):
                 alerts.append(response)
+        if (request.POST['form_type'] == 'search_activity'):
+            acts = []
+            for group in user.group_member.all():
+                for act in group.activities.all().filter(name__contains = request.POST['search_word']):
+                    if not act in acts:
+                        if (act in user.activity_member.all())or(act.organizer == user):
+                            status = "already_in"
+                        else:
+                            if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                                status = "expired"
+                            else:
+                                status = "available"
+                        acts.append({
+                            "id": act.id,
+                            "name": act.name,
+                            "place": act.place,
+                            "start_time": act.start_time,
+                            "explanation": act.explanation,
+                            "status": status,
+                            "group": group.name,
+                        })
+            for group in user.group_owner.all():
+                for act in group.activities.all().filter(name__contains = request.POST['search_word']):
+                    if not act in acts:
+                        if (act in user.activity_member.all())or(act.organizer == user):
+                            status = "already_in"
+                        else:
+                            if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                                status = "expired"
+                            else:
+                                status = "available"
+                        acts.append({
+                            "id": act.id,
+                            "name": act.name,
+                            "place": act.place,
+                            "start_time": act.start_time,
+                            "explanation": act.explanation,
+                            "status": status,
+                            "group": group.name,
+                        })
 
     return render_to_response("my_group_activities.html", {
         'user': getUserObj(user.id),
@@ -1007,8 +1112,13 @@ def my_groups_create(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
+    all_grps = user.group_owner.all()
+    if (request.method == "POST"):
+        if (request.POST['form_type'] == 'search_group'):
+            all_grps = all_grps.filter(name__contains = request.POST['search_word'])
+
     grps = []
-    for grp in user.group_owner.all():
+    for grp in all_grps:
         grps.append({
             "id": grp.id,
             "name": grp.name,
@@ -1030,8 +1140,13 @@ def my_groups_attend(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
+    all_grps = user.group_member.all()
+    if (request.method == "POST"):
+        if (request.POST['form_type'] == 'search_group'):
+            all_grps = all_grps.filter(name__contains = request.POST['search_word'])
+
     grps = []
-    for grp in user.group_member.all():
+    for grp in all_grps:
         grps.append({
             "id": grp.id,
             "name": grp.name,
@@ -1054,12 +1169,15 @@ def all_groups(request):
         return HttpResponseRedirect("/login/")
 
     alerts = []
+    all_grps = Group.objects.all()
     if (request.method == 'POST'):
         if (request.POST['form_type'] == 'apply_group'):
             alerts.append(applyGroup(user.id, request.POST['group_id']))
+        if (request.POST['form_type'] == 'search_group'):
+            all_grps = all_grps.filter(name__contains = request.POST['search_word'])
 
     grps = []
-    for grp in Group.objects.all():
+    for grp in all_grps:
         grps.append({
             "id": grp.id,
             "name": grp.name,

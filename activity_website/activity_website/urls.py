@@ -62,7 +62,6 @@ urlpatterns = [
     url(r'^upload_headimg/$', 'activity.views.upload_headimg', name = 'upload_headimg'),
 
 
-
 ]
 
 #urlpatterns = patterns('',

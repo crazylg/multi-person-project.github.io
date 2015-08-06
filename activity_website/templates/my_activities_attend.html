@@ -6,16 +6,7 @@
                     <li><a href="/my_activities/launch/">我发起的活动</a></li>      
                     </ul>
 
-                    <div class="col-lg-10 input-group">
-                        <form method="post" action="">
-                            <div class="col-lg-10" style="top:10px" >
-                            <input type="text" class="form-control" placeholder="搜索" name="search_word">               
-                        </div>                            
-                        <span class="input-group-btn" style="top:10px">
-                            <button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                        </span>
-                        </form>
-                    </div>
+                    {% include "search_activity.html" %}
                 {% for activity in my_attend_activities %}
                     {% include "activity_item.html" %}
                 {% endfor %}
