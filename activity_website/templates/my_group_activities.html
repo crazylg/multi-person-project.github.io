@@ -1,6 +1,6 @@
 {% include "header.html" %}
                 <div class="col-lg-7 col-lg-offset-1 col-sm-8">
-                	<h2>我的群组活动</h2>
+                	<h2>群组活动</h2>
 					<div class="col-lg-10 input-group">
                         <form method="post" action="">
                             <div class="col-lg-10">
@@ -25,6 +25,19 @@
                 <span class="glyphicon glyphicon-map-marker" aria-hidden:true></span>{{activity.place}}</h4>
             <p class="list-group-item-text">{{activity.explanation}}</p>
         </div>
+        {% if activity.status == "already_in" %}
+             <button type="submit" class="btn btn-md pull-right disabled" style="position:relative;top:4px">已参加</button>
+        {% endif %}
+        {% if activity.status == "expired" %}
+             <button type="submit" class="btn btn-md pull-right disabled" style="position:relative;top:4px">已过期</button>
+        {% endif %}
+        {% if activity.status == "available" %}
+        <form role="form" method="post" action="">
+            <input type="hidden" name="activity_id" value={{activity.id}} />
+            <input type="hidden" name="form_type" value="apply_activity" />
+            <button type="submit" class="btn btn-md btn-danger pull-right" style="position:relative;top:4px">申请参加</button>
+        </form>
+        {% endif %}
     </div>
 </div>
                 {% endfor %}
