@@ -642,7 +642,14 @@ def activity_attendance(request, act_id):
                 tar = User.objects.get(id = request.POST['attendance_id'])
             except User.DoesNotExist:
                 alerts.append('该用户不存在')
-            #if (not alerts)
+            if (not alerts):
+                if (not tar in act.members.all()):
+                    alerts.append('该用户未参加此活动')
+                else:
+                    act.members.remove(tar)
+                    act.current_size -= 1
+                    act.save()
+                    alerts.append('用户 ' + tar.nickname + ' 已从活动中移除')
 
     return render_to_response("activity_attendance.html", {
         "user": getUserObj(user.id),
@@ -815,10 +822,29 @@ def group_members(request, group_id):
     except Group.DoesNotExist:
         raise Http404()
 
+    alerts = []
+    if (request.method == 'POST'):
+        if (request.POST["form_type"] == "cancel_member"):
+            try:
+                tar = User.objects.get(id = request.POST['member_id'])
+            except User.DoesNotExist:
+                alerts.append('该用户不存在')
+            if (not alerts):
+                if (not tar in group.members.all()):
+                    alerts.append('该用户未参加此群组')
+                else:
+                    group.members.remove(tar)
+                    group.current_size -= 1
+                    group.save()
+                    alerts.append('用户 ' + tar.nickname + ' 已从群组中移除')
+
+
     return render_to_response('group_members.html',{
         'user': getUserObj(user.id),
         'group': group,
+        'owner': True if (user == group.owner) else False,
         'groupmembers': group.members.all(),
+        'alerts': alerts,
     })
 
 def group_activities(request, group_id):
