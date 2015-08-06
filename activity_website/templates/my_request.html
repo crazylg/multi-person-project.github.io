@@ -38,6 +38,7 @@
 									<a href="/group_info/{{request.goal}}/">{{request.target}}</a>
 									<p>{{request.time}}</p>
 								</div>
+								{% endif %}
 								{% if request.type == 'activity_invitation' %}
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
@@ -45,6 +46,7 @@
 									<a href="/activity_detail/{{request.goal}}/">{{request.target}}</a>
 									<p>{{request.time}}</p>
 								</div>
+								{% endif %}
 								{% if request.type == 'group_application' %}
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
@@ -52,12 +54,14 @@
 									<a href="/group_info/{{request.goal}}/">{{request.target}}</a>
 									<p>{{request.time}}</p>
 								</div>
+								{% endif %}
 								{% if request.type == 'friend_application' %}
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
 									申请添加您为好友
 									<p>{{request.time}}</p>
 								</div>
+								{% endif %}
 								{% if request.type == 'activity_application' %}
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
