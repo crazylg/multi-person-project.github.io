@@ -525,6 +525,7 @@ def all_activities(request):
         return HttpResponseRedirect("/login/")
 
     alerts = []
+    all_acts = Activity.objects.all().order_by("-post_time")
     if (request.method == 'POST'):
         if (request.POST['form_type'] == 'apply_activity'):
             response = applyActivity(user.id, request.POST['activity_id'])
@@ -532,10 +533,11 @@ def all_activities(request):
                 alerts.append(response)
             else:
                 alerts.append("请求已发送")
-        #if (request.POST)
+        if (request.POST['form_type'] == 'search_activity'):
+            all_acts = Activity.objects.all().filter(name__contains = request.POST['search_word']).order_by("-post_time")
 
     acts = []
-    for act in Activity.objects.all().order_by("-post_time"):
+    for act in all_acts:
         if (act in user.activity_member.all())or(act.organizer == user):
             status = "already_in"
         else:

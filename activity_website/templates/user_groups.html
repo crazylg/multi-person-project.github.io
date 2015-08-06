@@ -7,6 +7,7 @@
                     <li><a href="/user_friends/{{ tar.id }}/">好友</a></li>
                     <li class="active"><a href="#">群组</a></li>
                     </ul>
+<<<<<<< HEAD
                     <div class="col-lg-12">
                         <table class="table table-hover" style="font-family:'Microsoft YaHei';font-size:1.3em">
                         <thead>
@@ -26,5 +27,10 @@
                         </tbody>
                     </table>
                     </div>
+=======
+                            {% for group in usergroups %}
+                                {% include "group_item.html" %}   
+                            {% endfor %}         
+>>>>>>> a5b1207b702e66c1eaa0c4f237940501dcad705e
             </div>
 {% include "footer.html" %}

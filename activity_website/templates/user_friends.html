@@ -24,7 +24,7 @@
                             </tr>
                             {% for userfriend in userfriends %}
                                 <tr>
-                                <td><a href="/user_page/{{ userfriend.id }}/">{{userfriend.account}}</a></td>
+                                <td><a href="/user_info/{{ userfriend.id }}/">{{userfriend.account}}</a></td>
                                 <td>{{userfriend.nickname}}</td>
                                 <td>{% if userfriend.sex == "male" %}男{% endif %}
                                     {% if userfriend.sex == "female" %}女{% endif %}

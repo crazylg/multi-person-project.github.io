@@ -35,7 +35,12 @@
                             </tr>
                             <tr>
                                 <td>活动分类</td>
-                                <td>{{activity.type}}</td>
+                                <td>{% if activity.type =="1"} 朋友聚会 {% endif %}
+                                    {% if activity.type =="2"} 运动活动 {% endif %}
+                                    {% if activity.type =="3"} 联谊活动 {% endif %}
+                                    {% if activity.type =="4"} 社会活动 {% endif %}
+                                    {% if activity.type =="5"} 学术活动 {% endif %}
+                                </td>
                             </tr>
                             <tr>
                                 <td>详细描述</td>
