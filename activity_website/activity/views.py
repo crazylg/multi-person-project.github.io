@@ -560,25 +560,39 @@ def add_activity(request):
             errors['max_size'] = '请输入最大参与人数'
         elif (not isSize(request.POST['max_size'], 1000)):
             errors['max_size'] = '最大参与人数应为不大于1000的正整数'
-        if (not 'applyend_date' in request.POST) or (not request.POST['applyend_date']):
-            errors['applyend_date'] = '请输入报名截止日期'
-        if (not 'applyend_time' in request.POST) or (not request.POST['applyend_date']):
+        if (not 'applyend_date' in request.POST) or (not request.POST['applyend_date']) or (not 'applyend_time' in request.POST) or (not request.POST['applyend_time']):
             errors['applyend_time'] = '请输入报名截止时间'
+        if (not 'start_date' in request.POST) or (not request.POST['start_date']) or (not 'start_time' in request.POST) or (not request.POST['start_time']):
+            errors['start_time'] = '请输入活动开始时间'
+        if (not 'end_date' in request.POST) or (not request.POST['end_date']) or (not 'end_time' in request.POST) or (not request.POST['end_time']):
+            errors['end_time'] = '请输入活动结束时间'
 
-
-        applyend_time = datetime.datetime.strptime(request.POST['applyend_date'] + ' ' + request.POST['applyend_time'], '%Y/%m/%d %H:%M')
-        start_time = datetime.datetime.strptime(request.POST['start_date'] + ' ' + request.POST['start_time'], '%Y/%m/%d %H:%M')
-        end_time = datetime.datetime.strptime(request.POST['end_date'] + ' ' + request.POST['end_time'], '%Y/%m/%d %H:%M')
-
-        if (applyend_time > start_time):
-            errors['applyend_time'] = '报名结束时间应早于活动开始时间'
-        if (start_time > end_time):
-            errors['start_time'] = '活动开始时间应早于结束时间'
+        if (not 'applyend_time' in errors) and (not 'start_time' in errors) and (not 'end_time' in errors):
+            applyend_time = datetime.datetime.strptime(request.POST['applyend_date'] + ' ' + request.POST['applyend_time'], '%Y/%m/%d %H:%M')
+            start_time = datetime.datetime.strptime(request.POST['start_date'] + ' ' + request.POST['start_time'], '%Y/%m/%d %H:%M')
+            end_time = datetime.datetime.strptime(request.POST['end_date'] + ' ' + request.POST['end_time'], '%Y/%m/%d %H:%M')
+            if (applyend_time > start_time):
+                errors['applyend_time'] = '报名结束时间应早于活动开始时间'
+            if (start_time > end_time):
+                errors['start_time'] = '活动开始时间应早于结束时间'
 
         if (errors):
             return render_to_response("add_activity.html", {
                 'user': getUserObj(user.id),
-                'errors': errors
+                'errors': errors,
+                'friends': user.friends.all(),
+                'name': request.POST.get('name'),
+                'start_date': request.POST.get('start_date'),
+                'start_time': request.POST.get('start_time'),
+                'end_date': request.POST.get('end_date'),
+                'end_time': request.POST.get('end_time'),
+                'applyend_date': request.POST.get('applyend_date'),
+                'applyend_time': request.POST.get('applyend_time'),
+                'place': request.POST.get('place'),
+                'explanation': request.POST.get('explanation'),
+                'min_age': request.POST.get('min_age'),
+                'max_age': request.POST.get('max_age'),
+                'max_size': request.POST.get('max_size'),
             }, context_instance = RequestContext(request))
         else:
             act = Activity(
@@ -1180,15 +1194,21 @@ def add_group_activity(request):
             errors['max_size'] = '请输入最大参与人数'
         elif (not isSize(request.POST['max_size'], 1000)):
             errors['max_size'] = '最大参与人数应为不大于1000的正整数'
+        if (not 'applyend_date' in request.POST) or (not request.POST['applyend_date']) or (not 'applyend_time' in request.POST) or (not request.POST['applyend_time']):
+            errors['applyend_time'] = '请输入报名截止时间'
+        if (not 'start_date' in request.POST) or (not request.POST['start_date']) or (not 'start_time' in request.POST) or (not request.POST['start_time']):
+            errors['start_time'] = '请输入活动开始时间'
+        if (not 'end_date' in request.POST) or (not request.POST['end_date']) or (not 'end_time' in request.POST) or (not request.POST['end_time']):
+            errors['end_time'] = '请输入活动结束时间'
 
-        applyend_time = datetime.datetime.strptime(request.POST['applyend_date'] + ' ' + request.POST['applyend_time'], '%Y/%m/%d %H:%M')
-        start_time = datetime.datetime.strptime(request.POST['start_date'] + ' ' + request.POST['start_time'], '%Y/%m/%d %H:%M')
-        end_time = datetime.datetime.strptime(request.POST['end_date'] + ' ' + request.POST['end_time'], '%Y/%m/%d %H:%M')
-
-        if (applyend_time > start_time):
-            errors['applyend_date'] = '报名结束时间应早于活动开始时间'
-        if (start_time > end_time):
-            errors['start_date'] = '活动开始时间应早于结束时间'
+        if (not 'applyend_time' in errors) and (not 'start_time' in errors) and (not 'end_time' in errors):
+            applyend_time = datetime.datetime.strptime(request.POST['applyend_date'] + ' ' + request.POST['applyend_time'], '%Y/%m/%d %H:%M')
+            start_time = datetime.datetime.strptime(request.POST['start_date'] + ' ' + request.POST['start_time'], '%Y/%m/%d %H:%M')
+            end_time = datetime.datetime.strptime(request.POST['end_date'] + ' ' + request.POST['end_time'], '%Y/%m/%d %H:%M')
+            if (applyend_time > start_time):
+                errors['applyend_time'] = '报名结束时间应早于活动开始时间'
+            if (start_time > end_time):
+                errors['start_time'] = '活动开始时间应早于结束时间'
 
         if (not errors):
             act = Activity(
