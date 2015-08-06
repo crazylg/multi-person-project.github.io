@@ -20,7 +20,7 @@
                                 {% if request.status == 'unread' %}
                                 <button type="submit" class="btn btn-primary btn-md pull-right">我知道了<span class="glyphicon glyphicon-ok"></span></button>
                                 {% else %}
-                                <a href="#" class="list-group-item">
+                                <a href="#" class="list-group-item disabled">
                                     <h5 class="list-group-item-text">已读</h5>
                                 </a>
                                 {% endif %}
@@ -80,11 +80,11 @@
                                 <button onclick="accept('#'+{{request.id}})" type="submit" class="btn btn-danger btn-md pull-right">接受<span class="glyphicon glyphicon-ok"></span></button>
                                 {% else %}
                                     {% if request.status == 'accept' %}
-                                        <a href="#" class="list-group-item">
+                                        <a href="#" class="list-group-item disabled">
                                             <h5 class="list-group-item-text">已接受</h5>
                                         </a>
                                     {% else %}
-                                        <a href="#" class="list-group-item">
+                                        <a href="#" class="list-group-item disabled">
                                             <h5 class="list-group-item-text">已拒绝</h5>
                                         </a>
                                     {% endif %}
