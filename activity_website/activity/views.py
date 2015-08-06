@@ -1574,8 +1574,8 @@ def group_activities(request, group_id):
 
 
 class UserForm(forms.Form):
-    username = forms.CharField()
-    headimg = forms.FileField()
+    #username = forms.CharField()
+    headimg = forms.ImageField()
 
 def upload_headimg(request):
     if request.method == "POST":
@@ -1587,9 +1587,9 @@ def upload_headimg(request):
             return HttpResponse('upload ok!')
     else:
         uf = UserForm()
-    return render_to_response('upload_headimg.html',{
-        'uf': uf,
-    })
+        return render_to_response('upload_headimg.html',{
+            'uf': uf,
+        })
 
 
 

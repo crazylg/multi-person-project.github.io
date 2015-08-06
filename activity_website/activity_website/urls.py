@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^staticfiles/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATICFILES_DIRS, 'show_indexes': True}),
     #url(r'^$', 'activity.views.home', name = 'home'),
     #url(r'^test/$', 'activity.views.test', name = 'test'),
+    url(r'^upload_headimg/$', 'activity.views.upload_headimg', name = 'upload_headimg'),
     url(r'^welcome/$', 'activity.views.welcome', name = 'welcome'),
     url(r'^register/$', 'activity.views.register', name = 'register'),
     url(r'^register_success/$', 'activity.views.register_success', name = 'register_success'),
