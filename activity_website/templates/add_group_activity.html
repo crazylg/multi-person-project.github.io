@@ -168,7 +168,9 @@
                                 {{errors.min_age}}
                                 {% endif %}
                             </div>
-                            <b>  ~  </b>
+                            <div class="col-sm-1">
+                                ~
+                            </div>
                             <div class="col-sm-3">
                                 <input type="text" class="form-control" name="max_age" placeholder="最高年龄" {% if max_age %} value="{{max_age}}" {% endif %}
                                 />
