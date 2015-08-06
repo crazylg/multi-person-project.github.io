@@ -10,8 +10,9 @@
         {% if group.attend %}
              <button type="" class="btn btn-md pull-right disabled" style="position:relative;top:4px">已加入</button>
         {% else %}
-        <form role="form" method="post" action="/apply_group/">
-            <input type="hidden" name="id" value={{group.id}} />
+        <form role="form" method="post" action="">
+            <input type="hidden" name="form_type" value="apply_group" />
+            <input type="hidden" name="group_id" value={{group.id}} />
             <button type="submit" class="btn btn-md btn-danger pull-right" style="position:relative;top:4px">申请加入</button>
         </form>
         {% endif %}
