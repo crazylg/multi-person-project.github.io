@@ -33,7 +33,8 @@ urlpatterns = [
 
     url(r'^all_activities/$', 'activity.views.all_activities', name = 'all_activities'),
     url(r'^add_activity/$', 'activity.views.add_activity', name = 'add_activity'),
-    url(r'^apply_activity/$', 'activity.views.apply_activity', name = 'apply_activity'),
+    url(r'^activity_detail/(\d+)/$', 'activity.views.activity_detail', name = 'activity_detail'),
+    url(r'^activity_attendance/(\d+)/$', 'activity.views.activity_attendance', name = 'activity_attendance'),
 
     url(r'^my_friends/$', 'activity.views.my_friends', name = 'my_friends'),
     url(r'^my_groups/attend/$', 'activity.views.my_groups_attend', name = 'my_groups_attend'),
@@ -41,9 +42,9 @@ urlpatterns = [
 
     url(r'^add_group/$', 'activity.views.add_group', name = 'add_group'),
     url(r'^all_groups/$', 'activity.views.all_groups', name = 'all_groups'),
-    url(r'^group/(\d+)/info$', 'activity.views.group_info', name = 'group_info'),
-    url(r'^group/(\d+)/members$', 'activity.views.group_members', name = 'group_members'),
-    url(r'^group/(\d+)/activities$', 'activity.views.group_activities', name = 'group_activities'),
+    url(r'^group_info/(\d+)/$', 'activity.views.group_info', name = 'group_info'),
+    url(r'^group_members/(\d+)/$', 'activity.views.group_members', name = 'group_members'),
+    url(r'^group_activities/(\d+)/$', 'activity.views.group_activities', name = 'group_activities'),
 
     url(r'^change_userinfo/$', 'activity.views.change_userinfo', name = 'change_userinfo'),
     url(r'^change_userpwd/$', 'activity.views.change_userpwd', name = 'change_userpwd'),

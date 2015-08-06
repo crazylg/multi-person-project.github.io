@@ -2,14 +2,14 @@
             <div class="col-lg-7 col-sm-8">
                 <ul class="nav nav-pills">
                     <li class="active"><a href="#">活动介绍</a></li>
-                    <li><a href="/activity/attendence/">参加人员</a></li>        
+                    <li><a href="/activity_attendance/{{ activity.id }}/">参加人员</a></li>
                 </ul>
                 <div style="top:10px">
                 <blockquote>
                     <p></p>
                     <h2>{{activity.name}}</h2>
                     <p><h3>{{activity.status}}</h3></p>
-                    <h4>目前报名人数： {{activity.current_size}}   /  {{activity.maxsize}}</h4>
+                    <h4>目前报名人数： {{activity.current_size}}   /  {{activity.max_size}}</h4>
                     <p></p>
                 </blockquote>
                 </div>
@@ -18,7 +18,7 @@
                         <h4>活动时间：</h4>
                         </div>
                         <div class="col-lg-7 col-lg-offset-1 list-group">
-                            <h4>{{activtiy.start_time}}  ~  {{activity.end_time}}</h4>
+                            <h4>{{activity.start_time}}  ~  {{activity.end_time}}</h4>
                         </div>
                     </div>
                     <div class="col-lg-11">
@@ -26,7 +26,7 @@
                         <h4>活动地点：</h4>
                         </div>
                         <div class="col-lg-7 col-lg-offset-1 list-group">
-                            <p><h4>{{activtiy.place}}</h4></p>
+                            <p><h4>{{activity.place}}</h4></p>
                         </div>
                     </div>
                     <div class="col-lg-11">
@@ -34,7 +34,7 @@
                         <h4>活动发起人：</h4>
                         </div>
                         <div class="col-lg-7 col-lg-offset-1 list-group">
-                            <p><h4>{{activtiy.organizer}}</h4></p>
+                            <p><h4>{{activity.organizer.nickname}}</h4></p>
                         </div>
                     </div>
                     <div class="col-lg-11">
@@ -42,7 +42,7 @@
                         <h4>活动分类：</h4>
                         </div>
                         <div class="col-lg-7 col-lg-offset-1 list-group">
-                            <p><h4>{{activtiy.type}}</h4></p>
+                            <p><h4>{{activity.type}}</h4></p>
                         </div>
                     </div>
                     <div class="col-lg-11">
@@ -50,7 +50,7 @@
                         <h4>活动简介：</h4>
                         </div>
                         <div class="col-lg-7 col-lg-offset-1 list-group">
-                            <p><h4>{{activtiy.explanation}}</h4></p>
+                            <p><h4>{{activity.explanation}}</h4></p>
                         </div>
                     </div>
                     <div class="col-lg-11">
@@ -58,7 +58,7 @@
                         <h4>参与年龄限制：</h4>
                         </div>
                         <div class="col-lg-7 col-lg-offset-1 list-group">
-                            <p><h4>{{activtiy.min_age}}  ~  {{acitvity.max_age}} 岁</h4></p>
+                            <p><h4>{{activity.min_age}}  ~  {{activity.max_age}} 岁</h4></p>
                         </div>
                     </div>
                     <div class="col-lg-11">
@@ -66,7 +66,7 @@
                         <h4>参与性别限制：</h4>
                         </div>
                         <div class="col-lg-7 col-lg-offset-1 list-group">
-                            <p><h4>{{activtiy.sex_requirement}}</h4></p>
+                            <p><h4>{{activity.sex_requirement}}</h4></p>
                         </div>
                     </div>
                     <div class="col-lg-11">
@@ -74,7 +74,7 @@
                         <p><h4>报名截止时间：</h4></p>
                         </div>
                         <div class="col-lg-7 col-lg-offset-1 list-group">
-                            <h4><p>{{activtiy.applyend_time}}</p></h4>
+                            <h4><p>{{activity.applyend_time}}</p></h4>
                         </div>
                     </div>
             </div>
