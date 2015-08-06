@@ -1,4 +1,5 @@
-﻿{% include "header.html" %}
+﻿<!DOCTYPE html>
+{% include "header.html" %}
 
 		<div class="col-lg-6 col-lg-offset-1 col-sm-7" style="">
 			<div class="row" style="height:20px">
@@ -15,14 +16,22 @@
                     <ul class="nav nav-pills" style="width:100%">
                         {% for friend in friend_list %}
 						{% if friend.current_talker %}
-                        <li class="active" style="width:100%"><button  class="btn btn-block btn-primary" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</button></li>
+						<li class="active" style="width:100%">
+							<form role="form" id={{friend.id}} method="post" action="">
+							<input type="hidden" name="form_type" value="change_talker"/>
+							<input type="hidden" name="click_friend_id" value={{friend.id}}/>
+							<button  class="btn btn-block btn-primary" type="submit">{{ friend.nickname }}</button>
+							</form>
+						</li>
 						{% else %}
-                        <li style="width:100%"><button class="btn btn-block btn-default" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</button></li>
+                        <li style="width:100%">
+							<form role="form" id={{friend.id}} method="post" action="">
+							<input type="hidden" name="form_type" value="change_talker"/>
+							<input type="hidden" name="click_friend_id" value={{friend.id}}/>
+							<button  class="btn btn-block btn-default" type="submit">{{ friend.nickname }}</button>
+							</form>
+						</li>
 						{% endif %}
-                        <form role="form" id={{friend.id}} method="post" action="">
-						<input type="hidden" name="form_type" value="change_talker"/>
-						<input type="hidden" name="click_friend_id" value={{friend.id}}/>
-                        </form>
                         {% endfor %}
                     </ul>
                 </div>
@@ -73,9 +82,6 @@
 		</div>
 		
 <script type="text/javascript">
-    function showmessage(id_input) {
-		$('#' + id_input).submit();
-	};
     $(function () {
         $('#input_search').bind('keypress', function (event) {
             if (event.keyCode == "13") {
