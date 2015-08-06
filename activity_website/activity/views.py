@@ -635,12 +635,22 @@ def activity_attendance(request, act_id):
     except Activity.DoesNotExist:
         raise Http404()
 
+    alerts = []
+    if (request.method == 'POST'):
+        if (request.POST["form_type"] == "cancel_attendance"):
+            try:
+                tar = User.objects.get(id = request.POST['attendance_id'])
+            except User.DoesNotExist:
+                alerts.append('该用户不存在')
+            #if (not alerts)
+
     return render_to_response("activity_attendance.html", {
         "user": getUserObj(user.id),
         "organizer": True if (act.organizer == user) else False,
         "activity": act,
         "attendances": act.members.all(),
         "friends": user.friends.all(),
+        "alerts": alerts,
     })
 
 

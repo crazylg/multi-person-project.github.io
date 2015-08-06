@@ -25,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/activity/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="259" column="34" selection-start-line="259" selection-start-column="34" selection-end-line="259" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.65803814">
+              <caret line="644" column="13" selection-start-line="644" selection-start-column="13" selection-end-line="644" selection-end-column="13" />
               <folding>
                 <element signature="e#0#100#0" expanded="true" />
                 <element signature="e#265#317#0" expanded="false" />
@@ -44,6 +44,7 @@
                 <element signature="e#5369#5800#0" expanded="false" />
                 <element signature="e#5836#6931#0" expanded="false" />
                 <element signature="e#6966#8549#0" expanded="false" />
+                <element signature="e#8582#11692#0" expanded="false" />
                 <element signature="e#11740#12609#0" expanded="false" />
                 <element signature="e#12642#16106#0" expanded="false" />
                 <element signature="e#16141#17508#0" expanded="false" />
@@ -52,38 +53,17 @@
                 <element signature="e#20210#21651#0" expanded="false" />
                 <element signature="e#21696#23166#0" expanded="false" />
                 <element signature="e#23210#23877#0" expanded="false" />
-                <element signature="e#23925#24638#0" expanded="false" />
-                <element signature="e#24671#26732#0" expanded="false" />
-                <element signature="e#26769#27460#0" expanded="false" />
-                <element signature="e#27497#28189#0" expanded="false" />
-                <element signature="e#28220#28893#0" expanded="false" />
-                <element signature="e#28934#29492#0" expanded="false" />
-                <element signature="e#29536#30142#0" expanded="false" />
-                <element signature="e#30189#30804#0" expanded="false" />
-                <element signature="e#30840#30900#0" expanded="false" />
-                <element signature="e#30935#31323#0" expanded="false" />
-                <element signature="e#31356#32828#0" expanded="false" />
+                <element signature="e#25011#27072#0" expanded="false" />
+                <element signature="e#27109#27800#0" expanded="false" />
+                <element signature="e#27837#28529#0" expanded="false" />
+                <element signature="e#28560#29233#0" expanded="false" />
+                <element signature="e#29274#29832#0" expanded="false" />
+                <element signature="e#29876#30482#0" expanded="false" />
+                <element signature="e#30529#31144#0" expanded="false" />
+                <element signature="e#31180#31240#0" expanded="false" />
+                <element signature="e#31275#31663#0" expanded="false" />
+                <element signature="e#31696#33168#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="my_groups_attend.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/my_groups_attend.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.064516">
-              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_detail.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/activity_detail.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.8387096">
-              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -91,25 +71,9 @@
       <file leaf-file-name="activity_attendance.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/activity_attendance.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.0">
-              <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-              <folding>
-                <element signature="e#783#799#0#HTML" expanded="true" />
-                <element signature="e#1155#1188#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add_group.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/add_group.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0327169">
-              <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
-              <folding>
-                <element signature="n#style#0;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#1;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-12.064516">
+              <caret line="17" column="68" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="68" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -118,7 +82,7 @@
         <entry file="file://$PROJECT_DIR$/activity_website/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="57" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="57" />
+              <caret line="44" column="31" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -172,17 +136,17 @@
         <option value="$PROJECT_DIR$/templates/all_groups.html" />
         <option value="$PROJECT_DIR$/templates/activity_item.html" />
         <option value="$PROJECT_DIR$/templates/activity_attendence.html" />
-        <option value="$PROJECT_DIR$/templates/activity_detail.html" />
         <option value="$PROJECT_DIR$/templates/my_groups_create.html" />
         <option value="$PROJECT_DIR$/activity_website/urls.py" />
         <option value="$PROJECT_DIR$/templates/group_members.html" />
         <option value="$PROJECT_DIR$/templates/group_activities.html" />
         <option value="$PROJECT_DIR$/templates/group_item.html" />
         <option value="$PROJECT_DIR$/templates/group_info.html" />
-        <option value="$PROJECT_DIR$/templates/add_group.html" />
-        <option value="$PROJECT_DIR$/activity/views.py" />
         <option value="$PROJECT_DIR$/templates/my_groups_attend.html" />
+        <option value="$PROJECT_DIR$/templates/add_group.html" />
         <option value="$PROJECT_DIR$/templates/activity_attendance.html" />
+        <option value="$PROJECT_DIR$/templates/activity_detail.html" />
+        <option value="$PROJECT_DIR$/activity/views.py" />
       </list>
     </option>
   </component>
@@ -644,6 +608,7 @@
             <element signature="e#5369#5800#0" expanded="false" />
             <element signature="e#5836#6931#0" expanded="false" />
             <element signature="e#6966#8549#0" expanded="false" />
+            <element signature="e#8582#11692#0" expanded="false" />
             <element signature="e#11740#12609#0" expanded="false" />
             <element signature="e#12642#16106#0" expanded="false" />
             <element signature="e#16141#17508#0" expanded="false" />
@@ -652,17 +617,16 @@
             <element signature="e#20210#21651#0" expanded="false" />
             <element signature="e#21696#23166#0" expanded="false" />
             <element signature="e#23210#23877#0" expanded="false" />
-            <element signature="e#23925#24638#0" expanded="false" />
-            <element signature="e#24671#26732#0" expanded="false" />
-            <element signature="e#26769#27460#0" expanded="false" />
-            <element signature="e#27497#28189#0" expanded="false" />
-            <element signature="e#28220#28893#0" expanded="false" />
-            <element signature="e#28934#29492#0" expanded="false" />
-            <element signature="e#29536#30142#0" expanded="false" />
-            <element signature="e#30189#30804#0" expanded="false" />
-            <element signature="e#30840#30900#0" expanded="false" />
-            <element signature="e#30935#31323#0" expanded="false" />
-            <element signature="e#31356#32828#0" expanded="false" />
+            <element signature="e#25011#27072#0" expanded="false" />
+            <element signature="e#27109#27800#0" expanded="false" />
+            <element signature="e#27837#28529#0" expanded="false" />
+            <element signature="e#28560#29233#0" expanded="false" />
+            <element signature="e#29274#29832#0" expanded="false" />
+            <element signature="e#29876#30482#0" expanded="false" />
+            <element signature="e#30529#31144#0" expanded="false" />
+            <element signature="e#31180#31240#0" expanded="false" />
+            <element signature="e#31275#31663#0" expanded="false" />
+            <element signature="e#31696#33168#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -707,6 +671,7 @@
             <element signature="e#5369#5800#0" expanded="false" />
             <element signature="e#5836#6931#0" expanded="false" />
             <element signature="e#6966#8549#0" expanded="false" />
+            <element signature="e#8582#11692#0" expanded="false" />
             <element signature="e#11740#12609#0" expanded="false" />
             <element signature="e#12642#16106#0" expanded="false" />
             <element signature="e#16141#17508#0" expanded="false" />
@@ -715,17 +680,16 @@
             <element signature="e#20210#21651#0" expanded="false" />
             <element signature="e#21696#23166#0" expanded="false" />
             <element signature="e#23210#23877#0" expanded="false" />
-            <element signature="e#23925#24638#0" expanded="false" />
-            <element signature="e#24671#26732#0" expanded="false" />
-            <element signature="e#26769#27460#0" expanded="false" />
-            <element signature="e#27497#28189#0" expanded="false" />
-            <element signature="e#28220#28893#0" expanded="false" />
-            <element signature="e#28934#29492#0" expanded="false" />
-            <element signature="e#29536#30142#0" expanded="false" />
-            <element signature="e#30189#30804#0" expanded="false" />
-            <element signature="e#30840#30900#0" expanded="false" />
-            <element signature="e#30935#31323#0" expanded="false" />
-            <element signature="e#31356#32828#0" expanded="false" />
+            <element signature="e#25011#27072#0" expanded="false" />
+            <element signature="e#27109#27800#0" expanded="false" />
+            <element signature="e#27837#28529#0" expanded="false" />
+            <element signature="e#28560#29233#0" expanded="false" />
+            <element signature="e#29274#29832#0" expanded="false" />
+            <element signature="e#29876#30482#0" expanded="false" />
+            <element signature="e#30529#31144#0" expanded="false" />
+            <element signature="e#31180#31240#0" expanded="false" />
+            <element signature="e#31275#31663#0" expanded="false" />
+            <element signature="e#31696#33168#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -778,6 +742,7 @@
             <element signature="e#5369#5800#0" expanded="false" />
             <element signature="e#5836#6931#0" expanded="false" />
             <element signature="e#6966#8549#0" expanded="false" />
+            <element signature="e#8582#11692#0" expanded="false" />
             <element signature="e#11740#12609#0" expanded="false" />
             <element signature="e#12642#16106#0" expanded="false" />
             <element signature="e#16141#17508#0" expanded="false" />
@@ -786,17 +751,16 @@
             <element signature="e#20210#21651#0" expanded="false" />
             <element signature="e#21696#23166#0" expanded="false" />
             <element signature="e#23210#23877#0" expanded="false" />
-            <element signature="e#23925#24638#0" expanded="false" />
-            <element signature="e#24671#26732#0" expanded="false" />
-            <element signature="e#26769#27460#0" expanded="false" />
-            <element signature="e#27497#28189#0" expanded="false" />
-            <element signature="e#28220#28893#0" expanded="false" />
-            <element signature="e#28934#29492#0" expanded="false" />
-            <element signature="e#29536#30142#0" expanded="false" />
-            <element signature="e#30189#30804#0" expanded="false" />
-            <element signature="e#30840#30900#0" expanded="false" />
-            <element signature="e#30935#31323#0" expanded="false" />
-            <element signature="e#31356#32828#0" expanded="false" />
+            <element signature="e#25011#27072#0" expanded="false" />
+            <element signature="e#27109#27800#0" expanded="false" />
+            <element signature="e#27837#28529#0" expanded="false" />
+            <element signature="e#28560#29233#0" expanded="false" />
+            <element signature="e#29274#29832#0" expanded="false" />
+            <element signature="e#29876#30482#0" expanded="false" />
+            <element signature="e#30529#31144#0" expanded="false" />
+            <element signature="e#31180#31240#0" expanded="false" />
+            <element signature="e#31275#31663#0" expanded="false" />
+            <element signature="e#31696#33168#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -975,6 +939,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28125">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1006,14 +971,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5625">
           <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/activity_website/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="57" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="57" />
           <folding />
         </state>
       </provider>
@@ -1066,10 +1023,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/activity/views.py">
+    <entry file="file://$PROJECT_DIR$/templates/my_groups_attend.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53200567">
+          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/add_group.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0327169">
+          <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/activity_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40682787">
+          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding>
+            <element signature="e#729#782#0#HTML" expanded="true" />
+            <element signature="e#2694#2734#0#HTML" expanded="true" />
+            <element signature="e#2871#2974#0#HTML" expanded="true" />
+            <element signature="e#3078#3107#0#HTML" expanded="true" />
+            <element signature="e#3729#3781#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/activity_website/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="259" column="34" selection-start-line="259" selection-start-column="34" selection-end-line="259" selection-end-column="34" />
+          <caret line="44" column="31" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/activity_attendance.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.064516">
+          <caret line="17" column="68" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/activity/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65803814">
+          <caret line="644" column="13" selection-start-line="644" selection-start-column="13" selection-end-line="644" selection-end-column="13" />
           <folding>
             <element signature="e#0#100#0" expanded="true" />
             <element signature="e#265#317#0" expanded="false" />
@@ -1084,6 +1090,7 @@
             <element signature="e#5369#5800#0" expanded="false" />
             <element signature="e#5836#6931#0" expanded="false" />
             <element signature="e#6966#8549#0" expanded="false" />
+            <element signature="e#8582#11692#0" expanded="false" />
             <element signature="e#11740#12609#0" expanded="false" />
             <element signature="e#12642#16106#0" expanded="false" />
             <element signature="e#16141#17508#0" expanded="false" />
@@ -1092,55 +1099,16 @@
             <element signature="e#20210#21651#0" expanded="false" />
             <element signature="e#21696#23166#0" expanded="false" />
             <element signature="e#23210#23877#0" expanded="false" />
-            <element signature="e#23925#24638#0" expanded="false" />
-            <element signature="e#24671#26732#0" expanded="false" />
-            <element signature="e#26769#27460#0" expanded="false" />
-            <element signature="e#27497#28189#0" expanded="false" />
-            <element signature="e#28220#28893#0" expanded="false" />
-            <element signature="e#28934#29492#0" expanded="false" />
-            <element signature="e#29536#30142#0" expanded="false" />
-            <element signature="e#30189#30804#0" expanded="false" />
-            <element signature="e#30840#30900#0" expanded="false" />
-            <element signature="e#30935#31323#0" expanded="false" />
-            <element signature="e#31356#32828#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/my_groups_attend.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.064516">
-          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/activity_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.8387096">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/activity_attendance.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.0">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-          <folding>
-            <element signature="e#783#799#0#HTML" expanded="true" />
-            <element signature="e#1155#1188#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/add_group.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0327169">
-          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
-          <folding>
-            <element signature="n#style#0;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#1;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#25011#27072#0" expanded="false" />
+            <element signature="e#27109#27800#0" expanded="false" />
+            <element signature="e#27837#28529#0" expanded="false" />
+            <element signature="e#28560#29233#0" expanded="false" />
+            <element signature="e#29274#29832#0" expanded="false" />
+            <element signature="e#29876#30482#0" expanded="false" />
+            <element signature="e#30529#31144#0" expanded="false" />
+            <element signature="e#31180#31240#0" expanded="false" />
+            <element signature="e#31275#31663#0" expanded="false" />
+            <element signature="e#31696#33168#0" expanded="false" />
           </folding>
         </state>
       </provider>
