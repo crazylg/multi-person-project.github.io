@@ -28,8 +28,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/activity/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7002725">
-              <caret line="638" column="40" selection-start-line="638" selection-start-column="40" selection-end-line="638" selection-end-column="40" />
+            <state vertical-scroll-proportion="2.404632">
+              <caret line="639" column="18" selection-start-line="639" selection-start-column="18" selection-end-line="639" selection-end-column="18" />
               <folding>
                 <element signature="e#0#100#0" expanded="true" />
                 <element signature="e#265#317#0" expanded="false" />
@@ -44,7 +44,6 @@
                 <element signature="e#5369#5800#0" expanded="false" />
                 <element signature="e#5836#6931#0" expanded="false" />
                 <element signature="e#6966#8549#0" expanded="false" />
-                <element signature="e#8582#12449#0" expanded="false" />
                 <element signature="e#12497#13366#0" expanded="false" />
                 <element signature="e#13399#16891#0" expanded="false" />
                 <element signature="e#16926#18293#0" expanded="false" />
@@ -628,7 +627,6 @@
             <element signature="e#5369#5800#0" expanded="false" />
             <element signature="e#5836#6931#0" expanded="false" />
             <element signature="e#6966#8549#0" expanded="false" />
-            <element signature="e#8582#12449#0" expanded="false" />
             <element signature="e#12497#13366#0" expanded="false" />
             <element signature="e#13399#16891#0" expanded="false" />
             <element signature="e#16926#18293#0" expanded="false" />
@@ -702,7 +700,6 @@
             <element signature="e#5369#5800#0" expanded="false" />
             <element signature="e#5836#6931#0" expanded="false" />
             <element signature="e#6966#8549#0" expanded="false" />
-            <element signature="e#8582#12449#0" expanded="false" />
             <element signature="e#12497#13366#0" expanded="false" />
             <element signature="e#13399#16891#0" expanded="false" />
             <element signature="e#16926#18293#0" expanded="false" />
@@ -1060,8 +1057,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/activity/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7002725">
-          <caret line="638" column="40" selection-start-line="638" selection-start-column="40" selection-end-line="638" selection-end-column="40" />
+        <state vertical-scroll-proportion="2.404632">
+          <caret line="639" column="18" selection-start-line="639" selection-start-column="18" selection-end-line="639" selection-end-column="18" />
           <folding>
             <element signature="e#0#100#0" expanded="true" />
             <element signature="e#265#317#0" expanded="false" />
@@ -1076,7 +1073,6 @@
             <element signature="e#5369#5800#0" expanded="false" />
             <element signature="e#5836#6931#0" expanded="false" />
             <element signature="e#6966#8549#0" expanded="false" />
-            <element signature="e#8582#12449#0" expanded="false" />
             <element signature="e#12497#13366#0" expanded="false" />
             <element signature="e#13399#16891#0" expanded="false" />
             <element signature="e#16926#18293#0" expanded="false" />
