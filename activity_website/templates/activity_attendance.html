@@ -24,8 +24,10 @@
                             {% for attendance in attendances %}
                                 <tr>
                                 <td>{{attendance.account}}</td>
-                                <td>{{attendance.username}}</td>
-                                <td>{{attendance.sex}}</td>
+                                <td>{{attendance.nickname}}</td>
+                                <td>{% if attendance.sex == "male" %}男{% endif %}
+                                    {% if attendance.sex == "female" %}女{% endif %}
+                                </td>
                                 <td>{{attendance.age}}</td>
                                 <td></td>
                                 {% if owner %}

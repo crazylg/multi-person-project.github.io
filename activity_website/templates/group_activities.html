@@ -5,6 +5,11 @@
                     <li class="active"><a href="#">活动</a></li>
                     <li><a href="/group_members/{{ group.id }}/">成员</a></li>
                     <li><a href="/group_info/{{ group.id }}/">介绍</a></li>
+                    <li><form role="form" method="post" action="/add_group_activity/">
+                        <input type="hidden" name="lauch_group_activity" value={{group.id}} />
+                        <input type="hidden" name="form_type" value="launch_group_activity" />
+                        <button type="submit" class="btn btn-md btn-danger pull-right" style="position:relative;top:4px">发起群组活动</button>
+                    </form></li>
                     </ul>
 					<div class="col-lg-10 input-group">
                         <form method="post" action="">
