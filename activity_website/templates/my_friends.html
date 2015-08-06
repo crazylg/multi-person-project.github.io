@@ -6,17 +6,18 @@
             <div class="row" style="box-shadow:0 0 16px skyblue;width:100%;border:2px solid skyblue;padding-left:5px;padding-top:5px;padding-bottom:5px;border-radius:10px;">
                 <div class="col-lg-4 col-sm-3" style="height:750px;border:1px solid skyblue;overflow-y:auto;border-radius:10px;">
                     <div class="form-group has-feedback" style="width:100%;top:2px">
-                        <form method="post" action="">
-                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                            <input type="text" class="form-control search-query" placeholder="搜索" autofocus>
+                        <form id="search_talker" method="post" action="">
+                            <span onclick="search_talker()" class="glyphicon glyphicon-search form-control-feedback"></span>
+                            <input type="text" id="input_search" class="form-control search-query" placeholder="搜索" autofocus>
+							<input type="hidden" name="form_type" value="search_talker"/>
                         </form>
                     </div>
                     <ul class="nav nav-pills" style="width:100%">
                         {% for friend in friend_list %}
 						{% if friend.current_talker %}
-                        <li class="active" style="width:100%"><a href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
+                        <li class="active" style="width:100%"><button  class="btn btn-block btn-primary" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</button></li>
 						{% else %}
-                        <li style="width:100%"><a href="#" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</a></li>
+                        <li style="width:100%"><button class="btn btn-block btn-default" oncilck="showmessage({{friend.id}})">{{ friend.nickname }}</button></li>
 						{% endif %}
                         <form role="form" id={{friend.id}} method="post" action="">
 						<input type="hidden" name="form_type" value="change_talker"/>
@@ -75,6 +76,13 @@
     function showmessage(id_input) {
 		$('#' + id_input).submit();
 	};
+    $(function () {
+        $('#input_search').bind('keypress', function (event) {
+            if (event.keyCode == "13") {
+                $('#search_talker').submit();
+            }
+        });
+    });
 </script>
 		
 	    </div>
