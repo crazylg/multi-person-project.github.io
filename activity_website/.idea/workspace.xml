@@ -28,8 +28,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/activity/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.72475797">
-              <caret line="804" column="31" selection-start-line="804" selection-start-column="31" selection-end-line="804" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.23789765">
+              <caret line="797" column="25" selection-start-line="797" selection-start-column="25" selection-end-line="797" selection-end-column="25" />
               <folding>
                 <element signature="e#0#100#0" expanded="true" />
                 <element signature="e#265#317#0" expanded="false" />
@@ -76,16 +76,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/activity_website/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -99,7 +89,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/500.html" />
         <option value="$PROJECT_DIR$/activity_website/settings_pro.py" />
         <option value="$PROJECT_DIR$/templates/new_activity.html" />
         <option value="$PROJECT_DIR$/templates/user_infochange.html" />
@@ -113,7 +102,6 @@
         <option value="$PROJECT_DIR$/templates/register_detail_form.html" />
         <option value="$PROJECT_DIR$/templates/activities.html" />
         <option value="$PROJECT_DIR$/templates/register.html" />
-        <option value="$PROJECT_DIR$/templates/my_request.html" />
         <option value="$PROJECT_DIR$/templates/my_attend_groups.html" />
         <option value="$PROJECT_DIR$/templates/my_create_groups.html" />
         <option value="$PROJECT_DIR$/templates/footer.html" />
@@ -126,7 +114,6 @@
         <option value="$PROJECT_DIR$/templates/group_item.html" />
         <option value="$PROJECT_DIR$/activity/models.py" />
         <option value="$PROJECT_DIR$/templates/header.html" />
-        <option value="$PROJECT_DIR$/templates/user_activities.html" />
         <option value="$PROJECT_DIR$/templates/all_activities.html" />
         <option value="$PROJECT_DIR$/templates/search_activity.html" />
         <option value="$PROJECT_DIR$/templates/my_group_activities.html" />
@@ -150,6 +137,9 @@
         <option value="$PROJECT_DIR$/templates/add_group_activity.html" />
         <option value="$PROJECT_DIR$/templates/add_activity.html" />
         <option value="$PROJECT_DIR$/activity/views.py" />
+        <option value="$PROJECT_DIR$/templates/my_request.html" />
+        <option value="$PROJECT_DIR$/templates/request_item.html" />
+        <option value="$PROJECT_DIR$/templates/user_activities.html" />
       </list>
     </option>
   </component>
@@ -587,14 +577,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/activity/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/activity/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -786,13 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/my_request.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.064516">
-          <caret line="17" column="61" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/all_activities.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.1290324">
@@ -839,13 +814,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.548387">
           <caret line="5" column="56" selection-start-line="5" selection-start-column="56" selection-end-line="5" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/user_activities.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56330013">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -970,14 +938,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/activity_website/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/add_activity.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.482659">
@@ -986,10 +946,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/request_item.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2647528">
+          <caret line="9" column="54" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/my_request.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.400607">
+          <caret line="12" column="109" selection-start-line="12" selection-start-column="109" selection-end-line="12" selection-end-column="284" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/activity_website/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user_activities.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28612718">
+          <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/activity/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72475797">
-          <caret line="804" column="31" selection-start-line="804" selection-start-column="31" selection-end-line="804" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.23789765">
+          <caret line="797" column="25" selection-start-line="797" selection-start-column="25" selection-end-line="797" selection-end-column="25" />
           <folding>
             <element signature="e#0#100#0" expanded="true" />
             <element signature="e#265#317#0" expanded="false" />

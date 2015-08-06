@@ -1,5 +1,5 @@
 {% if request.type == 'group_invitation' %}
-								<a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.time}}</h5></a>
+								<a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.title}} {{request.time.year}}年{{request.time.month}}月{{request.time.day}}日 {{request.time.hour}}:{% if request.time.minute < 10 %}0{% endif %}{{request.time.minute}}</h5></a>
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
 									邀请你加入群
@@ -7,7 +7,7 @@
 								</div>
 								{% endif %}
 								{% if request.type == 'activity_invitation' %}
-								<a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.time}}</h5></a>
+								<a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.title}} {{request.time.year}}年{{request.time.month}}月{{request.time.day}}日 {{request.time.hour}}:{% if request.time.minute < 10 %}0{% endif %}{{request.time.minute}}</h5></a>
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
 									邀请你加入活动
@@ -15,7 +15,7 @@
 								</div>
 								{% endif %}
 								{% if request.type == 'group_application' %}
-								<a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.time}}</h5></a>
+								<a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.title}} {{request.time.year}}年{{request.time.month}}月{{request.time.day}}日 {{request.time.hour}}:{% if request.time.minute < 10 %}0{% endif %}{{request.time.minute}}</h5></a>
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
 									申请加入群
@@ -23,14 +23,14 @@
 								</div>
 								{% endif %}
 								{% if request.type == 'friend_application' %}
-								<a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.time}}</h5></a>
+								<a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.title}} {{request.time.year}}年{{request.time.month}}月{{request.time.day}}日 {{request.time.hour}}:{% if request.time.minute < 10 %}0{% endif %}{{request.time.minute}}</h5></a>
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
 									申请添加您为好友
 								</div>
 								{% endif %}
 								{% if request.type == 'activity_application' %}
-								<a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.time}}</h5></a>
+								<a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.title}} {{request.time.year}}年{{request.time.month}}月{{request.time.day}}日 {{request.time.hour}}:{% if request.time.minute < 10 %}0{% endif %}{{request.time.minute}}</h5></a>
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
 									申请加入活动

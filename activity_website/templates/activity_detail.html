@@ -23,7 +23,7 @@
                         <tbody>
                             <tr>
                                 <td>活动时间</td>
-                                <td>{{activity.start_time.year}}年{{activity.start_time.month}}月{{activity.start_time.day}}日 {{activity.start_time.hour}}:{{activity.start_time.minute}}  ~  {{activity.end_time.year}}年{{activity.end_time.month}}月{{activity.end_time.day}}日 {{activity.end_time.hour}}:{{activity.end_time.minute}}</td>
+                                <td>{{activity.start_time.year}}年{{activity.start_time.month}}月{{activity.start_time.day}}日 {{activity.start_time.hour}}:{% if activity.start_time.minute < 10 %}0{% endif %}{{activity.start_time.minute}}  ~  {{activity.end_time.year}}年{{activity.end_time.month}}月{{activity.end_time.day}}日 {{activity.end_time.hour}}:{% if activity.end_time.minute < 10 %}0{% endif %}{{activity.end_time.minute}}</td>
                             </tr>
                             <tr>
                                 <td>活动地点</td>
@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td>报名结束时间</td>
-                                <td>{{activity.applyend_time.year}}年{{activity.applyend_time.month}}月{{activity.applyend_time.day}}日 {{activity.applyend_time.hour}}:{{activity.applyend_time.minute}}</td>
+                                <td>{{activity.applyend_time.year}}年{{activity.applyend_time.month}}月{{activity.applyend_time.day}}日 {{activity.applyend_time.hour}}:{% if activity.applyend_time.minute < 10 %}0{% endif %}{{activity.applyend_time.minute}}</td>
                             </tr>
                         </tbody>
                     </table>
