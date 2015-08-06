@@ -1,11 +1,14 @@
 ﻿{% include "header.html" %}
+
 	    	<div class="col-lg-6 col-lg-offset-1 col-sm-7" style="padding:1% 25px 1% 5%;">
                 {% for request in requests %}
                     {% if request.type == 'notice' %}
                     <div class="col-lg-10">
                         <div class="col-lg-10 list-group">
                             {% if request.status == 'unread' %}
-                            <a href="#" class="list-group-item active"><h5 class="list-group-item-heading">{{request.title}} {{request.time}}</h5></a>
+                            <div class="list-group-item">
+								{{request.title}}</br>{{request.time}}
+							</div>
                             {% else %}
                             <a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.title}} {{request.time}}</h5></a>
                             {% endif %}
@@ -28,7 +31,41 @@
                     <div class="col-lg-10">
                         <div class="col-lg-10 list-group">
                             {% if request.status == 'unread' %}
-                            <a href="#" class="list-group-item active"><h5 class="list-group-item-heading">{{request.title}} {{request.time}}</h5></a>
+								{% if request.type == 'group_invitation' %}
+								<div class="list-group-item">
+									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
+									邀请你加入群
+									<a href="/group_info/{{request.goal}}/">{{request.target}}</a>
+									<p>{{request.time}}</p>
+								</div>
+								{% elseif request.type == 'activity_invitation' %}
+								<div class="list-group-item">
+									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
+									邀请你加入活动
+									<a href="/activity_detail/{{request.goal}}/">{{request.target}}</a>
+									<p>{{request.time}}</p>
+								</div>
+								{% elseif request.type == 'group_application' %}
+								<div class="list-group-item">
+									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
+									申请加入群
+									<a href="/group_info/{{request.goal}}/">{{request.target}}</a>
+									<p>{{request.time}}</p>
+								</div>
+								{% elseif request.type == 'friend_application' %}
+								<div class="list-group-item">
+									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
+									申请添加您为好友
+									<p>{{request.time}}</p>
+								</div>
+								{% elseif request.type == 'activity_application' %}
+								<div class="list-group-item">
+									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
+									申请加入活动
+									<a href="/activity_detail/{{request.goal}}/">{{request.target}}</a>
+									<p>{{request.time}}</p>
+								</div>
+								{% endif %}
                             {% else %}
                             <a href="#" class="list-group-item disabled"><h5 class="list-group-item-heading">{{request.title}} {{request.time}}</h5></a>
                             {% endif %}
