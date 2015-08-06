@@ -160,27 +160,51 @@ def change_userinfo(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
+    errors = {}
+    alerts = []
     if (request.method == "POST"):
-        user.nickname = request.POST.get('nickname')
-        user.age = int(request.POST.get('age'))
-        #user.email = request.POST.get('email')
-        user.phone = request.POST.get('phone')
-        user.sex = request.POST.get('sex')
-        user.interest = request.POST.get('interest')
-        user.save()
-        return HttpResponseRedirect('/welcome/')
-    else:
-        return render_to_response("change_userinfo_form.html", {
-            'user': getUserObj(user.id),
-            'account': user.account,
-            'password': user.password,
-            'nickname': user.nickname,
-            'sex': user.sex, #male/female
-            'age': user.age,
-            'email': user.email,
-            'phone': user.phone,
-            'interest': user.interest,
-        }, context_instance = RequestContext(request))
+        if (not 'nickname' in request.POST) or (not request.POST['nickname']):
+            errors['nickname'] = '请输入昵称'
+        if (not 'sex' in request.POST) or (not request.POST['sex']):
+            errors['sex'] = '请选择性别'
+        if (not 'age' in request.POST) or (not request.POST['age']):
+            errors['age'] = '请输入年龄'
+        elif (not isAge(request.POST['age'])):
+            errors['age'] = '请输入正确的年龄'
+        if (not 'email' in request.POST) or (not request.POST['email']):
+            errors['email'] = '请输入邮件'
+        elif (not isEmail(request.POST['email'])):
+            errors['email'] = '请输入正确的邮件'
+        if (not 'phone' in request.POST) or (not request.POST['phone']):
+            errors['phone'] = '请输入手机号'
+        elif (not isPhone(request.POST['phone'])):
+            errors['phone'] = '请输入正确的手机号'
+        if (not 'interest' in request.POST) or (not request.POST['interest']):
+            errors['interest'] = '请输入兴趣'
+
+        if (not errors):
+            user.nickname = request.POST.get('nickname')
+            user.age = int(request.POST.get('age'))
+            #user.email = request.POST.get('email')
+            user.phone = request.POST.get('phone')
+            user.sex = request.POST.get('sex')
+            user.interest = request.POST.get('interest')
+            user.save()
+            alerts.append('修改成功')
+
+    return render_to_response("change_userinfo_form.html", {
+        'user': getUserObj(user.id),
+        'account': user.account,
+        'password': user.password,
+        'nickname': user.nickname,
+        'sex': user.sex, #male/female
+        'age': user.age,
+        'email': user.email,
+        'phone': user.phone,
+        'interest': user.interest,
+        'errors': errors,
+        'alerts': alerts,
+    }, context_instance = RequestContext(request))
 
 def change_userpwd(request):
     if (not 'user_id' in request.session):
@@ -190,33 +214,42 @@ def change_userpwd(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
+    errors = {}
+    alerts = []
     if (request.method == 'POST'):
-        errors = []
         old_password = ''
         new_password = ''
         if ('old_password' in request.POST) and (request.POST['old_password']):
             old_password = request.POST['old_password']
         else:
-            errors.append('Please enter your old password.')
-        if ('new_password1' in request.POST) and ('new_password2' in request.POST) and (request.POST['new_password1']) and (request.POST['new_password1'] == request.POST['new_password2']):
-            new_password = request.POST['new_password1']
-        else:
-            errors.append('Please enter your new password correctly.')
+            errors['old_password'] = '请输入旧密码'
+        if (not 'new_password1' in request.POST) or (not request.POST['new_password1']):
+            errors['new_password1'] = '请输入新密码'
+        if (not 'new_password2' in request.POST) or (not request.POST['new_password2']):
+            errors['new_password2'] = '请再次输入新密码'
+        if (not 'new_password1' in errors) and (not 'new_password2' in errors):
+            if (request.POST['new_password1'] == request.POST['new_password2']):
+                new_password = request.POST['new_password1']
+            else:
+                errors['new_password2'] = '两次输入密码不一致'
+
         if (not errors):
             if (old_password == user.password):
                 User.objects.filter(id = user.id).update(password = new_password)
             else:
-                errors.append('Your old password is wrong.')
+                errors['old_password'] = '旧密码错误'
         if (errors):
             return render_to_response("change_userpwd_form.html", {
                 'user': getUserObj(user.id),
                 'errors': errors
             }, context_instance = RequestContext(request))
         else:
-            return HttpResponseRedirect('/welcome/')
+            alerts.append('密码修改成功')
     else:
         return render_to_response("change_userpwd_form.html", {
             'user': getUserObj(user.id),
+            'errors': errors,
+            'alerts': alerts,
         }, context_instance = RequestContext(request))
 
 def user_info(request, user_id):
@@ -818,24 +851,27 @@ def friend_activities_attend(request):
                 alerts.append("请求已发送")
         if (request.POST['form_type'] == 'search_activity'):
                 acts = []
+                actss = []
                 for friend in user.friends.all():
                     for act in friend.activity_member.all().filter(name__contains = request.POST['search_word']):
-                        if (act in user.activity_member.all())or(act.organizer == user):
-                            status = "already_in"
-                        else:
-                            if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
-                                status = "expired"
+                        if (not act in actss):
+                            if (act in user.activity_member.all())or(act.organizer == user):
+                                status = "already_in"
                             else:
-                                status = "available"
-                        acts.append({
-                            "id": act.id,
-                            "name": act.name,
-                            "place": act.place,
-                            "start_time": act.start_time,
-                            "explanation": act.explanation,
-                            "status": status,
-                            "post_time": act.post_time.replace(tzinfo=None),
-                        })
+                                if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                                    status = "expired"
+                                else:
+                                    status = "available"
+                            acts.append({
+                                "id": act.id,
+                                "name": act.name,
+                                "place": act.place,
+                                "start_time": act.start_time,
+                                "explanation": act.explanation,
+                                "status": status,
+                                "post_time": act.post_time.replace(tzinfo=None),
+                            })
+                            actss.append(act)
 
 
     return render_to_response("friend_activities_attend.html", {
@@ -1084,6 +1120,18 @@ def activity_attendance(request, act_id):
                     act.current_size -= 1
                     act.save()
                     alerts.append('用户 ' + tar.nickname + ' 已从活动中移除')
+                    req = Request(
+                        type = "notice",
+                        title = "提醒",
+                        content = "你已被从活动'" + act.name + "'中移除",
+                        poster = user,
+                        receiver = tar,
+                        status = "unread",
+                        goal = " ",
+                        target = " ",
+                        time = datetime.datetime.now(),
+                    )
+                    req.save()
 
     return render_to_response("activity_attendance.html", {
         "user": getUserObj(user.id),
@@ -1460,6 +1508,18 @@ def group_members(request, group_id):
                     group.current_size -= 1
                     group.save()
                     alerts.append('用户 ' + tar.nickname + ' 已从群组中移除')
+                    req = Request(
+                        type = "notice",
+                        title = "提醒",
+                        content = "你已被从群组'" + group.name + "'中移除",
+                        poster = user,
+                        receiver = tar,
+                        status = "unread",
+                        goal = " ",
+                        target = " ",
+                        time = datetime.datetime.now(),
+                    )
+                    req.save()
 
 
     return render_to_response('group_members.html',{
