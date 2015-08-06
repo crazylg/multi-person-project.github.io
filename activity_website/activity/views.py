@@ -274,6 +274,22 @@ def my_request(request):
                         time = datetime.datetime.now(),
                     )
                     tmp_req.save()
+                if (req.type == "group_application"):
+                    grp = Group.objects.get(id = req.goal)
+                    grp.members.add(req.poster)
+                    grp.current_size += 1
+                    grp.save()
+                    tmp_req = Request(
+                        type = "notice",
+                        title = user.nickname + " 接受了你的请求",
+                        content = "账号 " + user.account + " 接受了你的加群请求, 你已加入群组'" + grp.name + "'",
+                        poster = req.receiver,
+                        receiver = req.poster,
+                        status = "unread",
+                        goal = " ",
+                        time = datetime.datetime.now(),
+                    )
+                    tmp_req.save()
 
         req.save()
 
@@ -594,6 +610,48 @@ def friend_activities_launch(request):
         "alerts": alerts,
     })
 
+def my_group_activities(request):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    acts = []
+    for group in user.group_member.all():
+        for act in group.activities.all():
+            if not act in acts:
+                if (act in user.activity_member.all())or(act.organizer == user):
+                    status = "already_in"
+                else:
+                    if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                        status = "expired"
+                    else:
+                        status = "available"
+                acts.append({
+                    "id": act.id,
+                    "name": act.name,
+                    "place": act.place,
+                    "start_time": act.start_time,
+                    "explanation": act.explanation,
+                    "status": status,
+                    "group": group.name,
+                })
+
+    alerts = []
+    if (request.method == 'POST'):
+        if (request.POST['form_type'] == 'apply_activity'):
+            response = applyActivity(user.id, request.POST['activity_id'])
+            if (response != 'success'):
+                alerts.append(response)
+
+    return render_to_response("friend_activities_launch.html", {
+        'user': getUserObj(user.id),
+        "friend_launch_activities": acts,
+        "alerts": alerts,
+    })
+
 def activity_detail(request, act_id):
     if (not 'user_id' in request.session):
         return HttpResponseRedirect("/login/")
@@ -662,6 +720,32 @@ def activity_attendance(request, act_id):
 
 
 
+def applyGroup(user_id, group_id):
+    try:
+        user = User.objects.get(id = user_id)
+    except User.DoesNotExist:
+        return "用户不存在，请您先登录"
+    try:
+        group = Group.objects.get(id = group_id)
+    except Group.DoesNotExist:
+        return "该群组不存在"
+
+    if (group.current_size >= group.max_size):
+        return "该活动人数已满"
+
+    req = Request(
+        type = "group_application",
+        title = user.nickname + "的加群申请",
+        content = "账号" + user.account + "想加入群组 '" + group.name + "'",
+        poster = user,
+        receiver = group.owner,
+        status = "unread",
+        time = datetime.datetime.now(),
+        goal = group.id,
+        target = group.name,
+    )
+    req.save()
+    return "请求已发送"
 
 def add_group(request):
     if (not 'user_id' in request.session):
@@ -839,6 +923,11 @@ def all_groups(request):
     except User.DoesNotExist:
         return HttpResponseRedirect("/login/")
 
+    alerts = []
+    if (request.method == 'POST'):
+        if (request.POST['form_type'] == 'apply_group'):
+            alerts.append(applyGroup(user.id, request.POST['group_id']))
+
     grps = []
     for grp in Group.objects.all():
         grps.append({
@@ -851,7 +940,8 @@ def all_groups(request):
 
     return render_to_response("all_groups.html", {
         "user": getUserObj(user.id),
-        "groups" : grps,
+        "groups": grps,
+        "alerts": alerts,
     })
 
 def group_info(request, group_id):

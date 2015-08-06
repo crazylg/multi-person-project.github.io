@@ -71,5 +71,6 @@ class Request(models.Model):
     receiver = models.ForeignKey(User, related_name = 'request_receiver')
     status = models.CharField(max_length = 100) #unread/accept/reject
     goal = models.CharField(max_length = 20)
+    target = models.CharField(max_length = 100, null = True)
     time = models.DateTimeField(null = True)
 

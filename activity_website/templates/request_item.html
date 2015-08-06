@@ -1,7 +1,7 @@
 {% if request.type == 'group_invitation' %}
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
-									ÑûÇëÄã¼ÓÈëÈº
+									é‚€è¯·ä½ åŠ å…¥ç¾¤
 									<a href="/group_info/{{request.goal}}/">{{request.target}}</a>
 									<p>{{request.time}}</p>
 								</div>
@@ -9,7 +9,7 @@
 								{% if request.type == 'activity_invitation' %}
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
-									ÑûÇëÄã¼ÓÈë»î¶¯
+									é‚€è¯·ä½ åŠ å…¥æ´»åŠ¨
 									<a href="/activity_detail/{{request.goal}}/">{{request.target}}</a>
 									<p>{{request.time}}</p>
 								</div>
@@ -17,7 +17,7 @@
 								{% if request.type == 'group_application' %}
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
-									ÉêÇë¼ÓÈëÈº
+									ç”³è¯·åŠ å…¥ç¾¤
 									<a href="/group_info/{{request.goal}}/">{{request.target}}</a>
 									<p>{{request.time}}</p>
 								</div>
@@ -25,14 +25,14 @@
 								{% if request.type == 'friend_application' %}
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
-									ÉêÇëÌí¼ÓÄúÎªºÃÓÑ
+									ç”³è¯·æ·»åŠ æ‚¨ä¸ºå¥½å‹
 									<p>{{request.time}}</p>
 								</div>
 								{% endif %}
 								{% if request.type == 'activity_application' %}
 								<div class="list-group-item">
 									<a href="/user_info/{{request.poster.id}}/">{{request.poster.nickname}}</a>
-									ÉêÇë¼ÓÈë»î¶¯
+									ç”³è¯·åŠ å…¥æ´»åŠ¨
 									<a href="/activity_detail/{{request.goal}}/">{{request.target}}</a>
 									<p>{{request.time}}</p>
 								</div>

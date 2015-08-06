@@ -31,8 +31,13 @@ urlpatterns = [
 
     url(r'^my_request/$', 'activity.views.my_request', name = 'my_request'),
 
-    url(r'^all_activities/$', 'activity.views.all_activities', name = 'all_activities'),
     url(r'^add_activity/$', 'activity.views.add_activity', name = 'add_activity'),
+    url(r'^all_activities/$', 'activity.views.all_activities', name = 'all_activities'),
+    url(r'^my_activities/attend/$', 'activity.views.my_activities_attend', name = 'my_activities_attend'),
+    url(r'^my_activities/launch/$', 'activity.views.my_activities_launch', name = 'my_activities_launch'),
+    url(r'^friend_activities/attend/$', 'activity.views.friend_activities_attend', name = 'friend_activities_attend'),
+    url(r'^friend_activities/launch/$', 'activity.views.friend_activities_launch', name = 'friend_activities_launch'),
+    url(r'^my_group_activities/$', 'activity.views.my_group_activities', name = 'my_group_activities'),
     url(r'^activity_detail/(\d+)/$', 'activity.views.activity_detail', name = 'activity_detail'),
     url(r'^activity_attendance/(\d+)/$', 'activity.views.activity_attendance', name = 'activity_attendance'),
 
@@ -51,10 +56,6 @@ urlpatterns = [
     url(r'^change_userpwd/$', 'activity.views.change_userpwd', name = 'change_userpwd'),
     url(r'^upload_headimg/$', 'activity.views.upload_headimg', name = 'upload_headimg'),
 
-    url(r'^my_activities/attend/$', 'activity.views.my_activities_attend', name = 'my_activities_attend'),
-    url(r'^my_activities/launch/$', 'activity.views.my_activities_launch', name = 'my_activities_launch'),
-    url(r'^friend_activities/attend/$', 'activity.views.friend_activities_attend', name = 'friend_activities_attend'),
-    url(r'^friend_activities/launch/$', 'activity.views.friend_activities_launch', name = 'friend_activities_launch'),
 
 ]
 
