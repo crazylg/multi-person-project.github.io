@@ -7,24 +7,8 @@
                     <li><a href="/user_friends/{{ tar.id }}/">好友</a></li>
                     <li class="active"><a href="#">群组</a></li>
                     </ul>
-                    <div class="col-lg-12">
-                        <table class="table table-hover" style="font-family:'Microsoft YaHei';font-size:1.3em">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>群组名称</td>
-                            {% for usergroup in usergroups %}
-                                <tr>
-                                <td><a href="/group_info/{{ usergroup.id }}/">{{userfriend.account}}</a></td>    
-                            {% endfor %}
-                            </tr>
-                        </tbody>
-                    </table>
-                    </div>
+                            {% for group in usergroups %}
+                                {% include "group_item.html" %}   
+                            {% endfor %}         
             </div>
 {% include "footer.html" %}
