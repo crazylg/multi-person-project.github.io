@@ -211,6 +211,28 @@ def change_userpwd(request):
             'user': getUserObj(user.id),
         }, context_instance = RequestContext(request))
 
+def user_info(request, user_id):
+    if (not 'user_id' in request.session):
+        return HttpResponseRedirect("/login/")
+    try:
+        user = User.objects.get(id = request.session['user_id'])
+    except User.DoesNotExist:
+        return HttpResponseRedirect("/login/")
+
+    try:
+        user_id = int(user_id)
+    except ValueError:
+        raise Http404()
+    try:
+        tar = User.objects.get(id = user_id)
+    except User.DoesNotExist:
+        raise Http404()
+
+    return render_to_response("user_info.html", {
+        "user": getUserObj(user.id),
+        "tar": tar,
+    })
+
 
 
 def my_request(request):
@@ -638,6 +660,25 @@ def my_group_activities(request):
                     "status": status,
                     "group": group.name,
                 })
+    for group in user.group_owner.all():
+        for act in group.activities.all():
+            if not act in acts:
+                if (act in user.activity_member.all())or(act.organizer == user):
+                    status = "already_in"
+                else:
+                    if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                        status = "expired"
+                    else:
+                        status = "available"
+                acts.append({
+                    "id": act.id,
+                    "name": act.name,
+                    "place": act.place,
+                    "start_time": act.start_time,
+                    "explanation": act.explanation,
+                    "status": status,
+                    "group": group.name,
+                })
 
     alerts = []
     if (request.method == 'POST'):
@@ -646,9 +687,9 @@ def my_group_activities(request):
             if (response != 'success'):
                 alerts.append(response)
 
-    return render_to_response("friend_activities_launch.html", {
+    return render_to_response("my_group_activities.html", {
         'user': getUserObj(user.id),
-        "friend_launch_activities": acts,
+        "groupactivities": acts,
         "alerts": alerts,
     })
 

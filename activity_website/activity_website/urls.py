@@ -52,9 +52,13 @@ urlpatterns = [
     url(r'^group_members/(\d+)/$', 'activity.views.group_members', name = 'group_members'),
     url(r'^group_activities/(\d+)/$', 'activity.views.group_activities', name = 'group_activities'),
 
+    url(r'^user_info/(\d+)/$', 'activity.views.user_info', name = 'user_info'),
+    url(r'^user_friends/(\d+)/$', 'activity.views.user_friends', name = 'user_friends'),
+    url(r'^user_activities/(\d+)/$', 'activity.views.user_activities', name = 'user_activities'),
     url(r'^change_userinfo/$', 'activity.views.change_userinfo', name = 'change_userinfo'),
     url(r'^change_userpwd/$', 'activity.views.change_userpwd', name = 'change_userpwd'),
     url(r'^upload_headimg/$', 'activity.views.upload_headimg', name = 'upload_headimg'),
+
 
 
 ]

@@ -1,10 +1,10 @@
 {% include "header.html" %}
                 <div class="col-lg-7 col-lg-offset-1 col-sm-8">
-                	<h2>{{user.name}} 的个人档案</h2>
+                	<h2>{{tar.nickname}} 的个人档案</h2>
                     <ul class="nav nav-pills">
    					<li class="active"><a href="#">个人档案</a></li>
-                    <li><a href="/user_activities/{{ user.id }}/">活动</a></li>
-   					<li><a href="/user_groups/{{ uesr.id }}/">群组</a></li>
+                    <li><a href="/user_activities/{{ tar.id }}/">活动</a></li>
+   					<li><a href="/user_groups/{{ tar.id }}/">群组</a></li>
 					</ul>
                     <table class="table table-hover" style="font-family:'Microsoft YaHei';font-size:1.7em">
                         <thead>
@@ -16,27 +16,27 @@
                         <tbody>
                             <tr>
                                 <td>账号</td>
-                                <td>{{user.account}}</td>
+                                <td>{{tar.account}}</td>
                             </tr>
                             <tr>
                                 <td>昵称</td>
-                                <td>{{user.nickname}}</td>
+                                <td>{{tar.nickname}}</td>
                             </tr>
                             <tr>
                                 <td>性别</td>
-                                <td>{{user.sex}} 人</td>
+                                <td>{{tar.sex}} 人</td>
                             </tr>
                             <tr>
                                 <td>兴趣</td>
-                                <td>{{user.interest}}</td>
+                                <td>{{tar.interest}}</td>
                             </tr>
                             <tr>
                                 <td>电话</td>
-                                <td>{{user.phone}}</td>
+                                <td>{{tar.phone}}</td>
                             </tr>
                             <tr>
                                 <td>邮箱</td>
-                                <td>{{user.email}}</td>
+                                <td>{{tar.email}}</td>
                             </tr>
                         </tbody>
                     </table>
