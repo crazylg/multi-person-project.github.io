@@ -12,7 +12,7 @@ class User(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length = 20)
     interest = models.CharField(max_length = 200)
-    headImg = models.FileField(upload_to = './templates/static/headimg/', null = True)
+    headImg = models.FileField(upload_to = './templates/static/headimg/')
     friends = models.ManyToManyField("self")
 
     def __unicode__(self):

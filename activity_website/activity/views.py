@@ -187,6 +187,7 @@ def change_userinfo(request):
             errors['interest'] = '请输入兴趣'
 
         uf = ImageForm(request.POST, request.FILES)
+        #return HttpResponse(uf.cleaned_data['image'])
 
         if (not errors):
             user.nickname = request.POST.get('nickname')
@@ -196,7 +197,8 @@ def change_userinfo(request):
             user.sex = request.POST.get('sex')
             user.interest = request.POST.get('interest')
             if (uf.is_valid()):
-                user.headimg = uf.cleaned_data['image']
+                user.headImg = uf.cleaned_data['image']
+                alerts.append('头像修改成功')
             user.save()
             alerts.append('修改成功')
 
@@ -1583,19 +1585,21 @@ def group_activities(request, group_id):
 
 
 
-#def upload_headimg(request):
-#    if request.method == "POST":
-#        uf = UserForm(request.POST, request.FILES)
-#        if (uf.is_valid()):
-#            user = User.objects.get(id = 2)
-#            user.headimg = uf.cleaned_data['headimg']
-#            user.save()
-#            return HttpResponse('upload ok!')
-#    else:
-#        uf = UserForm()
-#        return render_to_response('upload_headimg.html',{
-#            'uf': uf,
-#        })
+def upload_headimg(request):
+    if request.method == "POST":
+        uf = ImageForm(request.POST, request.FILES)
+        if (uf.is_valid()):
+            user = User.objects.get(id = 1)
+            user.headImg = uf.cleaned_data['image']
+            user.save()
+            return HttpResponse('ok!')
+        else:
+            return HttpResponse('no')
+    else:
+        uf = ImageForm()
+        return render_to_response('upload_headimg.html',{
+            'uf': uf,
+        })
 
 def my_friends(request):
     if (not 'user_id' in request.session):
