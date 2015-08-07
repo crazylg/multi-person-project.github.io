@@ -6,6 +6,10 @@ from django import forms
 
 # Create your views here.
 
+class ImageForm(forms.Form):
+    #username = forms.CharField()
+    image = forms.FileField()
+
 def isAge(s):
     return (re.match(r'^[0-9]*$', s)) and (int(s) < 150)
 
@@ -182,6 +186,9 @@ def change_userinfo(request):
         if (not 'interest' in request.POST) or (not request.POST['interest']):
             errors['interest'] = '请输入兴趣'
 
+        uf = ImageForm(request.POST, request.FILES)
+        #return HttpResponse(uf.cleaned_data['image'])
+
         if (not errors):
             user.nickname = request.POST.get('nickname')
             user.age = int(request.POST.get('age'))
@@ -189,6 +196,9 @@ def change_userinfo(request):
             user.phone = request.POST.get('phone')
             user.sex = request.POST.get('sex')
             user.interest = request.POST.get('interest')
+            if (uf.is_valid()):
+                user.headImg = uf.cleaned_data['image']
+                alerts.append('头像修改成功')
             user.save()
             alerts.append('修改成功')
 
@@ -660,6 +670,9 @@ def add_activity(request):
                 max_size = int(request.POST['max_size']),
                 current_size = 0,
             )
+            uf = ImageForm(request.POST, request.FILES)
+            if (uf.is_valid()):
+                act.picture = uf.cleaned_data['image']
             act.save()
             for friend in user.friends.all():
                 if (("add_friend_to_activity_" + str(friend.id)) in request.POST):
@@ -718,9 +731,10 @@ def all_activities(request):
             "start_time": act.start_time,
             "explanation": act.explanation,
             "status": status,
+            "picture": act.picture,
         })
 
-    return render_to_response("all_activities.html", {
+    return render_to_response("all_activities_new.html", {
         'user': getUserObj(user.id),
         "activities": acts,
         "alerts": alerts,
@@ -1573,25 +1587,23 @@ def group_activities(request, group_id):
 
 
 
-class UserForm(forms.Form):
-    username = forms.CharField()
-    headimg = forms.FileField()
+
 
 def upload_headimg(request):
     if request.method == "POST":
-        uf = UserForm(request.POST, request.FILES)
+        uf = ImageForm(request.POST, request.FILES)
         if (uf.is_valid()):
-            user = User.objects.get(id = 2)
-            user.headimg = uf.cleaned_data['headimg']
+            user = User.objects.get(id = 1)
+            user.headImg = uf.cleaned_data['image']
             user.save()
-            return HttpResponse('upload ok!')
+            return HttpResponse('ok!')
+        else:
+            return HttpResponse('no')
     else:
-        uf = UserForm()
-    return render_to_response('upload_headimg.html',{
-        'uf': uf,
-    })
-
-
+        uf = ImageForm()
+        return render_to_response('upload_headimg.html',{
+            'uf': uf,
+        })
 
 def my_friends(request):
     if (not 'user_id' in request.session):
