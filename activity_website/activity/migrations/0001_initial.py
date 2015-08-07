@@ -28,13 +28,16 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(max_length=100)),
                 ('current_size', models.PositiveIntegerField()),
                 ('max_size', models.PositiveIntegerField()),
-                ('picture', models.FileField(null=True, upload_to='./templates/static/act_picture/')),
+                ('picture', models.FileField(upload_to='./templates/static/act_picture/', null=True)),
             ],
         ),
         migrations.CreateModel(
             name='Comment',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('content', models.CharField(max_length=400, null=True)),
+                ('time', models.DateTimeField(null=True)),
+                ('act', models.ForeignKey(null=True, to='activity.Activity', related_name='comment_act')),
             ],
         ),
         migrations.CreateModel(
@@ -67,7 +70,7 @@ class Migration(migrations.Migration):
                 ('content', models.CharField(max_length=500)),
                 ('status', models.CharField(max_length=100)),
                 ('goal', models.CharField(max_length=20)),
-                ('target', models.CharField(null=True, max_length=100)),
+                ('target', models.CharField(max_length=100, null=True)),
                 ('time', models.DateTimeField(null=True)),
             ],
         ),
@@ -84,7 +87,7 @@ class Migration(migrations.Migration):
                 ('phone', models.CharField(max_length=20)),
                 ('interest', models.CharField(max_length=200)),
                 ('headImg', models.FileField(upload_to='./templates/static/headimg/')),
-                ('friends', models.ManyToManyField(related_name='friends_rel_+', to='activity.User')),
+                ('friends', models.ManyToManyField(to='activity.User', related_name='friends_rel_+')),
             ],
         ),
         migrations.CreateModel(
@@ -115,7 +118,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='group',
             name='members',
-            field=models.ManyToManyField(related_name='group_member', to='activity.User'),
+            field=models.ManyToManyField(to='activity.User', related_name='group_member'),
         ),
         migrations.AddField(
             model_name='group',
@@ -123,9 +126,14 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(to='activity.User', related_name='group_owner'),
         ),
         migrations.AddField(
+            model_name='comment',
+            name='poster',
+            field=models.ForeignKey(null=True, to='activity.User', related_name='comment_poster'),
+        ),
+        migrations.AddField(
             model_name='activity',
             name='members',
-            field=models.ManyToManyField(related_name='activity_member', to='activity.User'),
+            field=models.ManyToManyField(to='activity.User', related_name='activity_member'),
         ),
         migrations.AddField(
             model_name='activity',

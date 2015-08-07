@@ -3,12 +3,12 @@
             <div class="col-lg-7 col-lg-offset-1">
                 <h2>活动列表</h2>
 
-                <form class="form-horizontal">
-                    <input type='hidden' name="form_type" value="search">
+                <form class="form-horizontal" action="" method="post">
+                    <input type="hidden" name="form_type" value="search" />
                     <div class="form-group">
                         <label class="col-sm-2 control-label">类&nbsp;&nbsp;&nbsp;&nbsp;型:</label>
                         <div class="col-sm-10">
-                            <label class="checkbox-inline"><input type="checkbox" name="all_type" />全部</label>
+                            <label class="checkbox-inline"><input type="checkbox" name="all_type" checked/>全部</label>
                             <label class="checkbox-inline"><input type="checkbox" name="1" />朋友聚会</label>
                             <label class="checkbox-inline"><input type="checkbox" name="2" />运动活动</label>
                             <label class="checkbox-inline"><input type="checkbox" name="3" />联谊活动</label>
@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">时&nbsp;&nbsp;&nbsp;&nbsp;间:</label>
                         <div class="col-sm-10">
-                            <label class="checkbox-inline"><input type="checkbox" name="all_time" />全部</label>
+                            <label class="checkbox-inline"><input type="checkbox" name="all_time" checked/>全部</label>
                             <label class="checkbox-inline"><input type="checkbox" name="within_one_week" />一周内</label>
                             <label class="checkbox-inline"><input type="checkbox" name="within_one_month" />一个月内</label>
                             <label class="checkbox-inline"><input type="checkbox" name="within_three_months" />三个月内</label>
@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">关键字:</label>
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" name="kyewords" />
+                            <input class="form-control" type="text" name="keywords" />
                         </div>
                     </div>
                     <button type="submit" class="btn btn-md btn-primary col-lg-offset-2">搜索</button>

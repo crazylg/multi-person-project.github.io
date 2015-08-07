@@ -143,7 +143,7 @@ def register_success(request):
 
 def welcome(request):
     if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
+        return HttpResponseRedirect("/all_activities/")
     try:
         user = User.objects.get(id = request.session['user_id'])
     except User.DoesNotExist:
@@ -696,15 +696,15 @@ def add_activity(request):
         }, context_instance = RequestContext(request))
 
 def all_activities(request):
-    if (not 'user_id' in request.session):
-        return HttpResponseRedirect("/login/")
-    try:
-        user = User.objects.get(id = request.session['user_id'])
-    except User.DoesNotExist:
-        return HttpResponseRedirect("/login/")
+    user = {}
+    if ('user_id' in request.session):
+        try:
+            user = User.objects.get(id = request.session['user_id'])
+        except User.DoesNotExist:
+            user = {}
 
     alerts = []
-    all_acts = Activity.objects.all().order_by("-post_time")
+    all_acts = Activity.objects.all().order_by("-start_time")
     if (request.method == 'POST'):
         if (request.POST['form_type'] == 'apply_activity'):
             response = applyActivity(user.id, request.POST['activity_id'])
@@ -715,6 +715,7 @@ def all_activities(request):
         if (request.POST['form_type'] == 'search_activity'):
             all_acts = all_acts.filter(name__contains = request.POST['search_word'])
         if (request.POST['form_type'] == 'search'):
+            #return HttpResponse(request.POST['1'])
             type_list = []
             if ('all_type' in request.POST):
                 type_list = ["1", "2", "3", "4", "5"]
@@ -725,18 +726,31 @@ def all_activities(request):
             all_acts = all_acts.filter(type__in = type_list)
             if (not 'all_time' in request.POST):
                 if ('within_one_week' in request.POST):
-                    all_acts = all_acts.filter()
-
+                    all_acts = all_acts.filter(start_time__lte = datetime.datetime.now()+datetime.timedelta(days=7))
+                if ('within_one_month' in request.POST):
+                    all_acts = all_acts.filter(start_time__lte = datetime.datetime.now()+datetime.timedelta(days=30))
+                if ('within_three_months' in request.POST):
+                    all_acts = all_acts.filter(start_time__lte = datetime.datetime.now()+datetime.timedelta(days=90))
+                if ('within_half_year' in request.POST):
+                    all_acts = all_acts.filter(start_time__lte = datetime.datetime.now()+datetime.timedelta(days=182))
+                if ('within_one_year' in request.POST):
+                    all_acts = all_acts.filter(start_time__lte = datetime.datetime.now()+datetime.timedelta(days=365))
+            #return HttpResponse(request.POST['keywords'])
+            if ('keywords' in request.POST):
+                all_acts = all_acts.filter(name__contains = request.POST['keywords'])
 
     acts = []
     for act in all_acts:
-        if (act in user.activity_member.all())or(act.organizer == user):
-            status = "already_in"
-        else:
-            if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
-                status = "expired"
+        if (user):
+            if (act in user.activity_member.all())or(act.organizer == user):
+                status = "already_in"
             else:
-                status = "available"
+                if (act.applyend_time.replace(tzinfo=None) <= datetime.datetime.now()):
+                    status = "expired"
+                else:
+                    status = "available"
+        else:
+            status = "none"
         acts.append({
             "id": act.id,
             "name": act.name,
@@ -748,7 +762,7 @@ def all_activities(request):
         })
 
     return render_to_response("all_activities_new.html", {
-        'user': getUserObj(user.id),
+        'user': getUserObj(user.id) if (user) else {},
         "activities": acts,
         "alerts": alerts,
     }, context_instance = RequestContext(request))
