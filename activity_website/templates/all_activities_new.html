@@ -4,15 +4,16 @@
                 <h2>活动列表</h2>
 
                 <form class="form-horizontal">
+                    <input type='hidden' name="form_type" value="search">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">类&nbsp;&nbsp;&nbsp;&nbsp;型:</label>
                         <div class="col-sm-10">
                             <label class="checkbox-inline"><input type="checkbox" name="all_type" />全部</label>
-                            <label class="checkbox-inline"><input type="checkbox" name="type_party" />朋友聚会</label>
-                            <label class="checkbox-inline"><input type="checkbox" name="type_sport" />运动活动</label>
-                            <label class="checkbox-inline"><input type="checkbox" name="type_sorority" />联谊活动</label>
-                            <label class="checkbox-inline"><input type="checkbox" name="type_society" />社会活动</label>
-                            <label class="checkbox-inline"><input type="checkbox" name="type_academic" />学术活动</label>
+                            <label class="checkbox-inline"><input type="checkbox" name="1" />朋友聚会</label>
+                            <label class="checkbox-inline"><input type="checkbox" name="2" />运动活动</label>
+                            <label class="checkbox-inline"><input type="checkbox" name="3" />联谊活动</label>
+                            <label class="checkbox-inline"><input type="checkbox" name="4" />社会活动</label>
+                            <label class="checkbox-inline"><input type="checkbox" name="5" />学术活动</label>
                         </div>
                     </div>
 
@@ -37,7 +38,7 @@
                     <button type="submit" class="btn btn-md btn-primary col-lg-offset-2">搜索</button>
                 </form>
 
-                {% include "search_activity.html" %}
+                <!--{% include "search_activity.html" %}-->
                 
                     <div class="col-lg-10" style="top:15px">
                         {% for activity in activities %}

@@ -714,6 +714,19 @@ def all_activities(request):
                 alerts.append("请求已发送")
         if (request.POST['form_type'] == 'search_activity'):
             all_acts = all_acts.filter(name__contains = request.POST['search_word'])
+        if (request.POST['form_type'] == 'search'):
+            type_list = []
+            if ('all_type' in request.POST):
+                type_list = ["1", "2", "3", "4", "5"]
+            else:
+                for i in ["1", "2", "3", "4", "5"]:
+                    if (i in request.POST):
+                        type_list.append(i)
+            all_acts = all_acts.filter(type__in = type_list)
+            if (not 'all_time' in request.POST):
+                if ('within_one_week' in request.POST):
+                    all_acts = all_acts.filter()
+
 
     acts = []
     for act in all_acts:
