@@ -22,6 +22,7 @@ from django.contrib.auth.views import login, logout
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^staticfiles/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATICFILES_DIRS, 'show_indexes': True}),
+    url(r'^templates/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.TEMPLATES_DIRS, 'show_indexes': True}),
     #url(r'^$', 'activity.views.home', name = 'home'),
     #url(r'^test/$', 'activity.views.test', name = 'test'),
     url(r'^upload_headimg/$', 'activity.views.upload_headimg', name = 'upload_headimg'),

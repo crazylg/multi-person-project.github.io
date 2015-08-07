@@ -670,6 +670,9 @@ def add_activity(request):
                 max_size = int(request.POST['max_size']),
                 current_size = 0,
             )
+            uf = ImageForm(request.POST, request.FILES)
+            if (uf.is_valid()):
+                act.picture = uf.cleaned_data['image']
             act.save()
             for friend in user.friends.all():
                 if (("add_friend_to_activity_" + str(friend.id)) in request.POST):
@@ -728,6 +731,7 @@ def all_activities(request):
             "start_time": act.start_time,
             "explanation": act.explanation,
             "status": status,
+            "picture": act.picture,
         })
 
     return render_to_response("all_activities_new.html", {

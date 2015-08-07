@@ -117,3 +117,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     'templates/static'
 )
+
+TEMPLATES_URL = ''
+TEMPLATES_DIRS = (
+    'templates'
+)
