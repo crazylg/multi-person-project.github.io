@@ -1,0 +1,14 @@
+{% include "header.html" %}
+                <div class="col-lg-7 col-lg-offset-1">
+                <h2>我的活动</h2>
+                    <ul class="nav nav-pills"> 
+                    <li class="active"><a href="#">我参加的活动</a></li>
+                    <li><a href="/my_activities/launch/">我发起的活动</a></li>      
+                    </ul>
+
+                    {% include "search_activity.html" %}
+                {% for activity in my_attend_activities %}
+                    {% include "activity_item.html" %}
+                {% endfor %}
+                </div>
+{% include "footer.html" %}

@@ -1,0 +1,36 @@
+{% include "header.html" %}
+                <div class="col-lg-7 col-lg-offset-1">
+                <h2>我的活动</h2>
+                    <ul class="nav nav-pills"> 
+                    <li class="active"><a href="#">我参加的活动</a></li>
+                    <li><a href="/my_activities/launch/">我发起的活动</a></li>      
+                    </ul>
+
+                    <div class="col-lg-10 input-group">
+                        <form method="post" action="">
+                            <div class="col-lg-10" style="top:10px" >
+                            <input type="text" class="form-control" placeholder="搜索" name="search_word">               
+                        </div>                            
+                        <span class="input-group-btn" style="top:10px">
+                            <button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                        </form>
+                    </div>
+                {% for my_attend_activity in my_attend_activities %}
+                    <div class="col-lg-10" style="top:15px">
+                        
+                        <div class="col-lg-10 list-group">
+                            <a href="#" class="list-group-item active">
+                                <h4 class="list-group-item-heading">{{my_attend_activity.name}}</h4>
+                                <h5 class="list-group-item-heading">{{my_attned_activity.start_time}}</h5>
+                            </a>
+                            <div class="list-group-item">
+                                <h4 class="list-group-item-heading">
+                                    <span class="glyphicon glyphicon-map-marker" aria-hidden:true></span>{{my_attend_activity.place}}</h4>
+                                <p class="list-group-item-text">{{my_attend_activity.explanation}}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+{% include "footer.html" %}

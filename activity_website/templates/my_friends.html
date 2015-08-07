@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+{% include "header.html" %}
+
+		<div class="col-lg-6 col-lg-offset-1 col-sm-7" style="">
+			<div class="row" style="height:20px">
+			</div>
+            <div class="row" style="box-shadow:0 0 16px skyblue;width:100%;border:2px solid skyblue;padding-left:5px;padding-top:5px;padding-bottom:5px;border-radius:10px;">
+                <div class="col-lg-4 col-sm-3" style="height:750px;border:1px solid skyblue;overflow-y:auto;border-radius:10px;">
+                    <div class="form-group has-feedback" style="width:100%;top:2px">
+                        <form id="search_talker" method="post" action="">
+                            <span onclick="search_talker()" class="glyphicon glyphicon-search form-control-feedback"></span>
+                            <input type="text" id="input_search" name="search_word" class="form-control search-query" placeholder="搜索" autofocus>
+							<input type="hidden" name="form_type" value="search_talker"/>
+                        </form>
+                    </div>
+                    <ul class="nav nav-pills" style="width:100%">
+                        {% for friend in friend_list %}
+						{% if friend.current_talker %}
+						<li class="active" style="width:100%">
+							<form role="form" id={{friend.id}} method="post" action="">
+							<input type="hidden" name="form_type" value="change_talker"/>
+							<input type="hidden" name="click_friend_id" value={{friend.id}}/>
+							<button  class="btn btn-block btn-primary" type="submit">{{ friend.nickname }}</button>
+							</form>
+						</li>
+						{% else %}
+                        <li style="width:100%">
+							<form role="form" id={{friend.id}} method="post" action="">
+							<input type="hidden" name="form_type" value="change_talker"/>
+							<input type="hidden" name="click_friend_id" value={{friend.id}}/>
+							<button  class="btn btn-block btn-default" type="submit">{{ friend.nickname }}</button>
+							</form>
+						</li>
+						{% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="col-lg-8 col-md-9 col-sm-9" style="height:600px;">
+                    <div id="chatbox" class="row" style="width:103%;height:550px;border:1px solid skyblue;border-radius:10px;padding-left:2px;padding-top:2px;padding-right:8px;display:block;position:relative;left:5px">
+                        {% for message in messages %}
+							{% if message.type == "send" %}
+								<div class="right"></div>
+								<div class="message_send"><p style="font-size:0.9em;font-family:'Microsoft YaHei UI'">{{message.content}}</p><p style="font-size:0.7em;font-family:'Microsoft YaHei UI'">{{message.time}}</p></div>
+							{% else %}
+								<div class="left"></div>
+								<div class="message_get"><p style="font-size:0.9em;font-family:'Microsoft YaHei UI'">{{message.content}}</p><p style="font-size:0.7em;font-family:'Microsoft YaHei UI'">{{message.time}}</p></div>
+						<script type="text/javascript>
+							$("#chatbox").scrollTop = $('#chatbox').scrollHeight;
+							{% endif %}
+						</script>
+						{% endfor %}
+                    </div>
+
+                    <div id="sendbox" class="row" style="width:103%;height:190px;padding-left:2px;padding-top:2px;display:block;position:relative;left:5px;top:5px">
+                        <form method="post" action="">
+							<input type="hidden" name="form_type" value="send_message"/>
+                            <textarea class="form-control" style="height:140px;overflow-y:auto" name="send_message"></textarea>
+                            <button type="submit" class="btn btn-md btn-primary pull-right" style="position:relative;top:4px">发送</button>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+		</div>
+		<div class="col-lg-2 col-sm-3">
+			<div class="form-group has-feedback" style="width:100%">
+                <form method="post" action="">
+					<input type="hidden" name="form_type" value="add_friend" />
+                    <input type="text" name="account" class="form-control search-query" placeholder="请输入账号" autofocus>
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    <button type="submit" class="btn btn-danger pull-right" style="top:10px;position:relative">发送好友请求  <span class="glyphicon glyphicon-plus"></span></button>
+                    {% if errors.search_friend %}
+                        {{ errors.search_friend }}
+                    {% endif %}
+                    {% if responses.search_friend %}
+                        {{ responses.search_friend }}
+                    {% endif %}
+                </form>
+            </div>
+		</div>
+		
+<script type="text/javascript">
+    $(function () {
+        $('#input_search').bind('keypress', function (event) {
+            if (event.keyCode == "13") {
+                $('#search_talker').submit();
+            }
+        });
+    });
+</script>
+
+{% include "footer.html" %}

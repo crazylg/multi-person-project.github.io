@@ -1,0 +1,14 @@
+{% include "header.html" %}
+                <div class="col-lg-8 col-lg-offset-1 col-sm-8">
+                    <h2>{{tar.nickname}} 的群组列表</h2>
+                    <ul class="nav nav-pills">
+                    <li><a href="/user_info/{{ tar.id }}/">个人档案</a></li>
+                    <li><a href="/user_activities/{{ tar.id }}/">活动</a></li>
+                    <li><a href="/user_friends/{{ tar.id }}/">好友</a></li>
+                    <li class="active"><a href="#">群组</a></li>
+                    </ul>
+                            {% for group in usergroups %}
+                                {% include "group_item.html" %}   
+                            {% endfor %}         
+            </div>
+{% include "footer.html" %}

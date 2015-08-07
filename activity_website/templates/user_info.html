@@ -1,0 +1,55 @@
+{% include "header.html" %}
+                <div class="col-lg-7 col-lg-offset-1 col-sm-8">
+                	<h2>{{tar.nickname}} 的个人档案</h2>
+                    <ul class="nav nav-pills">
+   					<li class="active"><a href="#">个人档案</a></li>
+                    <li><a href="/user_activities/{{ tar.id }}/">活动</a></li>
+                    <li><a href="/user_friends/{{ tar.id }}/">好友</a></li>
+   					<li><a href="/user_groups/{{ tar.id }}/">群组</a></li>
+                    <li><form role="form" method="post" action="">
+                        <input type="hidden" name="friend_id" value={{tar.id}} />
+                        <input type="hidden" name="form_type" value="add_friend" />
+                        <button type="submit" class="btn btn-md btn-danger pull-right" style="position:relative;top:4px">发送好友请求</button>
+                    </form></li>
+					</ul>
+                    <table class="table table-hover" style="font-family:'Microsoft YaHei';font-size:1.7em">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>头像</td>
+                                <td><img src="/{{tar.headImg}}" alt="Head Img" height="250" width="250"></td>
+                            <tr>
+                                <td>账号</td>
+                                <td>{{tar.account}}</td>
+                            </tr>
+                            <tr>
+                                <td>昵称</td>
+                                <td>{{tar.nickname}}</td>
+                            </tr>
+                            <tr>
+                                <td>性别</td>
+                                <td>{% if tar.sex == "male" %} 男 {% endif %}
+                                    {% if tar.sex == "female" %} 女 {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>兴趣</td>
+                                <td>{{tar.interest}}</td>
+                            </tr>
+                            <tr>
+                                <td>电话</td>
+                                <td>{{tar.phone}}</td>
+                            </tr>
+                            <tr>
+                                <td>邮箱</td>
+                                <td>{{tar.email}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+{% include "footer.html" %}

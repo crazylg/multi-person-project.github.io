@@ -1,0 +1,13 @@
+{% include "header.html" %}
+                <div class="col-lg-7 col-lg-offset-1 col-sm-8">
+                	<h2>我的群组</h2>
+                    <ul class="nav nav-pills"> 
+                    <li class="active"><a href="#">我参加的群组</a></li>
+                    <li><a href="/my_groups/create/">我创建的群组</a></li>
+                    </ul>
+                    {% include "search_group.html" %}
+                {% for group in my_attend_groups %}
+                    {% include "group_item.html" %}
+                {% endfor %}
+                </div>
+{% include "footer.html" %}

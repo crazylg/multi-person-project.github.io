@@ -1,0 +1,24 @@
+{% include "header.html" %}
+                <div class="col-lg-7 col-lg-offset-1 col-sm-8">
+                	<h2>{{tar.nickname}} 的活动列表</h2>
+                    <ul class="nav nav-pills">
+   					<li><a href="/user_info/{{ tar.id }}/">个人档案</a></li>
+                    <li class="active"><a href="#">活动</a></li>
+   					<li><a href="/user_friends/{{ tar.id }}/">好友</a></li>
+                    <li><a href="/user_groups/{{ tar.id }}/">群组</a></li>
+                    </ul>
+                    <div class="col-lg-10 input-group">
+                        <form method="post" action="">
+                            <div class="col-lg-10" style="top:10px" >
+                            <input type="text" class="form-control" placeholder="搜索" name="search_word">               
+                        </div>                            
+                        <span class="input-group-btn" style="top:10px">
+                            <button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                        </form>
+                    </div>
+                {% for activity in useractivities %}
+                    {% include "activity_item.html" %}
+                {% endfor %}
+            </div>
+{% include "footer.html" %}
