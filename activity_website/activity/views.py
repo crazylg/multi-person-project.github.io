@@ -1093,6 +1093,15 @@ def activity_detail(request, act_id):
                     )
                     req.save()
             alerts.append('请求已发送')
+        if (request.POST['form_type'] == 'new_comment'):
+            comm = Comment(
+                poster = user,
+                act = act,
+                content = request.POST['content'],
+                time = datetime.datetime.now(),
+            )
+            comm.save()
+            alerts.append('评论成功')
 
     return render_to_response("activity_detail.html", {
         "user": getUserObj(user.id),
