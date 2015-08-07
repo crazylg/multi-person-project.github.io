@@ -22,11 +22,6 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>
-                                    <img src="/{{activity.picture}}" alt="Activity Picture" width="60%">
-                                </td>
-                            </tr>
-                            <tr>
                                 <td>活动时间</td>
                                 <td>{{activity.start_time.year}}年{{activity.start_time.month}}月{{activity.start_time.day}}日 {{activity.start_time.hour}}:{% if activity.start_time.minute < 10 %}0{% endif %}{{activity.start_time.minute}}  ~  {{activity.end_time.year}}年{{activity.end_time.month}}月{{activity.end_time.day}}日 {{activity.end_time.hour}}:{% if activity.end_time.minute < 10 %}0{% endif %}{{activity.end_time.minute}}</td>
                             </tr>
@@ -75,7 +70,7 @@
                         {% for comment in comments %}
                         <div class="media">
                             <div class="media-left media-middle">
-                                <img src="/{{comment.user.headImg}}" alt="Smiley face" height="42" width="42">                            
+                                <h2>{{comment.id}}F</h2>
                             </div>
                             <div class="media-body form-inline"  style="bottom:5px;">
                                 <h4 class="media-haeding">{{comment.nickname}}</h4>

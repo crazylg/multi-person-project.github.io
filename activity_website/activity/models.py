@@ -12,7 +12,7 @@ class User(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length = 20)
     interest = models.CharField(max_length = 200)
-    headImg = models.FileField(upload_to = './templates/static/headimg/')
+    headimg = models.FileField(upload_to = './upload/')
     friends = models.ManyToManyField("self")
 
     def __unicode__(self):
@@ -36,7 +36,6 @@ class Activity(models.Model):
     status = models.CharField(max_length = 100)
     current_size = models.PositiveIntegerField()
     max_size = models.PositiveIntegerField()
-    picture = models.FileField(upload_to = './templates/static/act_picture/', null = True)
 
 
 class Group(models.Model):
@@ -74,10 +73,4 @@ class Request(models.Model):
     goal = models.CharField(max_length = 20)
     target = models.CharField(max_length = 100, null = True)
     time = models.DateTimeField(null = True)
-
-class Comment(models.Model):
-    poster = models.ForeignKey(User, related_name = 'comment_poster'),
-    act = models.ForeignKey(Activity, related_name = 'comment_act'),
-    content = models.CharField(max_length = 400),
-    time = models.DateTimeField(null = True),
 
