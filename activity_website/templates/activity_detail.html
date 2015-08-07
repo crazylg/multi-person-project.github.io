@@ -23,7 +23,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <img src="{{activity.headImg}}" alt="Activity Headimg" width="60%">
+                                    <img src="/{{activity.picture}}" alt="Activity Picture" width="60%">
                                 </td>
                             </tr>
                             <tr>
@@ -75,7 +75,7 @@
                         {% for comment in comments %}
                         <div class="media">
                             <div class="media-left media-middle">
-                                <img src="{{comment.user.headImg" alt="Smiley face" height="42" width="42">                            
+                                <img src="/{{comment.user.headImg}}" alt="Smiley face" height="42" width="42">                            
                             </div>
                             <div class="media-body form-inline"  style="bottom:5px;">
                                 <h4 class="media-haeding">{{comment.nickname}}</h4>
