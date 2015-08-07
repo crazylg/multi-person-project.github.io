@@ -76,8 +76,8 @@ class Request(models.Model):
     time = models.DateTimeField(null = True)
 
 class Comment(models.Model):
-    poster = models.ForeignKey(User, related_name = 'comment_poster'),
-    act = models.ForeignKey(Activity, related_name = 'comment_act'),
-    content = models.CharField(max_length = 400),
-    time = models.DateTimeField(null = True),
+    poster = models.ForeignKey(User, related_name = 'comment_poster', null = True)
+    act = models.ForeignKey(Activity, related_name = 'comment_act', null = True)
+    content = models.CharField(max_length = 400, null = True)
+    time = models.DateTimeField(null = True)
 

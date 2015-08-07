@@ -1109,6 +1109,7 @@ def activity_detail(request, act_id):
         "activity": act,
         "friends": user.friends.all(),
         'alerts': alerts,
+        "comments": act.comment_act.all()
     })
 
 def activity_attendance(request, act_id):
@@ -1593,8 +1594,6 @@ def group_activities(request, group_id):
         'group': group,
         'groupactivities': acts,
     })
-
-
 
 
 

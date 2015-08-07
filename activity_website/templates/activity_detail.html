@@ -75,10 +75,10 @@
                         {% for comment in comments %}
                         <div class="media">
                             <div class="media-left media-middle">
-                                <img src="/{{comment.user.headImg}}" alt="Smiley face" height="42" width="42">                            
+                                <img src="/{{comment.poster.headImg}}" alt="Smiley face" height="42" width="42">
                             </div>
                             <div class="media-body form-inline"  style="bottom:5px;">
-                                <h4 class="media-haeding">{{comment.nickname}}</h4>
+                                <h4 class="media-haeding">{{comment.poster.nickname}}</h4>
                                 <h5>{{comment.content}}</h5>
                                 {{comment.time.year}}年{{comment.time.month}}月{{comment.time.day}}日 {{comment.time.hour}}:{% if comment.time.minute < 10 %}0{% endif %}{{comment.time.minute}}
                                 <div class="divider"></div>
